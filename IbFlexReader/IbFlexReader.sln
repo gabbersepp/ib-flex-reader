@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader", "IbFlexReader\IbFlexReader.csproj", "{9E8052D9-DF98-49AC-B5D2-B1F254330C8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IbFlexReader.Xml", "IbFlexReader.Xml\IbFlexReader.Xml.csproj", "{9A8831DA-29E8-4F17-B2B5-3C4BD0ED54A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IbFlexReader.Test", "IbFlexReader.Test\IbFlexReader.Test.csproj", "{C5558A6F-E11B-408F-9D64-17D6CE3CEBF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IbFlexReader.Utils", "IbFlexReader.Utils\IbFlexReader.Utils.csproj", "{5401088F-ECCF-4E3D-8D99-6C31D18E6571}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E8052D9-DF98-49AC-B5D2-B1F254330C8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E8052D9-DF98-49AC-B5D2-B1F254330C8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E8052D9-DF98-49AC-B5D2-B1F254330C8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E8052D9-DF98-49AC-B5D2-B1F254330C8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A8831DA-29E8-4F17-B2B5-3C4BD0ED54A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A8831DA-29E8-4F17-B2B5-3C4BD0ED54A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A8831DA-29E8-4F17-B2B5-3C4BD0ED54A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A8831DA-29E8-4F17-B2B5-3C4BD0ED54A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5558A6F-E11B-408F-9D64-17D6CE3CEBF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5558A6F-E11B-408F-9D64-17D6CE3CEBF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5558A6F-E11B-408F-9D64-17D6CE3CEBF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5558A6F-E11B-408F-9D64-17D6CE3CEBF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5401088F-ECCF-4E3D-8D99-6C31D18E6571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5401088F-ECCF-4E3D-8D99-6C31D18E6571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5401088F-ECCF-4E3D-8D99-6C31D18E6571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5401088F-ECCF-4E3D-8D99-6C31D18E6571}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67275CAF-1112-49DD-9686-31C143F3F622}
+	EndGlobalSection
+EndGlobal
