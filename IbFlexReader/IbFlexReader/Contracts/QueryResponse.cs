@@ -37,12 +37,13 @@ namespace IbFlexReader.Contracts
 
         public string RegisteredRepPhone { get; set; }
 
-        [Format("yyyyMMdd")]
+        [Format(Constants.DateFormat)]
         public DateTime DateOpened { get; set; }
 
-        [Format("yyyyMMdd")]
+        [Format(Constants.DateFormat)]
         public DateTime DateFunded { get; set; }
 
+        [Format(Constants.DateFormat)]
         public string DateClosed { get; set; }
 
         public string Street { get; set; }
@@ -86,115 +87,116 @@ namespace IbFlexReader.Contracts
 
         public string Model { get; set; }
 
-        public string ReportDate { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime ReportDate { get; set; }
 
-        public string Cash { get; set; }
+        public double Cash { get; set; }
 
-        public string CashLong { get; set; }
+        public double CashLong { get; set; }
 
-        public string CashShort { get; set; }
+        public double CashShort { get; set; }
 
-        public string SlbCashCollateral { get; set; }
+        public double SlbCashCollateral { get; set; }
 
-        public string SlbCashCollateralLong { get; set; }
+        public double SlbCashCollateralLong { get; set; }
 
-        public string SlbCashCollateralShort { get; set; }
+        public double SlbCashCollateralShort { get; set; }
 
-        public string Stock { get; set; }
+        public double Stock { get; set; }
 
-        public string StockLong { get; set; }
+        public double StockLong { get; set; }
 
-        public string StockShort { get; set; }
+        public double StockShort { get; set; }
 
-        public string SlbDirectSecuritiesBorrowed { get; set; }
+        public double SlbDirectSecuritiesBorrowed { get; set; }
 
-        public string SlbDirectSecuritiesBorrowedLong { get; set; }
+        public double SlbDirectSecuritiesBorrowedLong { get; set; }
 
-        public string SlbDirectSecuritiesBorrowedShort { get; set; }
+        public double SlbDirectSecuritiesBorrowedShort { get; set; }
 
-        public string SlbDirectSecuritiesLent { get; set; }
+        public double SlbDirectSecuritiesLent { get; set; }
 
-        public string SlbDirectSecuritiesLentLong { get; set; }
+        public double SlbDirectSecuritiesLentLong { get; set; }
 
-        public string SlbDirectSecuritiesLentShort { get; set; }
+        public double SlbDirectSecuritiesLentShort { get; set; }
 
-        public string Options { get; set; }
+        public double Options { get; set; }
 
-        public string OptionsLong { get; set; }
+        public double OptionsLong { get; set; }
 
-        public string OptionsShort { get; set; }
+        public double OptionsShort { get; set; }
 
-        public string Commodities { get; set; }
+        public double Commodities { get; set; }
 
-        public string CommoditiesLong { get; set; }
+        public double CommoditiesLong { get; set; }
 
-        public string CommoditiesShort { get; set; }
+        public double CommoditiesShort { get; set; }
 
-        public string Bonds { get; set; }
+        public double Bonds { get; set; }
 
-        public string BondsLong { get; set; }
+        public double BondsLong { get; set; }
 
-        public string BondsShort { get; set; }
+        public double BondsShort { get; set; }
 
-        public string Notes { get; set; }
+        public double Notes { get; set; }
 
-        public string NotesLong { get; set; }
+        public double NotesLong { get; set; }
 
-        public string NotesShort { get; set; }
+        public double NotesShort { get; set; }
 
-        public string Funds { get; set; }
+        public double Funds { get; set; }
 
-        public string FundsLong { get; set; }
+        public double FundsLong { get; set; }
 
-        public string FundsShort { get; set; }
+        public double FundsShort { get; set; }
 
-        public string InterestAccruals { get; set; }
+        public double InterestAccruals { get; set; }
 
-        public string InterestAccrualsLong { get; set; }
+        public double InterestAccrualsLong { get; set; }
 
-        public string InterestAccrualsShort { get; set; }
+        public double InterestAccrualsShort { get; set; }
 
-        public string SoftDollars { get; set; }
+        public double SoftDollars { get; set; }
 
-        public string SoftDollarsLong { get; set; }
+        public double SoftDollarsLong { get; set; }
 
-        public string SoftDollarsShort { get; set; }
+        public double SoftDollarsShort { get; set; }
 
-        public string ForexCfdUnrealizedPl { get; set; }
+        public double ForexCfdUnrealizedPl { get; set; }
 
-        public string ForexCfdUnrealizedPlLong { get; set; }
+        public double ForexCfdUnrealizedPlLong { get; set; }
 
-        public string ForexCfdUnrealizedPlShort { get; set; }
+        public double ForexCfdUnrealizedPlShort { get; set; }
 
-        public string CfdUnrealizedPl { get; set; }
+        public double CfdUnrealizedPl { get; set; }
 
-        public string CfdUnrealizedPlLong { get; set; }
+        public double CfdUnrealizedPlLong { get; set; }
 
-        public string CfdUnrealizedPlShort { get; set; }
+        public double CfdUnrealizedPlShort { get; set; }
 
-        public string DividendAccruals { get; set; }
+        public double DividendAccruals { get; set; }
 
-        public string DividendAccrualsLong { get; set; }
+        public double DividendAccrualsLong { get; set; }
 
-        public string DividendAccrualsShort { get; set; }
+        public double DividendAccrualsShort { get; set; }
 
-        public string FdicInsuredBankSweepAccountCashComponent { get; set; }
+        public double FdicInsuredBankSweepAccountCashComponent { get; set; }
 
-        public string FdicInsuredBankSweepAccountCashComponentLong { get; set; }
+        public double FdicInsuredBankSweepAccountCashComponentLong { get; set; }
 
-        public string FdicInsuredBankSweepAccountCashComponentShort { get; set; }
+        public double FdicInsuredBankSweepAccountCashComponentShort { get; set; }
 
-        public string FdicInsuredAccountInterestAccrualsComponent { get; set; }
+        public double FdicInsuredAccountInterestAccrualsComponent { get; set; }
 
-        public string FdicInsuredAccountInterestAccrualsComponentLong { get; set; }
+        public double FdicInsuredAccountInterestAccrualsComponentLong { get; set; }
 
-        public string FdicInsuredAccountInterestAccrualsComponentShort { get; set; }
+        public double FdicInsuredAccountInterestAccrualsComponentShort { get; set; }
 
-        public string Total { get; set; }
+        public double Total { get; set; }
 
-        public string TotalLong { get; set; }
+        public double TotalLong { get; set; }
 
-        public string TotalShort { get; set; }
+        public double TotalShort { get; set; }
     }
 
 
@@ -1025,13 +1027,16 @@ namespace IbFlexReader.Contracts
 
         public string AccountId { get; set; }
 
-        public string FromDate { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime FromDate { get; set; }
 
-        public string ToDate { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime ToDate { get; set; }
 
         public string Period { get; set; }
 
-        public string WhenGenerated { get; set; }
+        [Format(Constants.DateTimeFormat)]
+        public DateTime WhenGenerated { get; set; }
     }
 
 
@@ -1040,7 +1045,7 @@ namespace IbFlexReader.Contracts
 
         public FlexStatement FlexStatement { get; set; }
 
-        public string Count { get; set; }
+        public int Count { get; set; }
     }
 
 

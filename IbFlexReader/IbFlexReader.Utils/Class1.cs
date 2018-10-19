@@ -1,5 +1,8 @@
-﻿using IbFlexReader.Contracts.Attributes;
+﻿using IbFlexReader.Contracts;
+using IbFlexReader.Contracts.Attributes;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -21,22 +24,42 @@ namespace IbFlexReader.Utils
 
             foreach (var p in typeFrom.GetProperties())
             {
-                var possible = typeToProperties.FirstOrDefault(x => x.Name == p.Name);
-
-                if (possible != null)
+                try
                 {
-                    var possibleType = possible.PropertyType;
+                    var possible = typeToProperties.FirstOrDefault(x => x.Name == p.Name);
 
-                    if (possibleType.FullName.Contains("IbFlexReader"))
+                    if (possible != null)
                     {
-                        var instance = Activator.CreateInstance(possibleType);
+                        var possibleType = possible.PropertyType;
 
-                        possible.SetValue(obj, instance.PopulateFrom(p.GetValue(from)));
-                    } else
-                    {
-                        possible.SetValue(obj, CastValue(p.GetValue(from), possible));
+                        if (possibleType != typeof(string) && typeof(IEnumerable).IsAssignableFrom(possibleType))
+                        {
+                            var listType = typeof(List<>).MakeGenericType(possibleType.GenericTypeArguments[0]);
+                            var list = (IList)Activator.CreateInstance(listType);
+                            possible.SetValue(obj, list);
+
+                            foreach (var o in (IEnumerable)p.GetValue(from))
+                            {
+                                var entryType = typeof(FlexQueryResponse).Assembly.GetType("IbFlexReader.Contracts." + o.GetType().Name);
+                                list.Add(Activator.CreateInstance(entryType).PopulateFrom(o));
+                            }
+                        }
+                        else if (possibleType.FullName.Contains("IbFlexReader"))
+                        {
+                            var instance = Activator.CreateInstance(possibleType);
+
+                            possible.SetValue(obj, instance.PopulateFrom(p.GetValue(from)));
+                        }
+                        else
+                        {
+                            possible.SetValue(obj, CastValue(p.GetValue(from), possible));
+                        }
+
                     }
-                    
+                } 
+                catch (Exception e)
+                {
+                    throw new Exception($"error during casting field '{p.Name}' of '{typeFrom.Name}'", e);
                 }
             }
 
@@ -50,11 +73,13 @@ namespace IbFlexReader.Utils
                 return value;
             }
 
+            var strVal = value.ToString();
+
             var type = property.PropertyType;
 
             if (type.IsEnum)
             {
-                return Enum.Parse(type, value.ToString());
+                return Enum.Parse(type, strVal);
             }
 
             if (type == typeof(DateTime))
@@ -67,7 +92,37 @@ namespace IbFlexReader.Utils
                     throw new Exception("format not specified");
                 }
 
-                return DateTime.ParseExact(value.ToString(), attribute.Value, CultureInfo.InvariantCulture);
+                return DateTime.ParseExact(strVal, attribute.Value, CultureInfo.InvariantCulture);
+            }
+
+            if (type == typeof(int))
+            {
+                return int.Parse(strVal);
+            }
+
+            if (type == typeof(int?))
+            {
+                return (int?)int.Parse(strVal);
+            }
+
+            if (type == typeof(long))
+            {
+                return long.Parse(strVal);
+            }
+
+            if (type == typeof(long?))
+            {
+                return (long?)long.Parse(strVal);
+            }
+
+            if (type == typeof(double))
+            {
+                return double.Parse(strVal, CultureInfo.InvariantCulture);
+            }
+
+            if (type == typeof(IEnumerable<>))
+            {
+
             }
 
             return value.ToString();
