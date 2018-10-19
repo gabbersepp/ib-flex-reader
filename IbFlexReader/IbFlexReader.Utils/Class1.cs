@@ -84,17 +84,12 @@ namespace IbFlexReader.Utils
 
             var type = property.PropertyType;
 
-            if (type.IsEnum)
-            {
-                return Enum.Parse(type, strVal);
-            }
-
             if (Nullable.GetUnderlyingType(type)?.IsEnum ?? false)
             {
                 return Enum.Parse(Nullable.GetUnderlyingType(type), strVal);
             }
 
-            if (type == typeof(DateTime))
+            if (type == typeof(DateTime?))
             {
                 // expet format
                 var attribute = property.GetCustomAttribute<FormatAttribute>();
@@ -107,19 +102,9 @@ namespace IbFlexReader.Utils
                 return DateTime.ParseExact(strVal, attribute.Value, CultureInfo.InvariantCulture);
             }
 
-            if (type == typeof(int))
-            {
-                return int.Parse(strVal);
-            }
-
             if (type == typeof(int?))
             {
                 return (int?)int.Parse(strVal);
-            }
-
-            if (type == typeof(long))
-            {
-                return long.Parse(strVal);
             }
 
             if (type == typeof(long?))
@@ -127,16 +112,11 @@ namespace IbFlexReader.Utils
                 return (long?)long.Parse(strVal);
             }
 
-            if (type == typeof(double))
+            if (type == typeof(double?))
             {
                 return double.Parse(strVal, CultureInfo.InvariantCulture);
             }
-
-            if (type == typeof(IEnumerable<>))
-            {
-
-            }
-
+            
             return value.ToString();
         }
     }

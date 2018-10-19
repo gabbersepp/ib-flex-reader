@@ -17,6 +17,16 @@
 
     public enum AssetCategory
     {
-        STK, OPT
+        STK, OPT, FOP
+    }
+
+    public enum OpenClose
+    {
+        O, C
+    }
+
+    public enum BuySell
+    {
+        BUY, SELL
     }
 }

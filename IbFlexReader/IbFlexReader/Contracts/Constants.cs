@@ -7,6 +7,7 @@ namespace IbFlexReader.Contracts
     public class Constants
     {
         public const string DateFormat = "yyyyMMdd";
-        public const string DateTimeFormat = DateFormat + ";" + "HHmmss";
+        public const string TimeFormat = "HHmmss";
+        public const string DateTimeFormat = DateFormat + ";" + TimeFormat;
     }
 }
