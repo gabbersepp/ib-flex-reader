@@ -5,4 +5,8 @@
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\IbFlexReader.Contracts\IbFlexReader.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

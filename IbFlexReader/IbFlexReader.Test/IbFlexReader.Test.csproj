@@ -12,6 +12,7 @@
 </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IbFlexReader.Contracts\IbFlexReader.Contracts.csproj" />
     <ProjectReference Include="..\IbFlexReader.Xml\IbFlexReader.Xml.csproj" />
     <ProjectReference Include="..\IbFlexReader\IbFlexReader.csproj" />
   </ItemGroup>
