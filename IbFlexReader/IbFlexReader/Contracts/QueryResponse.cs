@@ -216,17 +216,17 @@ namespace IbFlexReader.Contracts
 
         public string Model { get; set; }
 
-        public string Currency { get; set; }
+        public Currencies Currency { get; set; }
 
-        public string FxRateToBase { get; set; }
+        public double FxRateToBase { get; set; }
 
-        public string AssetCategory { get; set; }
+        public AssetCategory AssetCategory { get; set; }
 
         public string Symbol { get; set; }
 
         public string Description { get; set; }
 
-        public string Conid { get; set; }
+        public long Conid { get; set; }
 
         public string SecurityID { get; set; }
 
@@ -238,7 +238,7 @@ namespace IbFlexReader.Contracts
 
         public string ListingExchange { get; set; }
 
-        public string UnderlyingConid { get; set; }
+        public int? UnderlyingConid { get; set; }
 
         public string UnderlyingSymbol { get; set; }
 
@@ -248,47 +248,51 @@ namespace IbFlexReader.Contracts
 
         public string Issuer { get; set; }
 
-        public string Multiplier { get; set; }
+        public int Multiplier { get; set; }
 
-        public string Strike { get; set; }
+        public double Strike { get; set; }
 
-        public string Expiry { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime Expiry { get; set; }
 
-        public string PutCall { get; set; }
+        public PutCall? PutCall { get; set; }
 
         public string PrincipalAdjustFactor { get; set; }
 
-        public string ReportDate { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime ReportDate { get; set; }
 
-        public string Position { get; set; }
+        public int Position { get; set; }
 
-        public string MarkPrice { get; set; }
+        public double MarkPrice { get; set; }
 
-        public string PositionValue { get; set; }
+        public double PositionValue { get; set; }
 
-        public string OpenPrice { get; set; }
+        public double OpenPrice { get; set; }
 
-        public string CostBasisPrice { get; set; }
+        public double CostBasisPrice { get; set; }
 
-        public string CostBasisMoney { get; set; }
+        public double CostBasisMoney { get; set; }
 
         public string PercentOfNAV { get; set; }
 
-        public string FifoPnlUnrealized { get; set; }
+        public double FifoPnlUnrealized { get; set; }
 
-        public string Side { get; set; }
+        public LongShort Side { get; set; }
 
         public string LevelOfDetail { get; set; }
 
-        public string OpenDateTime { get; set; }
+        [Format(Constants.DateTimeFormat)]
+        public DateTime OpenDateTime { get; set; }
 
-        public string HoldingPeriodDateTime { get; set; }
+        [Format(Constants.DateTimeFormat)]
+        public DateTime HoldingPeriodDateTime { get; set; }
 
         public string Code { get; set; }
 
-        public string OriginatingOrderID { get; set; }
+        public long OriginatingOrderID { get; set; }
 
-        public string OriginatingTransactionID { get; set; }
+        public long OriginatingTransactionID { get; set; }
 
         public string AccruedInt { get; set; }
     }

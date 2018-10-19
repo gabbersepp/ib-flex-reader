@@ -26,6 +26,8 @@ namespace IbFlexReader.Utils
             {
                 try
                 {
+                    // just for debugging purposes
+                    var pName = p.Name;
                     var possible = typeToProperties.FirstOrDefault(x => x.Name == p.Name);
 
                     if (possible != null)
@@ -44,7 +46,7 @@ namespace IbFlexReader.Utils
                                 list.Add(Activator.CreateInstance(entryType).PopulateFrom(o));
                             }
                         }
-                        else if (possibleType.FullName.Contains("IbFlexReader"))
+                        else if (possibleType.FullName.Contains("IbFlexReader") && !possibleType.IsEnum && (!Nullable.GetUnderlyingType(possibleType)?.IsEnum ?? true))
                         {
                             var instance = Activator.CreateInstance(possibleType);
 
@@ -75,11 +77,21 @@ namespace IbFlexReader.Utils
 
             var strVal = value.ToString();
 
+            if (strVal == string.Empty && property.PropertyType != typeof(string))
+            {
+                return null;
+            }
+
             var type = property.PropertyType;
 
             if (type.IsEnum)
             {
                 return Enum.Parse(type, strVal);
+            }
+
+            if (Nullable.GetUnderlyingType(type)?.IsEnum ?? false)
+            {
+                return Enum.Parse(Nullable.GetUnderlyingType(type), strVal);
             }
 
             if (type == typeof(DateTime))

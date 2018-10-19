@@ -76,6 +76,26 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
             entry.Cash.Should().BeApproximately(-13262.92, 0.01);
         }
 
+        [Test]
+        public void TestOpenPositions()
+        {
+            var str = start + @"<OpenPositions>
+<OpenPosition accountId=""xxxx"" acctAlias=""xxxx  xxxx xxxx"" model="""" currency=""EUR"" fxRateToBase=""1"" assetCategory=""STK"" symbol=""PSMd"" description=""PROSIEBENSAT.1 MEDIA SE"" conid=""132721011"" securityID=""DE000PSM7770"" securityIDType=""ISIN"" cusip="""" isin=""DE000PSM7770"" listingExchange=""IBIS"" underlyingConid="""" underlyingSymbol="""" underlyingSecurityID="""" underlyingListingExchange="""" issuer="""" multiplier=""1"" strike="""" expiry="""" putCall="""" principalAdjustFactor="""" reportDate=""20181016"" position=""100"" markPrice=""21.38"" positionValue=""2138"" openPrice=""23.42"" costBasisPrice=""23.42"" costBasisMoney=""2342"" percentOfNAV="""" fifoPnlUnrealized=""-204"" side=""Long"" levelOfDetail=""LOT"" openDateTime=""20180719;150000"" holdingPeriodDateTime=""20180719;150000"" code="""" originatingOrderID="""" originatingTransactionID=""9290307278"" accruedInt="""" />
+<OpenPosition accountId=""xxxx"" acctAlias=""xxxx  xxxx xxxx"" model="""" currency=""EUR"" fxRateToBase=""1"" assetCategory=""STK"" symbol=""SNH"" description=""STEINHOFF INTERNATIONAL H NV"" conid=""214727589"" securityID=""NL0011375019"" securityIDType=""ISIN"" cusip="""" isin=""NL0011375019"" listingExchange=""IBIS2"" underlyingConid="""" underlyingSymbol="""" underlyingSecurityID="""" underlyingListingExchange="""" issuer="""" multiplier=""1"" strike="""" expiry="""" putCall="""" principalAdjustFactor="""" reportDate=""20181016"" position=""200"" markPrice=""0.1265"" positionValue=""25.3"" openPrice=""0.2422"" costBasisPrice=""0.2422"" costBasisMoney=""48.44"" percentOfNAV="""" fifoPnlUnrealized=""-23.14"" side=""Long"" levelOfDetail=""LOT"" openDateTime=""20180321;101315"" holdingPeriodDateTime=""20180321;101315"" code="""" originatingOrderID=""1015934799"" originatingTransactionID=""8789843416"" accruedInt="""" />
+<OpenPosition accountId=""xxxx"" acctAlias=""xxxx  xxxx xxxx"" model="""" currency=""USD"" fxRateToBase=""0.86395"" assetCategory=""OPT"" symbol=""INTC  181026P00046000"" description=""INTC 26OCT18 46.0 P"" conid=""332532980"" securityID="""" securityIDType="""" cusip="""" isin="""" listingExchange="""" underlyingConid=""270639"" underlyingSymbol=""INTC"" underlyingSecurityID="""" underlyingListingExchange=""NASDAQ"" issuer="""" multiplier=""100"" strike=""46"" expiry=""20181026"" putCall=""P"" principalAdjustFactor="""" reportDate=""20181016"" position=""-1"" markPrice=""1.3375"" positionValue=""-133.75"" openPrice=""1.24"" costBasisPrice=""1.24"" costBasisMoney=""-124"" percentOfNAV="""" fifoPnlUnrealized=""-9.75"" side=""Short"" levelOfDetail=""LOT"" openDateTime=""20181001;155509"" holdingPeriodDateTime=""20181001;155509"" code="""" originatingOrderID=""1094835050"" originatingTransactionID=""9610469328"" accruedInt="""" />
+<OpenPosition accountId=""xxxx"" acctAlias=""xxxx  xxxx xxxx"" model="""" currency=""USD"" fxRateToBase=""0.86395"" assetCategory=""OPT"" symbol=""INTC  181026C00047000"" description=""INTC 26OCT18 47.0 C"" conid=""332532927"" securityID="""" securityIDType="""" cusip="""" isin="""" listingExchange="""" underlyingConid=""270639"" underlyingSymbol=""INTC"" underlyingSecurityID="""" underlyingListingExchange=""NASDAQ"" issuer="""" multiplier=""100"" strike=""47"" expiry=""20181026"" putCall=""C"" principalAdjustFactor="""" reportDate=""20181016"" position=""-1"" markPrice=""0.8374"" positionValue=""-83.74"" openPrice=""1.24"" costBasisPrice=""1.24"" costBasisMoney=""-124"" percentOfNAV="""" fifoPnlUnrealized=""40.26"" side=""Short"" levelOfDetail=""LOT"" openDateTime=""20181001;155509"" holdingPeriodDateTime=""20181001;155509"" code="""" originatingOrderID=""1094834574"" originatingTransactionID=""9610469194"" accruedInt="""" />
+</OpenPositions>" + end;
+
+            var obj = new Deserializer().Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str));
+            var openPositions = obj.FlexStatements.FlexStatement.OpenPositions;
+            openPositions.OpenPosition.Count.Should().Be(4);
+            var first = openPositions.OpenPosition[0];
+            first.AssetCategory.Should().Be(AssetCategory.STK);
+            first.Symbol.Should().Be("PSMd");
+            first.Currency.Should().Be(Currencies.EUR);
+            first.PutCall.Should().Be(null);
+        }
+
         public static Stream GenerateStreamFromString(string s)
         {
             var stream = new MemoryStream();
