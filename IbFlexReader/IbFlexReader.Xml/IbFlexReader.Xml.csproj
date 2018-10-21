@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IbFlexReader.Contracts\IbFlexReader.Contracts.csproj" />
     <ProjectReference Include="..\IbFlexReader.Utils\IbFlexReader.Utils.csproj" />
   </ItemGroup>
 
