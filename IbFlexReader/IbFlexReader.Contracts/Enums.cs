@@ -17,7 +17,7 @@
 
     public enum AssetCategory
     {
-        STK, OPT, FOP
+        STK, OPT, FOP, CFD, FUT
     }
 
     public enum OpenClose
