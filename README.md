@@ -27,5 +27,5 @@ Search it on nuget.com
 ## Requirements
 It requires your application to be .NET Standard 2.0 compliant.
 
-## [Release Notes](https://github.com/gabbersepp/ib-flex-reader/blob/master/README.md)
+## [Release Notes](https://github.com/gabbersepp/ib-flex-reader/blob/master/CHANGELOG.md)
 
