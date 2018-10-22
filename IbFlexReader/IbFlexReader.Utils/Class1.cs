@@ -86,6 +86,13 @@ namespace IbFlexReader.Utils
 
             if (Nullable.GetUnderlyingType(type)?.IsEnum ?? false)
             {
+                object enumValue;
+
+                if ((enumValue = EnumParser.ParseWithMapping(Nullable.GetUnderlyingType(type), strVal)) != null)
+                {
+                    return enumValue;
+                }
+
                 return Enum.Parse(Nullable.GetUnderlyingType(type), strVal);
             }
 

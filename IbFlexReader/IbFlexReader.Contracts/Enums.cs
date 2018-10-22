@@ -1,4 +1,8 @@
-﻿namespace IbFlexReader.Contracts
+﻿using IbFlexReader.Contracts.Attributes;
+using System;
+using System.Linq;
+
+namespace IbFlexReader.Contracts
 {
     public enum PutCall
     {
@@ -28,5 +32,36 @@
     public enum BuySell
     {
         BUY, SELL
+    }
+
+    [EnumName]
+    public enum TradeType
+    {
+        [EnumName("Other Fees")]
+        OtherFees
+    }
+
+    public class EnumParser
+    {
+        public static object ParseWithMapping(Type type, string name)
+        {
+            var attr = type.GetCustomAttributes(false).OfType<EnumNameAttribute>().FirstOrDefault();
+
+            if (attr != null)
+            {
+                var field = type.GetFields()
+                    .Select(f => new { FieldName = f.Name, Ca = f.GetCustomAttributes(typeof(EnumNameAttribute), false).OfType<EnumNameAttribute>().FirstOrDefault()?.Value })
+                    .FirstOrDefault(x => x.Ca == name);
+
+                if (field == null)
+                {
+                    return null;
+                }
+
+                return Enum.Parse(type, field.FieldName);
+            }
+
+            return null;
+        }
     }
 }
