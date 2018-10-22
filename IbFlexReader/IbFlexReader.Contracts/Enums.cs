@@ -38,7 +38,15 @@ namespace IbFlexReader.Contracts
     public enum TradeType
     {
         [EnumName("Other Fees")]
-        OtherFees
+        OtherFees,
+        [EnumName("Withholding Tax")]
+        WithholdingTax,
+        [EnumName("Dividends")]
+        Dividends,
+        [EnumName("Payment In Lieu Of Dividends")]
+        PaymentInLieuOfDividends,
+        [EnumName("Broker Interest Paid")]
+        BrokerInterestPaid
     }
 
     public class EnumParser

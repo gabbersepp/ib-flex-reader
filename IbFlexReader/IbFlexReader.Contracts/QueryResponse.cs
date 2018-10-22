@@ -618,17 +618,17 @@ namespace IbFlexReader.Contracts
 
         public string Model { get; set; }
 
-        public string Currency { get; set; }
+        public Currencies? Currency { get; set; }
 
-        public string FxRateToBase { get; set; }
+        public double? FxRateToBase { get; set; }
 
-        public string AssetCategory { get; set; }
+        public AssetCategory? AssetCategory { get; set; }
 
         public string Symbol { get; set; }
 
         public string Description { get; set; }
 
-        public string Conid { get; set; }
+        public long? Conid { get; set; }
 
         public string SecurityID { get; set; }
 
@@ -650,29 +650,32 @@ namespace IbFlexReader.Contracts
 
         public string Issuer { get; set; }
 
-        public string Multiplier { get; set; }
+        public int? Multiplier { get; set; }
 
-        public string Strike { get; set; }
+        public double? Strike { get; set; }
 
-        public string Expiry { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime? Expiry { get; set; }
 
-        public string PutCall { get; set; }
+        public PutCall? PutCall { get; set; }
 
         public string PrincipalAdjustFactor { get; set; }
 
-        public string DateTime { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime? DateTime { get; set; }
 
-        public string Amount { get; set; }
+        public double? Amount { get; set; }
+        
+        public TradeType? Type { get; set; }
 
-        public string Type { get; set; }
-
-        public string TradeID { get; set; }
+        public long? TradeID { get; set; }
 
         public string Code { get; set; }
 
-        public string TransactionID { get; set; }
+        public long? TransactionID { get; set; }
 
-        public string ReportDate { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime? ReportDate { get; set; }
 
         public string ClientReference { get; set; }
     }
