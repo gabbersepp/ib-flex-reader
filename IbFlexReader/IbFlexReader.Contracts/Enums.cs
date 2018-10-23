@@ -46,7 +46,9 @@ namespace IbFlexReader.Contracts
         [EnumName("Payment In Lieu Of Dividends")]
         PaymentInLieuOfDividends,
         [EnumName("Broker Interest Paid")]
-        BrokerInterestPaid
+        BrokerInterestPaid,
+        [EnumName("Price Adjustments")]
+        PriceAdjustments
     }
 
     public class EnumParser
