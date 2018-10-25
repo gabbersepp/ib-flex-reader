@@ -54,7 +54,7 @@ namespace IbFlexReader.Utils
                         }
                         else
                         {
-                            possible.SetValue(obj, CastValue(p.GetValue(from), possible));
+                            possible.SetValue(obj, CastValue(from, p.GetValue(from), possible));
                         }
 
                     }
@@ -68,7 +68,14 @@ namespace IbFlexReader.Utils
             return obj;
         }
 
-        private static object CastValue(object value, PropertyInfo property)
+        private static object GetValueOfProperty(object obj, string name)
+        {
+            var type = obj.GetType();
+            var prop = type.GetProperty(name);
+            return prop.GetValue(obj);
+        }
+
+        private static object CastValue(object valueHolder, object value, PropertyInfo property)
         {
             if (value == null)
             {
@@ -99,14 +106,26 @@ namespace IbFlexReader.Utils
             if (type == typeof(DateTime?))
             {
                 // expet format
-                var attribute = property.GetCustomAttribute<FormatAttribute>();
+                var formatAttribute = property.GetCustomAttribute<FormatAttribute>();
+                var timeFieldAttribute = property.GetCustomAttribute<TimeFieldAttribute>();
+                var dateFieldAttribute = property.GetCustomAttribute<DateFieldAttribute>();
 
-                if (attribute == null)
+                if (formatAttribute == null)
                 {
                     throw new Exception("format not specified");
                 }
+                
+                if (dateFieldAttribute != null)
+                {
+                    strVal = GetValueOfProperty(valueHolder, dateFieldAttribute.Field).ToString() + ";" + strVal;
+                }
 
-                return DateTime.ParseExact(strVal, attribute.Value, CultureInfo.InvariantCulture);
+                if (timeFieldAttribute != null)
+                {
+                    strVal = strVal + ";" + GetValueOfProperty(valueHolder, timeFieldAttribute.Field).ToString();
+                }
+
+                return DateTime.ParseExact(strVal, formatAttribute.Value, CultureInfo.InvariantCulture);
             }
 
             if (type == typeof(int?))

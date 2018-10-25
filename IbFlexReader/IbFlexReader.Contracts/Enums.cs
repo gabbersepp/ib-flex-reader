@@ -35,7 +35,7 @@ namespace IbFlexReader.Contracts
     }
 
     [EnumName]
-    public enum TradeType
+    public enum CashTransactionType
     {
         [EnumName("Other Fees")]
         OtherFees,

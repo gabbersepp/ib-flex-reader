@@ -9,9 +9,9 @@ namespace IbFlexReader.Test
         [Test]
         public void TestParseWithMapping()
         {
-            var enumValue = EnumParser.ParseWithMapping(typeof(TradeType), "Other Fees");
+            var enumValue = EnumParser.ParseWithMapping(typeof(CashTransactionType), "Other Fees");
 
-            enumValue.Should().Be(TradeType.OtherFees);
+            enumValue.Should().Be(CashTransactionType.OtherFees);
         }
     }
 }
