@@ -16,7 +16,15 @@ namespace IbFlexReader.Contracts
 
     public enum Currencies
     {
-        EUR, USD
+        EUR,
+        USD,
+        JPY,
+        CHF,
+        GBP,
+        NZD,
+        AUD,
+        CAD
+
     }
 
     public enum AssetCategory
