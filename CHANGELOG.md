@@ -2,6 +2,13 @@
 
 Here you can see a full list of changes between each release.
 
+## Version 1.0.2
+
+Released on November 01, 2018
+
+- add notes enum to "Trade" class
+- add more currencies [Hummel83]
+
 ## Version 1.0.1
 
 Released on October 23, 2018
