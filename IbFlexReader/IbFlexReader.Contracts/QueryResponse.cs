@@ -397,7 +397,7 @@ namespace IbFlexReader.Contracts
 
         public OpenClose? OpenCloseIndicator { get; set; }
 
-        public string Notes { get; set; }
+        public Notes? Notes { get; set; }
 
         public double? Cost { get; set; }
 

@@ -100,7 +100,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
         public void TestTrades()
         {
             var str = start + @"<Trades>
-<Trade currency=""EUR"" assetCategory=""STK"" symbol=""SNH"" underlyingSymbol="""" multiplier=""1"" putCall="""" tradeDate=""20171214"" tradeTime=""041923"" quantity=""200"" tradePrice=""0.593"" openCloseIndicator=""O"" ibCommission=""-4"" ibCommissionCurrency=""EUR"" notes="""" orderType=""LMT"" strike="""" />
+<Trade currency=""EUR"" assetCategory=""STK"" symbol=""SNH"" underlyingSymbol="""" multiplier=""1"" putCall="""" tradeDate=""20171214"" tradeTime=""041923"" quantity=""200"" tradePrice=""0.593"" openCloseIndicator=""O"" ibCommission=""-4"" ibCommissionCurrency=""EUR"" notes=""A"" orderType=""LMT"" strike="""" />
 <Trade currency=""USD"" assetCategory=""OPT"" symbol=""AAPL  171020C00162500"" underlyingSymbol=""AAPL"" multiplier=""100"" putCall=""C"" tradeDate=""20170921"" tradeTime=""132105"" quantity=""-1"" tradePrice=""0.9"" openCloseIndicator=""O"" ibCommission=""-3.5"" ibCommissionCurrency=""USD"" notes="""" orderType=""LMT"" strike=""162.5"" />
 <Trade currency=""USD"" assetCategory=""OPT"" symbol=""AAPL  171020C00162500"" underlyingSymbol=""AAPL"" multiplier=""100"" putCall=""C"" tradeDate=""20170929"" tradeTime=""094647"" quantity=""1"" tradePrice=""0.4"" openCloseIndicator=""C"" ibCommission=""-3.5"" ibCommissionCurrency=""USD"" notes="""" orderType=""LMT"" strike=""162.5"" />
 <Trade currency=""USD"" assetCategory=""FOP"" symbol=""ADUG8 P0740"" underlyingSymbol=""ADH8"" multiplier=""100000"" putCall=""P"" tradeDate=""20171214"" tradeTime=""113319"" quantity=""1"" tradePrice=""0.0013"" openCloseIndicator=""C"" ibCommission=""-3.5"" ibCommissionCurrency=""USD"" notes="""" orderType=""LMT"" strike=""0.74"" />
@@ -109,6 +109,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
             var obj = new Deserializer().Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str));
             var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
             trades.Count.Should().Be(4);
+            trades[0].Notes.Value.Should().Be(Notes.Assigned);
         }
 
         [Test]

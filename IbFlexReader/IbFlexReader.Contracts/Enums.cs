@@ -59,6 +59,20 @@ namespace IbFlexReader.Contracts
         PriceAdjustments
     }
 
+    [Flags]
+    [EnumName]
+    public enum Notes
+    {
+        [EnumName("Ex")]
+        Exercised = 1,
+        [EnumName("A")]
+        Assigned = 2,
+        [EnumName("P")]
+        P = 4,
+        [EnumName("Ep")]
+        Expired = 8
+    }
+
     public class EnumParser
     {
         public static object ParseWithMapping(Type type, string name)
