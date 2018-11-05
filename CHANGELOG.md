@@ -2,6 +2,12 @@
 
 Here you can see a full list of changes between each release.
 
+## Version 1.0.3
+
+Released on November 05, 2018
+
+- make more stable by not throwing exception when something can not be parsed
+
 ## Version 1.0.2
 
 Released on November 01, 2018

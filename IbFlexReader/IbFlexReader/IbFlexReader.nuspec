@@ -2,7 +2,7 @@
 <package  xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>    
     <id>Biehler.IbFlexReader</id>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <title>Interactive Brokers Flex Query Reader</title>
     <authors>gabbersepp</authors>
     <owners>gabbersepp</owners>
@@ -11,7 +11,7 @@
     <!--<iconUrl></iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Easily read any flex query. Provides the whole data model.</description>
-    <releaseNotes>add more currencies, add "Notes" to "Trade"</releaseNotes>
+    <releaseNotes>make more stable; do not throw exception on unparseable entry</releaseNotes>
     <copyright>2018 Josef Biehler</copyright>
     <tags>IB interactive broker flex query</tags>
     <summary></summary>
