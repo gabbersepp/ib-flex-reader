@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Test", "IbFlex
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Utils", "IbFlexReader.Utils\IbFlexReader.Utils.csproj", "{5401088F-ECCF-4E3D-8D99-6C31D18E6571}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IbFlexReader.Contracts", "IbFlexReader.Contracts\IbFlexReader.Contracts.csproj", "{21A0A357-2533-429B-AB35-A9D5497263E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Contracts", "IbFlexReader.Contracts\IbFlexReader.Contracts.csproj", "{21A0A357-2533-429B-AB35-A9D5497263E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

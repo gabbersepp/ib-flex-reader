@@ -1073,6 +1073,8 @@ namespace IbFlexReader.Contracts
         public string QueryName { get; set; }
 
         public string Type { get; set; }
+        
+        public List<ErrorMessage> Errors { get; set; }
     }
 
 }

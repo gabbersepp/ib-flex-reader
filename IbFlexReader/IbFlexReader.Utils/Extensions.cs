@@ -4,14 +4,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization.Json;
+using System.Text;
 
 namespace IbFlexReader.Utils
 {
     public static class Extensions
     {
-        public static TIn PopulateFrom<TIn, TFrom>(this TIn obj, TFrom from)
+        public static TIn PopulateFrom<TIn, TFrom>(this TIn obj, TFrom from, List<ErrorMessage> errorObjects) where TIn : class
         {
             if (from == null)
             {
@@ -21,6 +24,7 @@ namespace IbFlexReader.Utils
             var typeFrom = from.GetType();
             var typeTo = obj.GetType();
             var typeToProperties = typeTo.GetProperties();
+            var errorFound = false;
 
             foreach (var p in typeFrom.GetProperties())
             {
@@ -43,14 +47,18 @@ namespace IbFlexReader.Utils
                             foreach (var o in (IEnumerable)p.GetValue(from))
                             {
                                 var entryType = typeof(FlexQueryResponse).Assembly.GetType("IbFlexReader.Contracts." + o.GetType().Name);
-                                list.Add(Activator.CreateInstance(entryType).PopulateFrom(o));
+                                var newInstance = Activator.CreateInstance(entryType).PopulateFrom(o, errorObjects);
+                                if (newInstance != null)
+                                {
+                                    list.Add(newInstance);
+                                }
                             }
                         }
                         else if (possibleType.FullName.Contains("IbFlexReader") && !possibleType.IsEnum && (!Nullable.GetUnderlyingType(possibleType)?.IsEnum ?? true))
                         {
                             var instance = Activator.CreateInstance(possibleType);
 
-                            possible.SetValue(obj, instance.PopulateFrom(p.GetValue(from)));
+                            possible.SetValue(obj, instance.PopulateFrom(p.GetValue(from), errorObjects));
                         }
                         else
                         {
@@ -61,11 +69,27 @@ namespace IbFlexReader.Utils
                 } 
                 catch (Exception e)
                 {
-                    throw new Exception($"error during casting field '{p.Name}' of '{typeFrom.Name}'", e);
+                    var msg = $"error during casting field '{p.Name}' of '{typeFrom.Name}'";
+                    errorObjects.Add(new ErrorMessage
+                    {
+                        Message = msg,
+                        Object = GetJson(from, typeFrom)
+                    });
+                    errorFound = true;
+                    break;
                 }
             }
 
-            return obj;
+            return errorFound ? null : obj;
+        }
+
+        private static string GetJson(object obj, Type type)
+        {
+            var jsonSerializer = new DataContractJsonSerializer(type);
+            var memStream = new MemoryStream();
+            jsonSerializer.WriteObject(memStream, obj);
+            memStream.Seek(0, SeekOrigin.Begin);
+            return Encoding.UTF8.GetString(memStream.GetBuffer());
         }
 
         private static object GetValueOfProperty(object obj, string name)

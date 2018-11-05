@@ -13,7 +13,9 @@ namespace IbFlexReader
         public Contracts.FlexQueryResponse GetByString(string content)
         {
             var stream = GenerateStreamFromString(content);
-            return new Deserializer().Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(stream);
+            var result = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
+            result.Errors = errorObjects;
+            return result;
         }
 
         public async Task<Contracts.FlexResult> GetByApi(string token, string queryId)
@@ -22,7 +24,7 @@ namespace IbFlexReader
             var uri = new Uri($"https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.SendRequest?t={token}&q={queryId}&v=3");
             var result = await client.PostAsync(uri, null);
             var stream = await result.Content.ReadAsStreamAsync();
-            var response = new Deserializer().Deserialize<XmlFlexStatementResponse, FlexStatementResponse>(stream);
+            var response = Deserializer.Deserialize<XmlFlexStatementResponse, FlexStatementResponse>(stream, out var errorObjects);
 
             if (response.Status != "Success")
             {
@@ -36,7 +38,8 @@ namespace IbFlexReader
             uri = new Uri($"https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.GetStatement?q={response.ReferenceCode}&t={token}&v=3");
             result = await client.PostAsync(uri, null);
             stream = await result.Content.ReadAsStreamAsync();
-            var queryResponse = new Deserializer().Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(stream);
+            var queryResponse = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out errorObjects);
+            queryResponse.Errors = errorObjects;
 
             return new FlexResult
             {
