@@ -2,6 +2,13 @@
 
 Here you can see a full list of changes between each release.
 
+## Version 1.1.0
+
+Released on November 06, 2018
+
+- split up Open/Close trades. see issue #3
+- allow flagable enums
+
 ## Version 1.0.3
 
 Released on November 05, 2018
