@@ -460,10 +460,13 @@ namespace IbFlexReader.Contracts
         public string IsAPIOrder { get; set; }
     }
 
+    public class Lot : Trade
+    {        
+    }
 
     public class Trades
     {
-
+        public List<Lot> Lot { get; set; }
         public List<Trade> Trade { get; set; }
     }
 

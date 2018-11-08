@@ -10,11 +10,12 @@ namespace IbFlexReader
 {
     public class Reader
     {
-        public Contracts.FlexQueryResponse GetByString(string content)
+        public Contracts.FlexQueryResponse GetByString(string content, Options options = null)
         {
             var stream = GenerateStreamFromString(content);
             var result = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
             result.Errors = errorObjects;
+            Logic.ProcessStatement(result.FlexStatements.FlexStatement, options);
             return result;
         }
 

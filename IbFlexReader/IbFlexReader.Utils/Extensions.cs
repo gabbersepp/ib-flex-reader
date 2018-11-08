@@ -69,7 +69,7 @@ namespace IbFlexReader.Utils
                 } 
                 catch (Exception e)
                 {
-                    var msg = $"error during casting field '{p.Name}' of '{typeFrom.Name}'";
+                    var msg = $"error during casting field '{p.Name}' of '{typeFrom.Name}' with message: {e.Message.ToString()} and stacktrace: {e.StackTrace.ToString()}";
                     errorObjects.Add(new ErrorMessage
                     {
                         Message = msg,
