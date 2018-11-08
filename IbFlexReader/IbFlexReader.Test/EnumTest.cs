@@ -13,5 +13,13 @@ namespace IbFlexReader.Test
 
             enumValue.Should().Be(CashTransactionType.OtherFees);
         }
+
+        [Test]
+        public void TestParseFlags()
+        {
+            var enumValue = EnumParser.Parse(typeof(OpenClose), "O;C");
+
+            enumValue.Should().HaveFlag(OpenClose.C).And.HaveFlag(OpenClose.O);
+        }
     }
 }

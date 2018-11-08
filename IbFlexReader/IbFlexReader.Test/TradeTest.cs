@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using IbFlexReader.Contracts;
 using IbFlexReader.Xml;
 using NUnit.Framework;
 using System;
@@ -20,6 +21,8 @@ namespace IbFlexReader.Test
 </Trades>" + XmlEnd;
             var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var error);
             error.Count.Should().Be(0);
+            obj.FlexStatements.FlexStatement.Trades.Trade[0].OpenCloseIndicator.Value.Should().HaveFlag(OpenClose.C);
+            obj.FlexStatements.FlexStatement.Trades.Trade[0].OpenCloseIndicator.Value.Should().HaveFlag(OpenClose.O);
             //obj.FlexStatements.FlexStatement.Trades.Trade.Count.Should().Be(3);
         }
     }
