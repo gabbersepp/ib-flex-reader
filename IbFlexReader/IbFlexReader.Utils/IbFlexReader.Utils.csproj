@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Biehler.EnumParser" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\IbFlexReader.Contracts\IbFlexReader.Contracts.csproj" />
   </ItemGroup>
 

@@ -117,7 +117,7 @@ namespace IbFlexReader.Utils
 
             if (Nullable.GetUnderlyingType(type)?.IsEnum ?? false)
             {
-                return EnumParser.Parse(Nullable.GetUnderlyingType(type), strVal);
+                return EnumParser.EnumParser.Parse(Nullable.GetUnderlyingType(type), strVal);
             }
 
             if (type == typeof(DateTime?))
