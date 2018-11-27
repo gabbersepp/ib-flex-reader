@@ -585,7 +585,7 @@ namespace IbFlexReader.Contracts
 
 		public string IsAPIOrder { get; set; }
 
-		public string Code { get; set; }
+		public Notes? Code { get; set; }
 
 		public double? BrokerExecutionCommission { get; set; }
 

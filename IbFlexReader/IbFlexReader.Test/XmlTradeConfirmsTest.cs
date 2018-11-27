@@ -839,7 +839,7 @@ namespace IbFlexReader.Test
 		}
 
 		[Test]
-		public void TestTradeConfirms_Code()
+		public void TestTradeConfirms_Code1()
 		{
 			var str = XmlStart + @"<TradeConfirms>
 			<TradeConfirm code='A' />
@@ -847,7 +847,31 @@ namespace IbFlexReader.Test
 			var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
 			var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
 			tradeConfirms.Count.Should().Be(1);
-			tradeConfirms[0].Code.Should().Be("A");
+			tradeConfirms[0].Code.Should().Be(Notes.Assigned);
+		}
+
+		[Test]
+		public void TestTradeConfirms_Code2()
+		{
+			var str = XmlStart + @"<TradeConfirms>
+			<TradeConfirm code='O' />
+			</TradeConfirms>" + XmlEnd;
+			var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
+			var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
+			tradeConfirms.Count.Should().Be(1);
+			tradeConfirms[0].Code.Should().Be(Notes.OpeningTrade);
+		}
+
+		[Test]
+		public void TestTradeConfirms_Code3()
+		{
+			var str = XmlStart + @"<TradeConfirms>
+			<TradeConfirm code='unknown' />
+			</TradeConfirms>" + XmlEnd;
+			var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
+			var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
+			tradeConfirms.Count.Should().Be(0);
+			msg.Should().NotBeNull();
 		}
 
 		[Test]
