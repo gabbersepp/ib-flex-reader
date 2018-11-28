@@ -848,6 +848,7 @@ namespace IbFlexReader.Test
 			var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
 			tradeConfirms.Count.Should().Be(1);
 			tradeConfirms[0].Code.Should().Be(Notes.Assigned);
+			tradeConfirms[0].Code.Should().HaveFlag(Notes.Assigned);
 		}
 
 		[Test]
@@ -860,6 +861,7 @@ namespace IbFlexReader.Test
 			var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
 			tradeConfirms.Count.Should().Be(1);
 			tradeConfirms[0].Code.Should().Be(Notes.OpeningTrade);
+			tradeConfirms[0].Code.Should().HaveFlag(Notes.OpeningTrade);
 		}
 
 		[Test]
@@ -872,6 +874,20 @@ namespace IbFlexReader.Test
 			var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
 			tradeConfirms.Count.Should().Be(0);
 			msg.Should().NotBeNull();
+		}
+
+		[Test]
+		public void TestTradeConfirms_Code5()
+		{
+			var str = XmlStart + @"<TradeConfirms>
+			<TradeConfirm code='C;AEx;T' />
+			</TradeConfirms>" + XmlEnd;
+			var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
+			var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
+			tradeConfirms.Count.Should().Be(1);
+			tradeConfirms[0].Code.Should().HaveFlag(Notes.ClosingTrade);
+			tradeConfirms[0].Code.Should().HaveFlag(Notes.AutomaticalExercise);
+			tradeConfirms[0].Code.Should().HaveFlag(Notes.Transfer);
 		}
 
 		[Test]
