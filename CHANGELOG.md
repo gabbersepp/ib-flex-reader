@@ -2,6 +2,13 @@
 
 Here you can see a full list of changes between each release.
 
+## Version 1.2.0
+
+Released on November 06, 2018
+
+- add SEK currency
+- add TradeConfirm (JueMueller)
+
 ## Version 1.1.0
 
 Released on November 06, 2018

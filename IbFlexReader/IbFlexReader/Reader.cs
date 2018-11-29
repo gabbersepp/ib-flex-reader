@@ -14,8 +14,9 @@ namespace IbFlexReader
         {
             var stream = GenerateStreamFromString(content);
             var result = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
+            result = result ?? new Contracts.FlexQueryResponse();
             result.Errors = errorObjects;
-            Logic.ProcessStatement(result.FlexStatements.FlexStatement, options);
+            Logic.ProcessStatement(result.FlexStatements?.FlexStatement, options);
             return result;
         }
 

@@ -2,7 +2,7 @@
 <package  xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>    
     <id>Biehler.IbFlexReader</id>
-    <version>1.1.0</version>
+    <version>1.2.1</version>
     <title>Interactive Brokers Flex Query Reader</title>
     <authors>gabbersepp</authors>
     <owners>gabbersepp</owners>
@@ -11,10 +11,13 @@
     <!--<iconUrl></iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Easily read any flex query. Provides the whole data model.</description>
-    <releaseNotes>split up Open/Close trades; allow flagable enums</releaseNotes>
+    <releaseNotes>add SEK currency, add TradeConfirm</releaseNotes>
     <copyright>2018 Josef Biehler</copyright>
     <tags>IB interactive broker flex query</tags>
     <summary></summary>
+    <dependencies>
+      <dependency id="Biehler.EnumParser" version="1.0.0" />
+    </dependencies>
   </metadata>
   <files>
     <file src="" target="" />
