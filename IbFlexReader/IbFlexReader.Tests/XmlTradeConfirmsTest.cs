@@ -1,19 +1,20 @@
-﻿using NUnit.Framework;
-using FluentAssertions;
+﻿using FluentAssertions;
 using IbFlexReader.Contracts;
 using IbFlexReader.Xml;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using static IbFlexReader.Test.Helper;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IbFlexReader.Test
 {
+	[TestClass]
 	public class XmlTradeConfirmsTest
 	{
 		#region TradeConfirms
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms()
 		{
 			StringBuilder sb = new StringBuilder();
@@ -31,7 +32,7 @@ namespace IbFlexReader.Test
 			tradeConfirms.Count.Should().Be(4);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_AccountId()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -43,7 +44,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].AccountId.Should().Be("abcdefg");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_AcctAlias()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -55,7 +56,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].AcctAlias.Should().Be("alias");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Model()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -67,7 +68,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Model.Should().Be("aModel");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Currency1()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -80,7 +81,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Currency.Should().Be(Currencies.USD);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Currency2()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -93,7 +94,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Currency.Should().Be(Currencies.EUR);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Currency3()
 		{
 			// unknown currency -> error message
@@ -106,7 +107,7 @@ namespace IbFlexReader.Test
 			msg.Should().NotBeNull();
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_AssetCategory1()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -118,7 +119,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].AssetCategory.Should().Be(AssetCategory.STK);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_AssetCategory2()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -130,7 +131,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].AssetCategory.Should().Be(AssetCategory.OPT);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_AssetCategory3()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -142,7 +143,7 @@ namespace IbFlexReader.Test
 			msg.Should().NotBeNull();
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Symbol()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -154,7 +155,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Symbol.Should().Be("KO");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Description()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -166,7 +167,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Description.Should().Be("COCA-COLA CO/THE");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Conid()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -178,7 +179,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Conid.Should().Be(8894);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_SecurityID()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -190,7 +191,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].SecurityID.Should().Be("secID");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_SecurityIDType()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -202,7 +203,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].SecurityIDType.Should().Be("secIDType");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Cusip()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -214,7 +215,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Cusip.Should().Be("cusipStr");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Isin()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -226,7 +227,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Isin.Should().Be("ii");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_ListingExchange()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -238,7 +239,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].ListingExchange.Should().Be("ex");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_UnderlyingConid()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -250,7 +251,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].UnderlyingConid.Should().Be(1234);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_UnderlyingSymbol()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -262,7 +263,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].UnderlyingSymbol.Should().Be("uSym");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_UnderlyingSecurityID()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -274,7 +275,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].UnderlyingSecurityID.Should().Be("usecID");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_UnderlyingListingExchange()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -286,7 +287,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].UnderlyingListingExchange.Should().Be("ulEx");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Issuer()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -298,7 +299,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Issuer.Should().Be("issuerTxt");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Multiplier1()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -310,7 +311,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Multiplier.Should().Be(101);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Multiplier2()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -322,7 +323,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Multiplier.Should().BeNull();
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Multiplier3()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -334,7 +335,7 @@ namespace IbFlexReader.Test
 			msg.Should().NotBeNull();
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Strike1()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -346,7 +347,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Strike.Should().Be(10.1);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Strike2()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -358,7 +359,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Strike.Should().BeNull();
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Strike3()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -370,7 +371,7 @@ namespace IbFlexReader.Test
 			msg.Should().NotBeNull();
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Expiry1()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -382,7 +383,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Expiry.Should().Be(new DateTime(2018, 11, 16));
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Expiry2()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -394,7 +395,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Expiry.Should().BeNull();
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Expiry3()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -406,7 +407,7 @@ namespace IbFlexReader.Test
 			msg.Should().NotBeNull();
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_PutCall1()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -418,7 +419,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].PutCall.Should().Be(PutCall.P);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_PutCall2()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -430,7 +431,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].PutCall.Should().Be(PutCall.C);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_PutCall3()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -442,7 +443,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].PutCall.Should().BeNull();
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_PutCall4()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -454,7 +455,7 @@ namespace IbFlexReader.Test
 			msg.Should().NotBeNull();
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_PrincipalAdjustFactor()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -466,7 +467,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].PrincipalAdjustFactor.Should().Be("paf");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_TransactionType()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -478,7 +479,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].TransactionType.Should().Be("BookTrade");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_TradeID()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -490,7 +491,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].TradeID.Should().Be(2276360777);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_OrderID()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -502,7 +503,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].OrderID.Should().Be(9857779816);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_ExecID()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -514,7 +515,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].ExecID.Should().Be("exec");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_BrokerageOrderID()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -526,7 +527,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].BrokerageOrderID.Should().Be("boID");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_OrderReference()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -538,7 +539,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].OrderReference.Should().Be("oRef");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_VolatilityOrderLink()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -550,7 +551,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].VolatilityOrderLink.Should().Be("voLink");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_ClearingFirmID()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -562,7 +563,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].ClearingFirmID.Should().Be("cfID");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_OrigTradePrice()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -574,7 +575,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].OrigTradePrice.Should().Be(1.23);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_OrigTradeDate()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -586,7 +587,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].OrigTradeDate.Should().Be(new DateTime(2018, 12, 31));
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_OrigTradeID()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -598,7 +599,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].OrigTradeID.Should().Be(12345678);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_OrderTime()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -610,7 +611,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].OrderTime.Should().Be(new DateTime(2018, 12, 31, 16, 20, 01));
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_DateTime()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -622,7 +623,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].DateTime.Should().Be(new DateTime(2018, 12, 30, 17, 20, 01));
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_ReportDate()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -634,7 +635,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].ReportDate.Should().Be(new DateTime(2018, 12, 30));
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_SettleDate()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -646,7 +647,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].SettleDate.Should().Be(new DateTime(2018, 11, 20));
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_TradeDate()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -658,7 +659,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].TradeDate.Should().Be(new DateTime(2018, 12, 23));
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Exchange()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -670,7 +671,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Exchange.Should().Be("--");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_BuySell()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -682,7 +683,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].BuySell.Should().Be(BuySell.SELL);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Quantity()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -694,7 +695,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Quantity.Should().Be(-100);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Price()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -706,7 +707,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Price.Should().Be(46.123);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Amount()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -718,7 +719,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Amount.Should().Be(-123.456);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Proceeds()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -730,7 +731,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Proceeds.Should().Be(-123.654);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Commission()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -742,7 +743,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Commission.Should().Be(-0.0717);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_BrokerExecutionCommission()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -754,7 +755,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].BrokerExecutionCommission.Should().Be(0.0717);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_BrokerClearingCommission()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -766,7 +767,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].BrokerClearingCommission.Should().Be(1.0717);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_ThirdPartyExecutionCommission()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -778,7 +779,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].ThirdPartyExecutionCommission.Should().Be(-1.0717);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_ThirdPartyClearingCommission()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -790,7 +791,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].ThirdPartyClearingCommission.Should().Be(-33.456);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_ThirdPartyRegulatoryCommission()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -802,7 +803,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].ThirdPartyRegulatoryCommission.Should().Be(33.456);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_OtherCommission()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -814,7 +815,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].OtherCommission.Should().Be(12.456);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_CommissionCurrency()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -826,7 +827,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].CommissionCurrency.Should().Be(Currencies.EUR);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Tax()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -838,7 +839,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Tax.Should().Be(432.765);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Code1()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -851,7 +852,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Code.Should().HaveFlag(Notes.Assigned);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Code2()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -864,7 +865,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Code.Should().HaveFlag(Notes.OpeningTrade);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Code3()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -876,7 +877,7 @@ namespace IbFlexReader.Test
 			msg.Should().NotBeNull();
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_Code5()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -890,7 +891,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].Code.Should().HaveFlag(Notes.Transfer);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_OrderType()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -902,7 +903,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].OrderType.Should().Be("oTyp");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_LevelOfDetail()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -914,7 +915,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].LevelOfDetail.Should().Be("EXECUTION");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_TraderID()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -926,7 +927,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].TraderID.Should().Be("trID");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_IsAPIOrder()
 		{
 			var str = XmlStart + @"<TradeConfirms>
@@ -938,7 +939,7 @@ namespace IbFlexReader.Test
 			tradeConfirms[0].IsAPIOrder.Should().Be("N");
 		}
 
-		[Test]
+		[TestMethod]
 		public void TestTradeConfirms_AllocatedTo()
 		{
 			var str = XmlStart + @"<TradeConfirms>

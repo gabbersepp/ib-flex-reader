@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Utils", "IbFle
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Contracts", "IbFlexReader.Contracts\IbFlexReader.Contracts.csproj", "{21A0A357-2533-429B-AB35-A9D5497263E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IbFlexReader.Tests", "IbFlexReader.Tests\IbFlexReader.Tests.csproj", "{A50C11A7-F1AD-4741-A22F-9941E8CC4FFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IbFlexReader.Tests", "IbFlexReader.Tests\IbFlexReader.Tests.csproj", "{B7ED29C0-4975-4F42-89AE-B00955EDEBA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{21A0A357-2533-429B-AB35-A9D5497263E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21A0A357-2533-429B-AB35-A9D5497263E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21A0A357-2533-429B-AB35-A9D5497263E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A50C11A7-F1AD-4741-A22F-9941E8CC4FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A50C11A7-F1AD-4741-A22F-9941E8CC4FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A50C11A7-F1AD-4741-A22F-9941E8CC4FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A50C11A7-F1AD-4741-A22F-9941E8CC4FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7ED29C0-4975-4F42-89AE-B00955EDEBA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7ED29C0-4975-4F42-89AE-B00955EDEBA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7ED29C0-4975-4F42-89AE-B00955EDEBA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7ED29C0-4975-4F42-89AE-B00955EDEBA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,16 +2,17 @@
 using IbFlexReader.Contracts;
 using IbFlexReader.Xml;
 using IbFlexReader.Xml.Contracts;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using static IbFlexReader.Test.Helper;
 
 namespace IbFlexReader.Test
 {
-    public class XmlTest
+	[TestClass]
+	public class XmlTest
     {
-        [Test]
+        [TestMethod]
         public void TestFlexStatementResponse() {
             var str = @"<FlexStatementResponse timestamp=""17 October, 2018 02:32 PM EDT"">
 <Status>Success</Status>
@@ -27,7 +28,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
             obj.ReferenceCode.Should().Be(1735268776);
         }
 
-        [Test]
+        [TestMethod]
         public void TestFlexStatementsEmpty()
         {
             var str = XmlStart + XmlEnd;
@@ -39,7 +40,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
             obj.FlexStatements.Count.Should().Be(1);
         }
 
-        [Test]
+        [TestMethod]
         public void TestAccountInformation()
         {
             var str = XmlStart +
@@ -54,7 +55,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
             accInfo.DateFunded.Should().Be(new DateTime(2017, 09, 01));
         }
 
-        [Test]
+        [TestMethod]
         public void TestEquitySummaryInBase()
         {
             var str = XmlStart + @"<EquitySummaryInBase>
@@ -69,7 +70,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
             entry.Cash.Should().BeApproximately(-13262.92, 0.01);
         }
 
-        [Test]
+        [TestMethod]
         public void TestOpenPositions()
         {
             var str = XmlStart + @"<OpenPositions>
@@ -89,7 +90,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
             first.PutCall.Should().Be(null);
         }
 
-        [Test]
+        [TestMethod]
         public void TestTrades()
         {
             var str = XmlStart + @"<Trades>
@@ -105,7 +106,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
             trades[0].Notes.Value.Should().Be(Notes.Assigned);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCashTransactions()
         {
             var str = XmlStart + @"<CashTransactions>
@@ -124,7 +125,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
             transactions.Count.Should().Be(8);
         }
 
-        [Test]
+        [TestMethod]
         public void TestTrades_CombinedDateTime()
         {
             var str = XmlStart + @"<Trades><Trade accountId=""xxxxx"" acctAlias=""xxxxx"" model="""" currency=""USD"" fxRateToBase=""0.85902"" assetCategory=""STK"" symbol=""BP"" description=""BP PLC-SPONS ADR"" conid=""5171"" securityID="""" securityIDType="""" cusip="""" isin="""" listingExchange=""NYSE"" underlyingConid="""" underlyingSymbol="""" underlyingSecurityID="""" underlyingListingExchange="""" issuer="""" multiplier=""1"" strike="""" expiry="""" tradeID=""2222253181"" putCall="""" reportDate=""20180927"" principalAdjustFactor="""" tradeDate=""20180927"" tradeTime=""145131"" settleDateTarget=""20181001"" transactionType=""ExchTrade"" exchange=""NYSENAT"" quantity=""-100"" tradePrice=""46.96"" tradeMoney=""-4696"" proceeds=""4696"" taxes=""0"" ibCommission=""-2"" ibCommissionCurrency=""USD"" netCash=""4694"" closePrice=""46.87"" openCloseIndicator=""O"" notes="""" cost=""-4694"" fifoPnlRealized=""0"" fxPnl=""0"" mtmPnl=""9"" origTradePrice=""0"" origTradeDate="""" origTradeID="""" origOrderID=""0"" clearingFirmID="""" transactionID=""9596216645"" buySell=""SELL"" ibOrderID=""1093485502"" ibExecID=""0000fda5.5bacd19b.01.01"" brokerageOrderID=""000fcf6e.000174c4.5bac6200.0001"" orderReference="""" volatilityOrderLink="""" exchOrderId=""N/A"" extExecID=""0d.a055.08.4a.0000f1:28319"" orderTime=""20180927;145131"" openDateTime="""" holdingPeriodDateTime="""" whenRealized="""" whenReopened="""" levelOfDetail=""EXECUTION"" changeInPrice=""0"" changeInQuantity=""0"" orderType=""LMT"" traderID="""" isAPIOrder=""N"" />
@@ -135,7 +136,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
             trades[0].TradeDate.Should().Be(new DateTime(2018, 09, 27, 14, 51, 31));
         }
 
-        [Test]
+        [TestMethod]
         // currency of first trade will be unknown
         public void ThrowNoExceptionOnParseError()
         {
