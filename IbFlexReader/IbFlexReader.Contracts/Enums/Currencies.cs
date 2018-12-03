@@ -10,6 +10,7 @@
         NZD,
         AUD,
         CAD,
-        SEK
+        SEK,
+        HKD
     }
 }
