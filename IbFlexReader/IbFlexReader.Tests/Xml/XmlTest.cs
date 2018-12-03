@@ -4,15 +4,26 @@ using IbFlexReader.Xml;
 using IbFlexReader.Xml.Contracts;
 using NUnit.Framework;
 using System;
-using System.IO;
-using static IbFlexReader.Test.Helper;
+using IbFlexReader.Contracts.Enums;
+using static IbFlexReader.Tests.StringFactory;
+
 
 namespace IbFlexReader.Test
 {
     public class XmlTest
     {
+        private IStreamBuilder _sb;
+
+
+        [SetUp]
+        public void InitTests()
+        {
+            _sb = new StreamBuilder();
+        }
+
         [Test]
-        public void TestFlexStatementResponse() {
+        public void TestFlexStatementResponse()
+        {
             var str = @"<FlexStatementResponse timestamp=""17 October, 2018 02:32 PM EDT"">
 <Status>Success</Status>
 <ReferenceCode>1735268776</ReferenceCode>
@@ -21,8 +32,8 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
 </Url>
 </FlexStatementResponse>
 ";
-            
-            var obj = Deserializer.Deserialize<XmlFlexStatementResponse, FlexStatementResponse>(GenerateStreamFromString(str), out var msg);
+
+            var obj = Deserializer.Deserialize<XmlFlexStatementResponse, FlexStatementResponse>(_sb.GenerateStreamFromString(str), out var msg);
             obj.Status.Should().Be("Success");
             obj.ReferenceCode.Should().Be(1735268776);
         }
@@ -32,7 +43,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
         {
             var str = XmlStart + XmlEnd;
 
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(_sb.GenerateStreamFromString(str), out var msg);
             obj.FlexStatements.FlexStatement.FromDate.Should().Be(new DateTime(2018, 09, 17));
             obj.FlexStatements.FlexStatement.WhenGenerated.Should().Be(new DateTime(2018, 10, 17, 14, 32, 11));
             obj.FlexStatements.FlexStatement.ToDate.Should().Be(new DateTime(2018, 10, 16));
@@ -44,9 +55,9 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
         {
             var str = XmlStart +
                 @"<AccountInformation accountId=""xxxxxx"" acctAlias=""xxxxxx"" model="""" currency=""EUR"" name=""xxxxxx"" accountType=""Broker Client"" customerType=""Individual"" accountCapabilities=""Margin"" tradingPermissions=""Stocks,Options,Warrants,Forex,Futures,Futures Options,Fully Paid Stock Loan"" registeredRepName="""" registeredRepPhone="""" dateOpened=""20150421"" dateFunded=""20170901"" dateClosed="""" street=""xxxxxx"" street2="""" city=""xxxxxx"" state=""DE-BY"" country=""Germany"" postalCode=""00000"" streetResidentialAddress=""xxxxxx"" street2ResidentialAddress="""" cityResidentialAddress=""xxxxxx"" stateResidentialAddress=""DE-BY"" countryResidentialAddress=""Germany"" postalCodeResidentialAddress=""00000"" masterName=""FXFlat Wertpapierhandelsbank GmbH"" ibEntity=""IB-UK"" primaryEmail=""xxxx@example.com"" />"
-                + XmlEnd;            
+                + XmlEnd;
 
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(_sb.GenerateStreamFromString(str), out var msg);
             var accInfo = obj.FlexStatements.FlexStatement.AccountInformation;
             accInfo.AccountId.Should().Be("xxxxxx");
             accInfo.Currency.Should().Be(Currencies.EUR);
@@ -62,7 +73,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
 <EquitySummaryByReportDateInBase accountId=""xxx"" acctAlias=""xxx  Max Mustermann"" model="""" reportDate=""20180917"" cash=""-17586.197864108"" cashLong=""18748.131125"" cashShort=""-36334.328989108"" slbCashCollateral=""0"" slbCashCollateralLong=""0"" slbCashCollateralShort=""0"" stock=""46148.1537"" stockLong=""46148.1537"" stockShort=""0"" slbDirectSecuritiesBorrowed=""0"" slbDirectSecuritiesBorrowedLong=""0"" slbDirectSecuritiesBorrowedShort=""0"" slbDirectSecuritiesLent=""0"" slbDirectSecuritiesLentLong=""0"" slbDirectSecuritiesLentShort=""0"" options=""-3609.971252"" optionsLong=""432.161028"" optionsShort=""-4042.13228"" commodities=""0"" commoditiesLong=""0"" commoditiesShort=""0"" bonds=""0"" bondsLong=""0"" bondsShort=""0"" notes=""0"" notesLong=""0"" notesShort=""0"" funds=""0"" fundsLong=""0"" fundsShort=""0"" interestAccruals=""-58.637709"" interestAccrualsLong=""0"" interestAccrualsShort=""-58.637709"" softDollars=""0"" softDollarsLong=""0"" softDollarsShort=""0"" forexCfdUnrealizedPl=""0"" forexCfdUnrealizedPlLong=""0"" forexCfdUnrealizedPlShort=""0"" cfdUnrealizedPl=""0"" cfdUnrealizedPlLong=""0"" cfdUnrealizedPlShort=""0"" dividendAccruals=""0"" dividendAccrualsLong=""0"" dividendAccrualsShort=""0"" fdicInsuredBankSweepAccountCashComponent=""0"" fdicInsuredBankSweepAccountCashComponentLong=""0"" fdicInsuredBankSweepAccountCashComponentShort=""0"" fdicInsuredAccountInterestAccrualsComponent=""0"" fdicInsuredAccountInterestAccrualsComponentLong=""0"" fdicInsuredAccountInterestAccrualsComponentShort=""0"" total=""24893.346874892"" totalLong=""65328.445853"" totalShort=""-40435.098978108"" />
 </EquitySummaryInBase>" + XmlEnd;
 
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(_sb.GenerateStreamFromString(str), out var msg);
             var summaryInBase = obj.FlexStatements.FlexStatement.EquitySummaryInBase;
             summaryInBase.EquitySummaryByReportDateInBase.Count.Should().Be(2);
             var entry = summaryInBase.EquitySummaryByReportDateInBase[0];
@@ -79,7 +90,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
 <OpenPosition accountId=""xxxx"" acctAlias=""xxxx  xxxx xxxx"" model="""" currency=""USD"" fxRateToBase=""0.86395"" assetCategory=""OPT"" symbol=""INTC  181026C00047000"" description=""INTC 26OCT18 47.0 C"" conid=""332532927"" securityID="""" securityIDType="""" cusip="""" isin="""" listingExchange="""" underlyingConid=""270639"" underlyingSymbol=""INTC"" underlyingSecurityID="""" underlyingListingExchange=""NASDAQ"" issuer="""" multiplier=""100"" strike=""47"" expiry=""20181026"" putCall=""C"" principalAdjustFactor="""" reportDate=""20181016"" position=""-1"" markPrice=""0.8374"" positionValue=""-83.74"" openPrice=""1.24"" costBasisPrice=""1.24"" costBasisMoney=""-124"" percentOfNAV="""" fifoPnlUnrealized=""40.26"" side=""Short"" levelOfDetail=""LOT"" openDateTime=""20181001;155509"" holdingPeriodDateTime=""20181001;155509"" code="""" originatingOrderID=""1094834574"" originatingTransactionID=""9610469194"" accruedInt="""" />
 </OpenPositions>" + XmlEnd;
 
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(_sb.GenerateStreamFromString(str), out var msg);
             var openPositions = obj.FlexStatements.FlexStatement.OpenPositions;
             openPositions.OpenPosition.Count.Should().Be(4);
             var first = openPositions.OpenPosition[0];
@@ -99,7 +110,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
 <Trade currency=""USD"" assetCategory=""FOP"" symbol=""ADUG8 P0740"" underlyingSymbol=""ADH8"" multiplier=""100000"" putCall=""P"" tradeDate=""20171214"" tradeTime=""113319"" quantity=""1"" tradePrice=""0.0013"" openCloseIndicator=""C"" ibCommission=""-3.5"" ibCommissionCurrency=""USD"" notes="""" orderType=""LMT"" strike=""0.74"" />
 </Trades>" + XmlEnd;
 
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(_sb.GenerateStreamFromString(str), out var msg);
             var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
             trades.Count.Should().Be(4);
             trades[0].Notes.Value.Should().Be(Notes.Assigned);
@@ -119,7 +130,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
 <CashTransaction accountId=""xxxx"" acctAlias=""xxxx"" model="""" currency=""USD"" fxRateToBase=""0.8603"" assetCategory="""" symbol="""" description=""USD DEBIT INT FOR AUG-2018"" conid="""" securityID="""" securityIDType="""" cusip="""" isin="""" listingExchange="""" underlyingConid="""" underlyingSymbol="""" underlyingSecurityID="""" underlyingListingExchange="""" issuer="""" multiplier=""0"" strike="""" expiry="""" putCall="""" principalAdjustFactor="""" dateTime=""20180906"" amount=""-129.89"" type=""Broker Interest Paid"" tradeID="""" code="""" transactionID=""9500569975"" reportDate=""20180906"" clientReference="""" />
 </CashTransactions>
 " + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(_sb.GenerateStreamFromString(str), out var msg);
             var transactions = obj.FlexStatements.FlexStatement.CashTransactions.CashTransaction;
             transactions.Count.Should().Be(8);
         }
@@ -130,7 +141,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
             var str = XmlStart + @"<Trades><Trade accountId=""xxxxx"" acctAlias=""xxxxx"" model="""" currency=""USD"" fxRateToBase=""0.85902"" assetCategory=""STK"" symbol=""BP"" description=""BP PLC-SPONS ADR"" conid=""5171"" securityID="""" securityIDType="""" cusip="""" isin="""" listingExchange=""NYSE"" underlyingConid="""" underlyingSymbol="""" underlyingSecurityID="""" underlyingListingExchange="""" issuer="""" multiplier=""1"" strike="""" expiry="""" tradeID=""2222253181"" putCall="""" reportDate=""20180927"" principalAdjustFactor="""" tradeDate=""20180927"" tradeTime=""145131"" settleDateTarget=""20181001"" transactionType=""ExchTrade"" exchange=""NYSENAT"" quantity=""-100"" tradePrice=""46.96"" tradeMoney=""-4696"" proceeds=""4696"" taxes=""0"" ibCommission=""-2"" ibCommissionCurrency=""USD"" netCash=""4694"" closePrice=""46.87"" openCloseIndicator=""O"" notes="""" cost=""-4694"" fifoPnlRealized=""0"" fxPnl=""0"" mtmPnl=""9"" origTradePrice=""0"" origTradeDate="""" origTradeID="""" origOrderID=""0"" clearingFirmID="""" transactionID=""9596216645"" buySell=""SELL"" ibOrderID=""1093485502"" ibExecID=""0000fda5.5bacd19b.01.01"" brokerageOrderID=""000fcf6e.000174c4.5bac6200.0001"" orderReference="""" volatilityOrderLink="""" exchOrderId=""N/A"" extExecID=""0d.a055.08.4a.0000f1:28319"" orderTime=""20180927;145131"" openDateTime="""" holdingPeriodDateTime="""" whenRealized="""" whenReopened="""" levelOfDetail=""EXECUTION"" changeInPrice=""0"" changeInQuantity=""0"" orderType=""LMT"" traderID="""" isAPIOrder=""N"" />
 <Trade accountId=""xxxxx"" acctAlias=""xxxxx"" model="""" currency=""USD"" fxRateToBase=""0.86156"" assetCategory=""STK"" symbol=""BP"" description=""BP PLC-SPONS ADR"" conid=""5171"" securityID="""" securityIDType="""" cusip="""" isin="""" listingExchange=""NYSE"" underlyingConid="""" underlyingSymbol="""" underlyingSecurityID="""" underlyingListingExchange="""" issuer="""" multiplier=""1"" strike="""" expiry="""" tradeID=""2223171268"" putCall="""" reportDate=""20180928"" principalAdjustFactor="""" tradeDate=""20180928"" tradeTime=""121440"" settleDateTarget=""20181002"" transactionType=""ExchTrade"" exchange=""ISLAND"" quantity=""100"" tradePrice=""46.43"" tradeMoney=""4643"" proceeds=""-4643"" taxes=""0"" ibCommission=""-2"" ibCommissionCurrency=""USD"" netCash=""-4645"" closePrice=""46.1"" openCloseIndicator=""C"" notes="""" cost=""4694"" fifoPnlRealized=""49"" fxPnl=""0"" mtmPnl=""-33"" origTradePrice=""0"" origTradeDate="""" origTradeID="""" origOrderID=""0"" clearingFirmID="""" transactionID=""9601735128"" buySell=""BUY"" ibOrderID=""1093940321"" ibExecID=""00011e50.5badf9c3.01.01"" brokerageOrderID=""000fcf6e.000174c4.5badc949.0001"" orderReference="""" volatilityOrderLink="""" exchOrderId=""N/A"" extExecID=""0327610381"" orderTime=""20180928;121440"" openDateTime="""" holdingPeriodDateTime="""" whenRealized="""" whenReopened="""" levelOfDetail=""EXECUTION"" changeInPrice=""0"" changeInQuantity=""0"" orderType=""LMT"" traderID="""" isAPIOrder=""N"" />
 </Trades>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(_sb.GenerateStreamFromString(str), out var msg);
             var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
             trades[0].TradeDate.Should().Be(new DateTime(2018, 09, 27, 14, 51, 31));
         }
@@ -143,7 +154,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
 <Trade accountId=""xxxxx"" acctAlias=""xxxxx"" model="""" currency=""UNKNOWN"" fxRateToBase=""0.85902"" assetCategory=""STK"" symbol=""BP"" description=""BP PLC-SPONS ADR"" conid=""5171"" securityID="""" securityIDType="""" cusip="""" isin="""" listingExchange=""NYSE"" underlyingConid="""" underlyingSymbol="""" underlyingSecurityID="""" underlyingListingExchange="""" issuer="""" multiplier=""1"" strike="""" expiry="""" tradeID=""2222253181"" putCall="""" reportDate=""20180927"" principalAdjustFactor="""" tradeDate=""20180927"" tradeTime=""145131"" settleDateTarget=""20181001"" transactionType=""ExchTrade"" exchange=""NYSENAT"" quantity=""-100"" tradePrice=""46.96"" tradeMoney=""-4696"" proceeds=""4696"" taxes=""0"" ibCommission=""-2"" ibCommissionCurrency=""USD"" netCash=""4694"" closePrice=""46.87"" openCloseIndicator=""O"" notes="""" cost=""-4694"" fifoPnlRealized=""0"" fxPnl=""0"" mtmPnl=""9"" origTradePrice=""0"" origTradeDate="""" origTradeID="""" origOrderID=""0"" clearingFirmID="""" transactionID=""9596216645"" buySell=""SELL"" ibOrderID=""1093485502"" ibExecID=""0000fda5.5bacd19b.01.01"" brokerageOrderID=""000fcf6e.000174c4.5bac6200.0001"" orderReference="""" volatilityOrderLink="""" exchOrderId=""N/A"" extExecID=""0d.a055.08.4a.0000f1:28319"" orderTime=""20180927;145131"" openDateTime="""" holdingPeriodDateTime="""" whenRealized="""" whenReopened="""" levelOfDetail=""EXECUTION"" changeInPrice=""0"" changeInQuantity=""0"" orderType=""LMT"" traderID="""" isAPIOrder=""N"" />
 <Trade accountId=""xxxxx"" acctAlias=""xxxxx"" model="""" currency=""USD"" fxRateToBase=""0.86156"" assetCategory=""STK"" symbol=""BP"" description=""BP PLC-SPONS ADR"" conid=""5171"" securityID="""" securityIDType="""" cusip="""" isin="""" listingExchange=""NYSE"" underlyingConid="""" underlyingSymbol="""" underlyingSecurityID="""" underlyingListingExchange="""" issuer="""" multiplier=""1"" strike="""" expiry="""" tradeID=""2223171268"" putCall="""" reportDate=""20180928"" principalAdjustFactor="""" tradeDate=""20180928"" tradeTime=""121440"" settleDateTarget=""20181002"" transactionType=""ExchTrade"" exchange=""ISLAND"" quantity=""100"" tradePrice=""46.43"" tradeMoney=""4643"" proceeds=""-4643"" taxes=""0"" ibCommission=""-2"" ibCommissionCurrency=""USD"" netCash=""-4645"" closePrice=""46.1"" openCloseIndicator=""C"" notes="""" cost=""4694"" fifoPnlRealized=""49"" fxPnl=""0"" mtmPnl=""-33"" origTradePrice=""0"" origTradeDate="""" origTradeID="""" origOrderID=""0"" clearingFirmID="""" transactionID=""9601735128"" buySell=""BUY"" ibOrderID=""1093940321"" ibExecID=""00011e50.5badf9c3.01.01"" brokerageOrderID=""000fcf6e.000174c4.5badc949.0001"" orderReference="""" volatilityOrderLink="""" exchOrderId=""N/A"" extExecID=""0327610381"" orderTime=""20180928;121440"" openDateTime="""" holdingPeriodDateTime="""" whenRealized="""" whenReopened="""" levelOfDetail=""EXECUTION"" changeInPrice=""0"" changeInQuantity=""0"" orderType=""LMT"" traderID="""" isAPIOrder=""N"" />
 </Trades>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(_sb.GenerateStreamFromString(str), out var msg);
             var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
             trades[0].Currency.Should().Be(Currencies.USD);
             msg.Count.Should().Be(1);

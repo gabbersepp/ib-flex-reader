@@ -3,6 +3,7 @@ using IbFlexReader.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using IbFlexReader.Contracts.Enums;
 
 namespace IbFlexReader
 {
