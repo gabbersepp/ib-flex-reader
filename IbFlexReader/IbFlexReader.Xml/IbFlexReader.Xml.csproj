@@ -9,4 +9,10 @@
     <ProjectReference Include="..\IbFlexReader.Utils\IbFlexReader.Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="StreamBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

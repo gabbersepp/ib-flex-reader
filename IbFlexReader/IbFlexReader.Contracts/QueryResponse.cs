@@ -1,13 +1,8 @@
-﻿/* 
- Licensed under the Apache License, Version 2.0
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- https://xmltocsharp.azurewebsites.net/
- */
+﻿
 using IbFlexReader.Contracts.Attributes;
 using System;
 using System.Collections.Generic;
+using IbFlexReader.Contracts.Enums;
 
 namespace IbFlexReader.Contracts
 {
