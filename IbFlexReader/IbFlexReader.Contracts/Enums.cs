@@ -26,7 +26,8 @@ namespace IbFlexReader.Contracts
 		NZD,
 		AUD,
 		CAD,
-        SEK
+        SEK,
+        HKD
 	}
 
 	public enum AssetCategory
