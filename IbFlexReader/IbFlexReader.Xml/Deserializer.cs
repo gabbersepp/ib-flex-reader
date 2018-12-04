@@ -8,9 +8,9 @@ using IbFlexReader.Contracts;
 
 namespace IbFlexReader.Xml
 {
-    public class Deserializer
+    public static class Deserializer
     {
-        public static TOut Deserialize<TXml, TOut>(Stream content, out List<ErrorMessage> errorObjects)
+        public  static TOut Deserialize<TXml, TOut>(Stream content, out List<ErrorMessage> errorObjects)
             where TXml : XmlBase where TOut : class, new()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(TXml));
@@ -18,5 +18,7 @@ namespace IbFlexReader.Xml
             errorObjects = new List<ErrorMessage>();
             return new TOut().PopulateFrom(obj, errorObjects);
         }
+
+
     }
 }
