@@ -55,7 +55,7 @@ namespace IbFlexReader
 
 			var stream = await result.Content.ReadAsStreamAsync();
 
-			if (dumpFile != null) Utils.DumpFileWriter.DumpSendRequest(stream, dumpFile);
+			if (dumpFile != null) { Utils.DumpFileWriter.DumpSendRequest(stream, dumpFile); }
 
 			var response = Deserializer.Deserialize<XmlFlexStatementResponse, FlexStatementResponse>(stream, out var errorObjects);
 
@@ -73,7 +73,7 @@ namespace IbFlexReader
 			result = await client.PostAsync(uri, null);
 			stream = await result.Content.ReadAsStreamAsync();
 
-			if (dumpFile != null) Utils.DumpFileWriter.DumpGetStatement(stream, dumpFile);
+			if (dumpFile != null) { Utils.DumpFileWriter.DumpGetStatement(stream, dumpFile); }
 
 			var queryResponse = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out errorObjects);
 			queryResponse.Errors = errorObjects;
