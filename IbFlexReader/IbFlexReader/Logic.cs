@@ -11,7 +11,7 @@ namespace IbFlexReader
     {
         public static void ProcessStatement(FlexStatement statement, Options options)
         {
-            if (statement != null && options.SplitUpOpenCloseTrades)
+            if (statement != null && options != null && options.SplitUpOpenCloseTrades)
             {
                 statement.Trades.Trade = SplitUpOpenCloseTrades(statement.Trades.Trade, statement.Trades.Lot);
             }
