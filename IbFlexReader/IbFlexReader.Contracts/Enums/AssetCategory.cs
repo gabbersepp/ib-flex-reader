@@ -2,6 +2,6 @@
 {
     public enum AssetCategory
     {
-        STK, OPT, FOP, CFD, FUT
+        STK, OPT, FOP, CFD, FUT, CASH
     }
 }
