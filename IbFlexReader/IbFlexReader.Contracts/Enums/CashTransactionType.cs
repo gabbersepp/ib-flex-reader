@@ -16,6 +16,8 @@ namespace IbFlexReader.Contracts.Enums
         [EnumName("Broker Interest Paid")]
         BrokerInterestPaid,
         [EnumName("Price Adjustments")]
-        PriceAdjustments
+        PriceAdjustments,
+        [EnumName("Deposits/Withdrawals")]
+        DepositsWithdrawals
     }
 }
