@@ -1,7 +1,7 @@
 ﻿namespace IbFlexReader.Contracts.Enums
 {
-	public enum PutCall
-	{
-		P, C
-	}
+    public enum PutCall
+    {
+        P, C
+    }
 }
