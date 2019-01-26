@@ -11,6 +11,8 @@
         AUD,
         CAD,
         SEK,
-        HKD
+        HKD,
+        MXN,
+        RUB
     }
 }
