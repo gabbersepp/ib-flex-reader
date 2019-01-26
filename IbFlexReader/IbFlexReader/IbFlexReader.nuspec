@@ -6,7 +6,7 @@
     <title>Interactive Brokers Flex Query Reader</title>
     <authors>gabbersepp</authors>
     <owners>gabbersepp</owners>
-    <license type="expression">MIT</license>
+    <licenseUrl>https://github.com/gabbersepp/ib-flex-reader/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/gabbersepp/ib-flex-reader</projectUrl>
     <!--<iconUrl></iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
