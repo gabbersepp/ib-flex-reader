@@ -1,0 +1,14 @@
+image: Visual Studio 2017
+
+before_build:
+- nuget restore
+
+build:
+  project: IbFlexReader.sln
+  verbosity: minimal
+
+test_script:
+#\xunit.runner.console.2.4.1\tools\net471\xunit.console.x86.exe" -targetargs:".\UnitTests\bin\Debug\UnitTests.dll -noshadow" -output:".\MyProject_coverage.xml"
+
+#upload report
+#- .\packages\Codecov.1.1.0\tools\codecov.exe -f "MyProject_coverage.xml"
