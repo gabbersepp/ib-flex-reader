@@ -1,14 +1,11 @@
+version: '2.1.{build}'
 image: Visual Studio 2017
 
 before_build:
-- nuget restore
+- cmd: nuget restore
 
-build:
-  project: IbFlexReader.sln
-  verbosity: minimal
+build_script:
+    - cmd: dotnet pack -p:PackageVersion=%APPVEYOR_BUILD_VERSION%
+    - cmd: dotnet pack -c Debug -p:PackageVersion=%APPVEYOR_BUILD_VERSION%
 
-test_script:
-#\xunit.runner.console.2.4.1\tools\net471\xunit.console.x86.exe" -targetargs:".\UnitTests\bin\Debug\UnitTests.dll -noshadow" -output:".\MyProject_coverage.xml"
 
-#upload report
-#- .\packages\Codecov.1.1.0\tools\codecov.exe -f "MyProject_coverage.xml"
