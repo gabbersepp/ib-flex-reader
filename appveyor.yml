@@ -1,11 +1,22 @@
 version: '2.1.{build}'
+
 image: Visual Studio 2017
 
+platform: Any CPU
+
+skip_tags: true
+skip_commits:
+files:
+- .editorconfig
+- LICENSE
+- README.md
+
 before_build:
-- cmd: nuget restore
+- cmd: donet restore ./ib-flex-reader/IbFlexReader/IbFlexReader.sln
 
 build_script:
     - cmd: dotnet pack -p:PackageVersion=%APPVEYOR_BUILD_VERSION%
     - cmd: dotnet pack -c Debug -p:PackageVersion=%APPVEYOR_BUILD_VERSION%
 
 
+test: off
