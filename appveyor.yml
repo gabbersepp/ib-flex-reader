@@ -4,11 +4,12 @@ image: Visual Studio 2017
 
 platform: Any CPU
 
+before_build:
+- dotnet restore 
+
 build:
-
-  project: ./ib-flex-reader/IbFlexReader/IbFlexReader.sln
-
-  verbosity: minimal
+project: IbFlexReader.sln
+verbosity: minimal
 
 
 test: off
