@@ -3,23 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader", "IbFlexReader\IbFlexReader\IbFlexReader.csproj", "{9E8052D9-DF98-49AC-B5D2-B1F254330C8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader", "IbFlexReader\IbFlexReader.csproj", "{9E8052D9-DF98-49AC-B5D2-B1F254330C8F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Xml", "IbFlexReader\IbFlexReader.Xml\IbFlexReader.Xml.csproj", "{9A8831DA-29E8-4F17-B2B5-3C4BD0ED54A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Xml", "IbFlexReader.Xml\IbFlexReader.Xml.csproj", "{9A8831DA-29E8-4F17-B2B5-3C4BD0ED54A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Utils", "IbFlexReader\IbFlexReader.Utils\IbFlexReader.Utils.csproj", "{5401088F-ECCF-4E3D-8D99-6C31D18E6571}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Utils", "IbFlexReader.Utils\IbFlexReader.Utils.csproj", "{5401088F-ECCF-4E3D-8D99-6C31D18E6571}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Contracts", "IbFlexReader\IbFlexReader.Contracts\IbFlexReader.Contracts.csproj", "{21A0A357-2533-429B-AB35-A9D5497263E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Contracts", "IbFlexReader.Contracts\IbFlexReader.Contracts.csproj", "{21A0A357-2533-429B-AB35-A9D5497263E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IbFlexReader.Tests", "IbFlexReader\IbFlexReader.Tests\IbFlexReader.Tests.csproj", "{A50C11A7-F1AD-4741-A22F-9941E8CC4FFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IbFlexReader.Tests", "IbFlexReader.Tests\IbFlexReader.Tests.csproj", "{A50C11A7-F1AD-4741-A22F-9941E8CC4FFB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3EF9CA9E-6C49-4081-BB66-1E93FCE638F8}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		appveyor.yml = appveyor.yml
-		CHANGELOG.md = CHANGELOG.md
-		LICENSE = LICENSE
-		README.md = README.md
+		.editorconfig = .editorconfig
+		..\CHANGELOG.md = ..\CHANGELOG.md
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Global
