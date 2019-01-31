@@ -39,10 +39,22 @@ namespace IbFlexReader.Tests.TestXml
         [Test]
         public void GetTestFilePathTest()
         {
-            string exp = @"F:\DEV_Projects\Projects\ib-flex-reader\IbFlexReader\IbFlexReader.Tests\XmlFileTest\Testfiles";
+            // Arrange
+            string exp = @"\ib-flex-reader\IbFlexReader\IbFlexReader.Tests\XmlFileTest\Testfiles";
+            bool check = false;
+
+            // Act
             var path = _tfh.GetTestFilePath();
 
-            Assert.AreEqual(exp, path);
+
+            // Assert
+            if (path.Contains(exp))
+            {
+                check = true;
+            }
+            
+            
+            Assert.True(check);
 
         }
 
@@ -54,7 +66,6 @@ namespace IbFlexReader.Tests.TestXml
 
             //Act
             var xfiles = _tfh.GetXmlFiles().Count;
-            
 
             //Assert
            Assert.AreEqual(xmlsInPath, xfiles);
@@ -71,18 +82,18 @@ namespace IbFlexReader.Tests.TestXml
             //Act
             var stringCol = _tfh.ConvertXmlToString(_tfh.GetXmlFiles());
 
-
             //Assert
             for (int i = 0; i < stringCol.Count ;i++)
             {
                 if (stringCol[i].Contains(xmlStart))
                 {
                     cont = true;
+                    Assert.IsTrue(cont);
                 }
             }
            
 
-            Assert.IsTrue(cont);
+           
         }
     }
 }
