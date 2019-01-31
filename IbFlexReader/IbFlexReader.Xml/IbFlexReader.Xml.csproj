@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="StreamBuilder.cs">
+    <Compile Update="StringStream.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
