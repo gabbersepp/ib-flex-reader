@@ -9,23 +9,23 @@ namespace IbFlexReader
 {
     public class Reader
     {
-        private IStreamBuilder sb;
+        private readonly IStreamBuilder<string> sb;
 
 
         public Reader()
         {
-            sb = new StreamBuilder();
+            sb = new StringStream();
         }
 
         /// <summary>
         /// Converts a string to a FlexQueryResponse.
         /// </summary>
-        /// <param name="convertedXmlFile"></param>
+        /// <param name="xmlFile"></param>
         /// <param name="options"></param>
         /// <returns>An object with account activities</returns>
-        public Contracts.FlexQueryResponse GetByString(string convertedXmlFile, Options options = null)
+        public Contracts.FlexQueryResponse GetByString(string xmlFile, Options options = null)
         {
-            using (var stream = this.sb.GenerateStreamFromString(convertedXmlFile))
+            using (var stream = this.sb.GenerateStream(xmlFile))
             {
                 var result = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
                 result = result ?? new Contracts.FlexQueryResponse();
@@ -41,12 +41,11 @@ namespace IbFlexReader
         /// Reads a FlexQuery by API.
         /// </summary>
         /// <param name="token">token provided by IB</param>
-        /// <param name="queryId">ID of the FelxQuery (not the name)</param>
+        /// <param name="queryId">ID of the FlexQuery (not the name)</param>
         /// <param name="dumpFile">if set, the data returned from IB will be dumped to file</param>
         /// <returns></returns>
         public async Task<FlexResult> GetByApi(string token, string queryId, string dumpFile = null)
         {
-            // todo: cover this code with tests
             using (var client = new HttpClient())
             {
                 var uri = new Uri($"https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.SendRequest?t={token}&q={queryId}&v=3");

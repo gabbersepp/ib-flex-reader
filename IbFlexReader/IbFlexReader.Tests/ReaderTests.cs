@@ -1,12 +1,16 @@
 ﻿using NUnit.Framework;
+using System.IO;
+using System.Linq;
+using IbFlexReader.Tests.TestXml;
 
 namespace IbFlexReader.Tests
 {
-    public class ReaderRealTest
+    public class ReaderTests
     {
         // fill with proper values to run the tests
         private string _queryId = string.Empty;
         private string _token = string.Empty;
+    
 
         [Test]
         public void GetByApi()
@@ -20,10 +24,23 @@ namespace IbFlexReader.Tests
         [Test]
         public void GetByString()
         {
-            Assert.Inconclusive("add valid queryID and token to run this test");
-            string xml = System.IO.File.ReadAllText(@"c:\Tests\Dump.2.xml");
-            var result = new Reader().GetByString(xml);
-            Assert.IsNotNull(result);
+            //Arrange
+            var tfh = new TestFileHelper();
+            var stringCol = tfh.ConvertXmlToString(tfh.GetXmlFiles());
+            var result = new Reader();
+            var fQR = new Contracts.FlexQueryResponse();
+
+
+            //Act
+
+            foreach (var file in stringCol)
+            {
+                 fQR = result.GetByString(file);
+            }
+
+            //Assert
+            Assert.NotNull(fQR);
+
         }
     }
 }

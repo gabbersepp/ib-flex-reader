@@ -11,13 +11,13 @@ namespace IbFlexReader.Test
 {
     public class XmlTradeConfirmsTest
     {
-        private IStreamBuilder _streamBuilder;
+        private IStreamBuilder<string> _streamBuilder;
 
 
         [SetUp]
         public void InitTests()
         {
-            _streamBuilder = new StreamBuilder();
+            _streamBuilder = new StringStream();
         }
 
         #region TradeConfirms
@@ -36,7 +36,7 @@ namespace IbFlexReader.Test
 
             string str = sb.ToString();
 
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(4);
         }
@@ -47,7 +47,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm accountId='abcdefg' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].AccountId.Should().Be("abcdefg");
@@ -59,7 +59,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm acctAlias='alias' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].AcctAlias.Should().Be("alias");
@@ -71,19 +71,19 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm model='aModel' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Model.Should().Be("aModel");
         }
 
         [Test]
-        public void TestTradeConfirms_Currency1()
+        public void TestTradeConfirms_CurrencyUSD()
         {
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm currency='USD' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Currency.HasValue.Should().Be(true);
@@ -91,12 +91,12 @@ namespace IbFlexReader.Test
         }
 
         [Test]
-        public void TestTradeConfirms_Currency2()
+        public void TestTradeConfirms_CurrencyEUR()
         {
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm currency='EUR' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Currency.HasValue.Should().Be(true);
@@ -104,13 +104,13 @@ namespace IbFlexReader.Test
         }
 
         [Test]
-        public void TestTradeConfirms_Currency3()
+        public void TestTradeConfirms_unknownCurrency()
         {
             // unknown currency -> error message
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm currency='XYZ' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -122,7 +122,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm assetCategory='STK' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].AssetCategory.Should().Be(AssetCategory.STK);
@@ -134,7 +134,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm assetCategory='OPT' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].AssetCategory.Should().Be(AssetCategory.OPT);
@@ -146,7 +146,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm assetCategory='unknown' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -158,7 +158,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm symbol='KO' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Symbol.Should().Be("KO");
@@ -170,7 +170,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm description='COCA-COLA CO/THE' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Description.Should().Be("COCA-COLA CO/THE");
@@ -182,7 +182,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm conid='8894' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Conid.Should().Be(8894);
@@ -194,7 +194,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm securityID='secID' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].SecurityID.Should().Be("secID");
@@ -206,7 +206,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm securityIDType='secIDType' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].SecurityIDType.Should().Be("secIDType");
@@ -218,7 +218,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm cusip='cusipStr' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Cusip.Should().Be("cusipStr");
@@ -230,7 +230,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm isin='ii' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Isin.Should().Be("ii");
@@ -242,7 +242,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm listingExchange='ex' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ListingExchange.Should().Be("ex");
@@ -254,7 +254,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm underlyingConid='1234' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].UnderlyingConid.Should().Be(1234);
@@ -266,7 +266,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm underlyingSymbol='uSym' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].UnderlyingSymbol.Should().Be("uSym");
@@ -278,7 +278,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm underlyingSecurityID='usecID' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].UnderlyingSecurityID.Should().Be("usecID");
@@ -290,7 +290,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm underlyingListingExchange='ulEx' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].UnderlyingListingExchange.Should().Be("ulEx");
@@ -302,7 +302,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm issuer='issuerTxt' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Issuer.Should().Be("issuerTxt");
@@ -314,7 +314,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm multiplier='101' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Multiplier.Should().Be(101);
@@ -326,7 +326,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm multiplier='' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Multiplier.Should().BeNull();
@@ -338,7 +338,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm multiplier='abc' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -350,7 +350,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm strike='10.1' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Strike.Should().Be(10.1);
@@ -362,7 +362,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm strike='' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Strike.Should().BeNull();
@@ -374,7 +374,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm strike='abc' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -386,7 +386,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm expiry='20181116' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Expiry.Should().Be(new DateTime(2018, 11, 16));
@@ -398,7 +398,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm expiry='' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Expiry.Should().BeNull();
@@ -410,7 +410,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm expiry='dasda' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -422,7 +422,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm putCall='P' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].PutCall.Should().Be(PutCall.P);
@@ -434,7 +434,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm putCall='C' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].PutCall.Should().Be(PutCall.C);
@@ -446,7 +446,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm putCall='' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].PutCall.Should().BeNull();
@@ -458,7 +458,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm putCall='sfdf' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -470,7 +470,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm principalAdjustFactor='paf' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].PrincipalAdjustFactor.Should().Be("paf");
@@ -482,7 +482,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm transactionType='BookTrade' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].TransactionType.Should().Be("BookTrade");
@@ -494,7 +494,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm tradeID='2276360777' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].TradeID.Should().Be(2276360777);
@@ -506,7 +506,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm orderID='9857779816' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrderID.Should().Be(9857779816);
@@ -518,7 +518,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm execID='exec' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ExecID.Should().Be("exec");
@@ -530,7 +530,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm brokerageOrderID='boID' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].BrokerageOrderID.Should().Be("boID");
@@ -542,7 +542,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm orderReference='oRef' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrderReference.Should().Be("oRef");
@@ -554,7 +554,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm volatilityOrderLink='voLink' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].VolatilityOrderLink.Should().Be("voLink");
@@ -566,7 +566,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm clearingFirmID='cfID' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ClearingFirmID.Should().Be("cfID");
@@ -578,7 +578,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm origTradePrice='1.23' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrigTradePrice.Should().Be(1.23);
@@ -590,7 +590,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm origTradeDate='20181231' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrigTradeDate.Should().Be(new DateTime(2018, 12, 31));
@@ -602,7 +602,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm origTradeID='12345678' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrigTradeID.Should().Be(12345678);
@@ -614,7 +614,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm orderTime='20181231;162001' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrderTime.Should().Be(new DateTime(2018, 12, 31, 16, 20, 01));
@@ -626,7 +626,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm dateTime='20181230;172001' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].DateTime.Should().Be(new DateTime(2018, 12, 30, 17, 20, 01));
@@ -638,7 +638,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm reportDate='20181230' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ReportDate.Should().Be(new DateTime(2018, 12, 30));
@@ -650,7 +650,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm settleDate='20181120' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].SettleDate.Should().Be(new DateTime(2018, 11, 20));
@@ -662,7 +662,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm tradeDate='20181223' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].TradeDate.Should().Be(new DateTime(2018, 12, 23));
@@ -674,7 +674,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm exchange='--' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Exchange.Should().Be("--");
@@ -686,7 +686,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm buySell='SELL' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].BuySell.Should().Be(BuySell.SELL);
@@ -698,7 +698,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm quantity='-100' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Quantity.Should().Be(-100);
@@ -710,7 +710,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm price='46.123' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Price.Should().Be(46.123);
@@ -722,7 +722,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm amount='-123.456' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Amount.Should().Be(-123.456);
@@ -734,7 +734,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm proceeds='-123.654' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Proceeds.Should().Be(-123.654);
@@ -746,7 +746,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm commission='-0.0717' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Commission.Should().Be(-0.0717);
@@ -758,7 +758,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm brokerExecutionCommission='0.0717' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].BrokerExecutionCommission.Should().Be(0.0717);
@@ -770,7 +770,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm brokerClearingCommission='1.0717' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].BrokerClearingCommission.Should().Be(1.0717);
@@ -782,7 +782,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm thirdPartyExecutionCommission='-1.0717' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ThirdPartyExecutionCommission.Should().Be(-1.0717);
@@ -794,7 +794,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm thirdPartyClearingCommission='-33.456' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ThirdPartyClearingCommission.Should().Be(-33.456);
@@ -806,7 +806,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm thirdPartyRegulatoryCommission='33.456' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ThirdPartyRegulatoryCommission.Should().Be(33.456);
@@ -818,7 +818,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm otherCommission='12.456' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OtherCommission.Should().Be(12.456);
@@ -830,7 +830,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm commissionCurrency='EUR' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].CommissionCurrency.Should().Be(Currencies.EUR);
@@ -842,7 +842,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm tax='432.765' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Tax.Should().Be(432.765);
@@ -854,7 +854,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm code='A' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Code.Should().Be(Notes.Assigned);
@@ -867,7 +867,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm code='O' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Code.Should().Be(Notes.OpeningTrade);
@@ -880,7 +880,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm code='unknown' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -892,7 +892,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm code='C;AEx;T' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Code.Should().HaveFlag(Notes.ClosingTrade);
@@ -906,7 +906,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm orderType='oTyp' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrderType.Should().Be("oTyp");
@@ -918,7 +918,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm levelOfDetail='EXECUTION' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].LevelOfDetail.Should().Be("EXECUTION");
@@ -930,7 +930,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm traderID='trID' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].TraderID.Should().Be("trID");
@@ -942,7 +942,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm isAPIOrder='N' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].IsAPIOrder.Should().Be("N");
@@ -954,7 +954,7 @@ namespace IbFlexReader.Test
             var str = XmlStart + @"<TradeConfirms>
             <TradeConfirm allocatedTo='allocTo' />
             </TradeConfirms>" + XmlEnd;
-            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStreamFromString(str), out var msg);
+            var obj = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(this._streamBuilder.GenerateStream(str), out var msg);
             var tradeConfirms = obj.FlexStatements.FlexStatement.TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].AllocatedTo.Should().Be("allocTo");
