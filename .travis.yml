@@ -3,17 +3,13 @@ language: csharp
 mono: none #5.10.0
 dotnet: 2.0.0
 
-
-
-# Restore dependencies
-    - dotnet restore ./ib-flex-reader/IbFlexReader
-    - dotnet restore ./ib-flex-reader/IbFlexReader.Contracts
-    - dotnet restore ./ib-flex-reader/IbFlexReader.Utils
-    - dotnet restore ./ib-flex-reader/IbFlexReader.Xml
-
 script:  
-  - dotnet build ./ib-flex-reader/IbFlexReader
-  - dotnet build ./ib-flex-reader/IbFlexReader.Contracts
-  - dotnet build ./ib-flex-reader/IbFlexReader.Utils
-  - dotnet build ./ib-flex-reade/IbFlexReader.Xml
+- dotnet restore ./ib-flex-reader/IbFlexReader
+- dotnet restore ./ib-flex-reader/IbFlexReader.Contracts
+- dotnet restore ./ib-flex-reader/IbFlexReader.Utils
+- dotnet restore ./ib-flex-reader/IbFlexReader.Xml
+- dotnet build ./ib-flex-reader/IbFlexReader
+- dotnet build ./ib-flex-reader/IbFlexReader.Contracts
+- dotnet build ./ib-flex-reader/IbFlexReader.Utils
+- dotnet build ./ib-flex-reade/IbFlexReader.Xml
  
