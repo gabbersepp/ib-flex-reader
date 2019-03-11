@@ -40,7 +40,7 @@ namespace IbFlexReader.Tests.TestXml
         public void GetTestFilePathTest()
         {
             // Arrange
-            string exp = @"\ib-flex-reader\IbFlexReader\IbFlexReader.Tests\bin\Release\XmlFileTest\Testfiles";
+            string exp = @"\ib-flex-reader\IbFlexReader\IbFlexReader.Tests\bin\Release\XmlFileTest\TestFiles";
             bool check = false;
 
             // Act
