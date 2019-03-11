@@ -31,7 +31,7 @@ namespace IbFlexReader.Tests.TestXml
                 check = true;}
 
             // Assert
-            Assert.IsTrue(check);
+            Assert.IsTrue(check, $"exp: ${exp}, current: ${path}");
 
         }
 
@@ -54,7 +54,7 @@ namespace IbFlexReader.Tests.TestXml
             }
             
             
-            Assert.True(check);
+            Assert.True(check, $"exp: ${exp}, current: ${path}");
 
         }
 
