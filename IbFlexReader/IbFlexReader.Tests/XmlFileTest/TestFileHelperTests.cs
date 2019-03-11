@@ -25,13 +25,13 @@ namespace IbFlexReader.Tests.TestXml
             string exp = @"ib-flex-reader\IbFlexReader";
 
             // Act
-            var path = _tfh.GetSlnPath();
+            var path = _tfh.GetSlnPath().Replace("/", "\\");
             if (path.Contains(exp))
             {
                 check = true;}
 
             // Assert
-            Assert.IsTrue(check, $"exp: ${exp}, current: ${path}");
+            Assert.IsTrue(check, $"exp: {exp}, current: {path}");
 
         }
 
@@ -44,7 +44,7 @@ namespace IbFlexReader.Tests.TestXml
             bool check = false;
 
             // Act
-            var path = _tfh.GetTestFilePath();
+            var path = _tfh.GetTestFilePath().Replace("/", "\\");
 
 
             // Assert
@@ -54,7 +54,7 @@ namespace IbFlexReader.Tests.TestXml
             }
             
             
-            Assert.True(check, $"exp: ${exp}, current: ${path}");
+            Assert.True(check, $"exp: {exp}, current: {path}");
 
         }
 
