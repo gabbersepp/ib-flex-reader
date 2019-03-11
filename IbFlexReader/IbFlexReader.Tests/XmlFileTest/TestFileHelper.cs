@@ -16,7 +16,8 @@ namespace IbFlexReader.Tests.TestXml
 
         public string GetTestFilePath()
         {
-            string  ext = @"/IbFlexReader.Tests/XmlFileTest/Testfiles";
+            string  ext = @"/IbFlexReader.Tests/bin/Release/XmlFileTest/Testfiles";
+
             var slnpath = GetSlnPath();
 
              TestFilePath = Path.GetFullPath(slnpath+ ext).Trim();
