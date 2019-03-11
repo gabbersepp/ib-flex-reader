@@ -22,7 +22,7 @@ namespace IbFlexReader.Tests.TestXml
         {
             // Arrange
             bool check = false;
-            string exp = @"ib-flex-reader\IbFlexReader";
+            string exp = @"ib-flex-reader/IbFlexReader";
 
             // Act
             var path = _tfh.GetSlnPath();
@@ -40,7 +40,7 @@ namespace IbFlexReader.Tests.TestXml
         public void GetTestFilePathTest()
         {
             // Arrange
-            string exp = @"\ib-flex-reader\IbFlexReader\IbFlexReader.Tests\XmlFileTest\Testfiles";
+            string exp = @"/ib-flex-reader/IbFlexReader/IbFlexReader.Tests/XmlFileTest/Testfiles";
             bool check = false;
 
             // Act
