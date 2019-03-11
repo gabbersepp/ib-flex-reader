@@ -13,10 +13,9 @@ install:
 - dotnet build ./IbFlexReader/IbFlexReader.Contracts
 - dotnet build ./IbFlexReader/IbFlexReader.Utils
 - dotnet build ./IbFlexReader/IbFlexReader.Xml
-- dotnet test ./IbFlexReader/IbFlexReader.Tests
 - nuget restore ./IbFlexReader/IbFlexReader.Tests
+- nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 
 script:  
-- xbuild /p:Configuration=Release SWapi-CSharp.sln /p:TargetFrameworkVersion="v4.6.1"
-
-
+- msbuild /p:Configuration=Release IbFlexReader/IbFlexReader.sln
+- mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./IbFlexReader/IbFlexReader.Tests/bin/Release/IbFlexReader.Tests.dll
