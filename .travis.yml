@@ -1,19 +1,9 @@
 
 language: csharp
-mono: none #5.10.0
-dotnet: 2.0.0
 solution: IbFlexReader/IbFlexReader.sln
 
 install:
-- dotnet restore ./IbFlexReader/IbFlexReader
-- dotnet restore ./IbFlexReader/IbFlexReader.Contracts
-- dotnet restore ./IbFlexReader/IbFlexReader.Utils
-- dotnet restore ./IbFlexReader/IbFlexReader.Xml
-- dotnet build ./IbFlexReader/IbFlexReader
-- dotnet build ./IbFlexReader/IbFlexReader.Contracts
-- dotnet build ./IbFlexReader/IbFlexReader.Utils
-- dotnet build ./IbFlexReader/IbFlexReader.Xml
-- nuget restore ./IbFlexReader/IbFlexReader.Tests
+- nuget restore IbFlexReader/IbFlexReader.sln
 - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 
 script:  
