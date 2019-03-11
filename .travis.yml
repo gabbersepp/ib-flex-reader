@@ -2,16 +2,21 @@
 language: csharp
 mono: none #5.10.0
 dotnet: 2.0.0
+solution: IbFlexReader/IbFlexReader.sln
 
-script:  
+install:
 - dotnet restore ./IbFlexReader/IbFlexReader
 - dotnet restore ./IbFlexReader/IbFlexReader.Contracts
 - dotnet restore ./IbFlexReader/IbFlexReader.Utils
 - dotnet restore ./IbFlexReader/IbFlexReader.Xml
-- dotnet restore ./IbFlexReader/IbFlexReader.Tests
 - dotnet build ./IbFlexReader/IbFlexReader
 - dotnet build ./IbFlexReader/IbFlexReader.Contracts
 - dotnet build ./IbFlexReader/IbFlexReader.Utils
 - dotnet build ./IbFlexReader/IbFlexReader.Xml
 - dotnet test ./IbFlexReader/IbFlexReader.Tests
- 
+- nuget restore ./IbFlexReader/IbFlexReader.Tests
+
+script:  
+- xbuild /p:Configuration=Release SWapi-CSharp.sln /p:TargetFrameworkVersion="v4.6.1"
+
+
