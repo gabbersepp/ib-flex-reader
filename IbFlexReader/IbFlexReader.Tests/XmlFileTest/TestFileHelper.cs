@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace IbFlexReader.Tests.TestXml
@@ -37,11 +39,15 @@ namespace IbFlexReader.Tests.TestXml
             return SlnPath;
         }
 
-
-
-        public IList<XmlDocument> GetXmlFiles()
+        public IList<string> ReadXmlFiles(string name)
         {
-            foreach (string file in Directory.GetFiles(GetTestFilePath(), "*.xml"))
+            var xml = GetXmlFiles(name);
+            return ConvertXmlToString(xml);
+        }
+
+        public IList<XmlDocument> GetXmlFiles(string namePattern = null)
+        {
+            foreach (string file in Directory.GetFiles(GetTestFilePath(), "*.xml").Where(x => new Regex($".*{namePattern}.*").IsMatch(x)))
             {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(file);

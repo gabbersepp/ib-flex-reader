@@ -62,7 +62,7 @@ namespace IbFlexReader.Tests.TestXml
         public void GetTestFilesTest()
         {
             // Arrange
-            int xmlsInPath = 1;
+            int xmlsInPath = 2;
 
             //Act
             var xfiles = _tfh.GetXmlFiles().Count;

@@ -1144,6 +1144,7 @@ namespace IbFlexReader.Contracts
 
     public class FlexStatement
     {
+        public StmtFunds StatementOfFunds { get; set; }
 
         public AccountInformation AccountInformation { get; set; }
 

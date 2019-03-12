@@ -5,6 +5,9 @@ namespace IbFlexReader.Xml.Contracts
     [XmlRoot(ElementName = "FlexStatement")]
     public class FlexStatement
     {
+        [XmlElement(ElementName = "StmtFunds")]
+        public StmtFunds StatementOfFunds { get; set; }
+
         [XmlElement(ElementName = "AccountInformation")]
         public AccountInformation AccountInformation { get; set; }
 
