@@ -2,6 +2,12 @@
 
 Here you can see a full list of changes between each release.
 
+## Version 1.4.0
+
+Released on March 12, 2019
+
+- add Statement of Funds
+
 ## Version 1.3.0
 
 Released on Januar 26, 2019
