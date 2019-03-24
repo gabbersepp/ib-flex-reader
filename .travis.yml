@@ -1,0 +1,11 @@
+
+language: csharp
+solution: IbFlexReader/IbFlexReader.sln
+
+install:
+- nuget restore IbFlexReader/IbFlexReader.sln
+- nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
+
+script:  
+- msbuild /p:Configuration=Release IbFlexReader/IbFlexReader.sln
+- mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./IbFlexReader/IbFlexReader.Tests/bin/Release/IbFlexReader.Tests.dll

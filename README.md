@@ -3,6 +3,8 @@
 This library can help you with fetching flex queries from Interactive Brokers.
 Just pass Token and Query ID and wait until it has finished.
 
+[![Build Status](https://travis-ci.org/gabbersepp/ib-flex-reader.svg?branch=master)](https://travis-ci.org/gabbersepp/ib-flex-reader)
+
 ## Usage
 
 Simple call the library by passing your token and queryId:

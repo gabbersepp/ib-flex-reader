@@ -1,17 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace IbFlexReader.Xml
 {
-
-    public interface IStreamBuilder
+    public class StringStream : IStreamBuilder<string>
     {
-        Stream GenerateStreamFromString(string Content);
-    }
-
-    public class StreamBuilder : IStreamBuilder
-    {
-        public Stream GenerateStreamFromString(string Content)
+        public Stream GenerateStream(string Content)
         {
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
