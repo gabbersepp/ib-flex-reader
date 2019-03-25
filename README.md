@@ -3,7 +3,7 @@
 This library can help you with fetching flex queries from Interactive Brokers.
 Just pass Token and Query ID and wait until it has finished.
 
-[![Build Status](https://travis-ci.org/gabbersepp/ib-flex-reader.svg?branch=master)](https://travis-ci.org/gabbersepp/ib-flex-reader) ![Nuget](https://img.shields.io/nuget/v/Biehler.IbFlexReader.svg?style=popout)
+[![Build Status](https://travis-ci.org/gabbersepp/ib-flex-reader.svg?branch=master)](https://travis-ci.org/gabbersepp/ib-flex-reader) [![Nuget](https://img.shields.io/nuget/v/Biehler.IbFlexReader.svg?style=popout)](https://www.nuget.org/packages/Biehler.IbFlexReader/)
 
 ## Usage
 
