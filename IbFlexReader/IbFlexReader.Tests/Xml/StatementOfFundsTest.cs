@@ -7,7 +7,7 @@
     using System.Threading.Tasks;
     using FluentAssertions;
     using IbFlexReader.Contracts.Enums;
-    using IbFlexReader.Tests.TestXml;
+    using IbFlexReader.Tests.XmlFileTest;
     using NUnit.Framework;
 
     public class StatementOfFundsTest

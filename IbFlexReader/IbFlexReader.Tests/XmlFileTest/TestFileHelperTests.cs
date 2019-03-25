@@ -1,7 +1,5 @@
-﻿namespace IbFlexReader.Tests.TestXml
+﻿namespace IbFlexReader.Tests.XmlFileTest
 {
-    using System;
-    using System.Linq;
     using NUnit.Framework;
 
     public class TestFileHelperTests

@@ -1,4 +1,4 @@
-﻿namespace IbFlexReader.Tests.TestXml
+﻿namespace IbFlexReader.Tests.XmlFileTest
 {
     using System.Collections.Generic;
     using System.IO;

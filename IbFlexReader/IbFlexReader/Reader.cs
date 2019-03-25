@@ -27,7 +27,7 @@
         {
             using (var stream = sb.GenerateStream(xmlFile))
             {
-                var result = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
+                var result = Deserializer.Deserialize<Xml.Contracts.QueryResponse.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
                 result = result ?? new Contracts.FlexQueryResponse();
                 result.Errors = errorObjects;
                 Logic.ProcessStatement(result.FlexStatements?.FlexStatement, options);
@@ -124,7 +124,7 @@
                     };
                 }
 
-                var queryResponse = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
+                var queryResponse = Deserializer.Deserialize<Xml.Contracts.QueryResponse.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
 
                 // in case of an error during deserialization, queryResponse maybe NULL (see PopulateFrom method)
                 if (queryResponse == null)

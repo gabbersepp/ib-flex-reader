@@ -6,7 +6,7 @@
  https://xmltocsharp.azurewebsites.net/
  */
 
-namespace IbFlexReader.Xml.Contracts
+namespace IbFlexReader.Xml.Contracts.QueryResponse
 {
     using System.Xml.Serialization;
 

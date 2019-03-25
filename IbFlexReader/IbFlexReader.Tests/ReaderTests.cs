@@ -2,7 +2,7 @@
 {
     using System.IO;
     using System.Linq;
-    using IbFlexReader.Tests.TestXml;
+    using IbFlexReader.Tests.XmlFileTest;
     using NUnit.Framework;
 
     public class ReaderTests

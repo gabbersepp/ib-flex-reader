@@ -1,4 +1,4 @@
-﻿namespace IbFlexReader.Tests
+﻿namespace IbFlexReader.Tests.Xml
 {
     public static class StringFactory
     {
