@@ -5,6 +5,7 @@
     using System.Linq;
     using IbFlexReader.Contracts;
     using IbFlexReader.Contracts.Enums;
+    using IbFlexReader.Contracts.Ib;
     using IbFlexReader.Utils;
 
     internal class Logic

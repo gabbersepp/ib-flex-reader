@@ -5,6 +5,7 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using IbFlexReader.Contracts;
+    using IbFlexReader.Contracts.Ib;
     using IbFlexReader.Xml;
     using IbFlexReader.Xml.Contracts;
 

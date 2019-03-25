@@ -3,6 +3,7 @@
     using FluentAssertions;
     using IbFlexReader.Contracts;
     using IbFlexReader.Contracts.Enums;
+    using IbFlexReader.Contracts.Ib;
     using NUnit.Framework;
 
     public class TradeTest

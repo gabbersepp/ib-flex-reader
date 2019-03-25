@@ -1,8 +1,6 @@
-﻿namespace IbFlexReader.Contracts
+﻿namespace IbFlexReader.Contracts.Ib
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
 
     public class StmtFunds
     {

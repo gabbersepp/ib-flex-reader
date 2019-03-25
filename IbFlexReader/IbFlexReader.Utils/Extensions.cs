@@ -11,9 +11,12 @@
     using System.Text;
     using IbFlexReader.Contracts;
     using IbFlexReader.Contracts.Attributes;
+    using IbFlexReader.Contracts.Ib;
 
     public static class Extensions
     {
+        private static Type referenceType = typeof(TradeConfirm);
+
         public static TIn PopulateFrom<TIn, TFrom>(this TIn obj, TFrom from, List<ErrorMessage> errorObjects) where TIn : class
         {
             if (from == null)
@@ -25,7 +28,7 @@
             var typeTo = obj.GetType();
             var typeToProperties = typeTo.GetProperties();
             var errorFound = false;
-
+            
             foreach (var p in typeFrom.GetProperties())
             {
                 try
@@ -46,7 +49,7 @@
 
                             foreach (var o in (IEnumerable)p.GetValue(from))
                             {
-                                var entryType = typeof(FlexQueryResponse).Assembly.GetType("IbFlexReader.Contracts." + o.GetType().Name);
+                                var entryType = referenceType.Assembly.GetType(referenceType.Namespace + "." + o.GetType().Name);
                                 var newInstance = Activator.CreateInstance(entryType).PopulateFrom(o, errorObjects);
                                 if (newInstance != null)
                                 {

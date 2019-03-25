@@ -1,4 +1,4 @@
-﻿namespace IbFlexReader.Contracts
+﻿namespace IbFlexReader.Contracts.Ib
 {
     public class OpenDividendAccrual
     {
