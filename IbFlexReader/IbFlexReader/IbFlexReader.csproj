@@ -5,8 +5,14 @@
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<RunCodeAnalysis>False</RunCodeAnalysis>
 	<CodeAnalysisRuleSet>./../HelloWorld.ruleset</CodeAnalysisRuleSet>
+	
   </PropertyGroup>
 
+   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'"> 
+   <!-- Ideally this is always enabled, but that tends to hurt developer productivity --> 
+   <TreatWarningsAsErrors>true</TreatWarningsAsErrors> 
+ </PropertyGroup> 
+ 
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.1-rc.114">
       <PrivateAssets>all</PrivateAssets>
