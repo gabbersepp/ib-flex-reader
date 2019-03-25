@@ -4,14 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<RunCodeAnalysis>False</RunCodeAnalysis>
-	<CodeAnalysisRuleSet>./../HelloWorld.ruleset</CodeAnalysisRuleSet>
+	<CodeAnalysisRuleSet>./../stylecop.ruleset</CodeAnalysisRuleSet>
 	
   </PropertyGroup>
 
    <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'"> 
-   <!-- Ideally this is always enabled, but that tends to hurt developer productivity --> 
    <TreatWarningsAsErrors>true</TreatWarningsAsErrors> 
- </PropertyGroup> 
+	</PropertyGroup> 
  
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.1-rc.114">
