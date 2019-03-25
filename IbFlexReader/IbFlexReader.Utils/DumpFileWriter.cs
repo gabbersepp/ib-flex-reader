@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-
-namespace IbFlexReader.Utils
+﻿namespace IbFlexReader.Utils
 {
+    using System;
+    using System.IO;
+
     public static class DumpFileWriter
     {
         public static void DumpSendRequest(Stream stream, string filename)

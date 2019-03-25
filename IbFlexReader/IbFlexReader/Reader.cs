@@ -1,17 +1,16 @@
-﻿using IbFlexReader.Contracts;
-using IbFlexReader.Xml;
-using IbFlexReader.Xml.Contracts;
-using System;
-using System.IO;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace IbFlexReader
+﻿namespace IbFlexReader
 {
+    using System;
+    using System.IO;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using IbFlexReader.Contracts;
+    using IbFlexReader.Xml;
+    using IbFlexReader.Xml.Contracts;
+
     public class Reader
     {
         private readonly IStreamBuilder<string> sb;
-
 
         public Reader()
         {
@@ -26,7 +25,7 @@ namespace IbFlexReader
         /// <returns>An object with account activities</returns>
         public Contracts.FlexQueryResponse GetByString(string xmlFile, Options options = null)
         {
-            using (var stream = this.sb.GenerateStream(xmlFile))
+            using (var stream = sb.GenerateStream(xmlFile))
             {
                 var result = Deserializer.Deserialize<Xml.Contracts.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
                 result = result ?? new Contracts.FlexQueryResponse();
@@ -59,7 +58,10 @@ namespace IbFlexReader
                 string referenceCode = requestResult.ReferenceCode;
 
                 int retryCounter = 0;
-                if (retry.HasValue && retry.Value > 0) retryCounter = retry.Value;
+                if (retry.HasValue && retry.Value > 0)
+                {
+                    retryCounter = retry.Value;
+                }
 
                 FlexResult result = null;
 
@@ -96,7 +98,6 @@ namespace IbFlexReader
                 }
 
                 return result;
-
             }
         }
 
@@ -107,7 +108,10 @@ namespace IbFlexReader
             using (var getStatementResult = await client.PostAsync(uri, null).ConfigureAwait(false))
             using (var stream = await getStatementResult.Content.ReadAsStreamAsync().ConfigureAwait(false))
             {
-                if (dumpFile != null) { Utils.DumpFileWriter.DumpGetStatement(stream, dumpFile); }
+                if (dumpFile != null)
+                {
+                    Utils.DumpFileWriter.DumpGetStatement(stream, dumpFile);
+                }
 
                 // in case of an error or warning, a FlexStatementResponse object will be returned instead of the data
                 if (TryGetFlexStatementResponse(stream, out FlexStatementResponse flexStatementResponse))
@@ -154,7 +158,10 @@ namespace IbFlexReader
             using (var sendRequestResult = await client.PostAsync(uri, null).ConfigureAwait(false))
             using (var stream = await sendRequestResult.Content.ReadAsStreamAsync().ConfigureAwait(false))
             {
-                if (dumpFile != null) { Utils.DumpFileWriter.DumpSendRequest(stream, dumpFile); }
+                if (dumpFile != null)
+                {
+                    Utils.DumpFileWriter.DumpSendRequest(stream, dumpFile);
+                }
 
                 var response = Deserializer.Deserialize<XmlFlexStatementResponse, FlexStatementResponse>(stream, out var errorObjects);
 
@@ -207,7 +214,10 @@ namespace IbFlexReader
             }
             finally
             {
-                if (stream != null) stream.Position = 0;
+                if (stream != null)
+                {
+                    stream.Position = 0;
+                }
             }
         }
     }

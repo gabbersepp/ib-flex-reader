@@ -1,10 +1,10 @@
-﻿using FluentAssertions;
-using System;
-using IbFlexReader.Utils;
-using NUnit.Framework;
-
-namespace IbFlexReader.Tests.Utils
+﻿namespace IbFlexReader.Tests.Utils
 {
+    using System;
+    using FluentAssertions;
+    using IbFlexReader.Utils;
+    using NUnit.Framework;
+
     public class DumpFileWriterTest
     {
         [Test]

@@ -1,7 +1,7 @@
-﻿using System.Xml.Serialization;
-
-namespace IbFlexReader.Xml.Contracts
+﻿namespace IbFlexReader.Xml.Contracts
 {
+    using System.Xml.Serialization;
+
     [XmlRoot(ElementName = "StatementOfFundsLine")]
     public class StatementOfFundsLine
     {

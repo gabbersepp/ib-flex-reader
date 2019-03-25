@@ -1,12 +1,12 @@
-﻿using IbFlexReader.Contracts;
-using IbFlexReader.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using IbFlexReader.Contracts.Enums;
-
-namespace IbFlexReader
+﻿namespace IbFlexReader
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using IbFlexReader.Contracts;
+    using IbFlexReader.Contracts.Enums;
+    using IbFlexReader.Utils;
+
     internal class Logic
     {
         public static void ProcessStatement(FlexStatement statement, Options options)
@@ -23,7 +23,7 @@ namespace IbFlexReader
                 .Where(t => t.OpenCloseIndicator.HasValue && t.OpenCloseIndicator.Value.Matches(x => x.HasFlag(OpenClose.C) && x.HasFlag(OpenClose.O)));
             var remainingTrades = trades.Where(x => !ocTrades.Contains(x)).ToList();
 
-            foreach(var ocTrade in ocTrades)
+            foreach (var ocTrade in ocTrades)
             {
                 var lot = lots.First(x => x.TradeDate == ocTrade.TradeDate && x.TradeTime == ocTrade.TradeTime && x.BuySell == ocTrade.BuySell && x.Description == ocTrade.Description);
                 var copy = ocTrade.Clone();

@@ -6,10 +6,10 @@
  https://xmltocsharp.azurewebsites.net/
  */
 
-using System.Xml.Serialization;
-
 namespace IbFlexReader.Xml.Contracts
 {
+    using System.Xml.Serialization;
+
     [XmlRoot(ElementName = "AccountInformation")]
     public class AccountInformation
     {
@@ -25,7 +25,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "currency")]
         public string Currency { get; set; }
 
-        [XmlAttribute(AttributeName = "name")] public string Name { get; set; }
+        [XmlAttribute(AttributeName = "name")]
+        public string Name { get; set; }
 
         [XmlAttribute(AttributeName = "accountType")]
         public string AccountType { get; set; }
@@ -60,7 +61,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "street2")]
         public string Street2 { get; set; }
 
-        [XmlAttribute(AttributeName = "city")] public string City { get; set; }
+        [XmlAttribute(AttributeName = "city")]
+        public string City { get; set; }
 
         [XmlAttribute(AttributeName = "state")]
         public string State { get; set; }

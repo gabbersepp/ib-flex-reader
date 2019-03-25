@@ -1,7 +1,7 @@
-﻿using System.Xml.Serialization;
-
-namespace IbFlexReader.Xml.Contracts
+﻿namespace IbFlexReader.Xml.Contracts
 {
+    using System.Xml.Serialization;
+
     [XmlRoot(ElementName = "FlexStatement")]
     public class FlexStatement
     {
@@ -17,7 +17,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlElement(ElementName = "OpenPositions")]
         public OpenPositions OpenPositions { get; set; }
 
-        [XmlElement(ElementName = "Trades")] public Trades Trades { get; set; }
+        [XmlElement(ElementName = "Trades")]
+        public Trades Trades { get; set; }
 
         [XmlElement(ElementName = "TradeConfirms")]
         public TradeConfirms TradeConfirms { get; set; }

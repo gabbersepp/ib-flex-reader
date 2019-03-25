@@ -1,7 +1,7 @@
-﻿using System.Xml.Serialization;
-
-namespace IbFlexReader.Xml.Contracts
+﻿namespace IbFlexReader.Xml.Contracts
 {
+    using System.Xml.Serialization;
+
     [XmlRoot(ElementName = "OpenDividendAccrual")]
     public class OpenDividendAccrual
     {
@@ -41,7 +41,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "cusip")]
         public string Cusip { get; set; }
 
-        [XmlAttribute(AttributeName = "isin")] public string Isin { get; set; }
+        [XmlAttribute(AttributeName = "isin")]
+        public string Isin { get; set; }
 
         [XmlAttribute(AttributeName = "listingExchange")]
         public string ListingExchange { get; set; }
@@ -85,9 +86,11 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "quantity")]
         public string Quantity { get; set; }
 
-        [XmlAttribute(AttributeName = "tax")] public string Tax { get; set; }
+        [XmlAttribute(AttributeName = "tax")]
+        public string Tax { get; set; }
 
-        [XmlAttribute(AttributeName = "fee")] public string Fee { get; set; }
+        [XmlAttribute(AttributeName = "fee")]
+        public string Fee { get; set; }
 
         [XmlAttribute(AttributeName = "grossRate")]
         public string GrossRate { get; set; }
@@ -98,7 +101,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "netAmount")]
         public string NetAmount { get; set; }
 
-        [XmlAttribute(AttributeName = "code")] public string Code { get; set; }
+        [XmlAttribute(AttributeName = "code")]
+        public string Code { get; set; }
 
         [XmlAttribute(AttributeName = "fromAcct")]
         public string FromAcct { get; set; }

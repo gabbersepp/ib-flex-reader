@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IbFlexReader.Contracts
+﻿namespace IbFlexReader.Contracts
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class Constants
     {
         public const string DateFormat = "yyyyMMdd";

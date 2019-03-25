@@ -1,17 +1,17 @@
-﻿using IbFlexReader.Contracts;
-using IbFlexReader.Contracts.Attributes;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization.Json;
-using System.Text;
-
-namespace IbFlexReader.Utils
+﻿namespace IbFlexReader.Utils
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime.Serialization.Json;
+    using System.Text;
+    using IbFlexReader.Contracts;
+    using IbFlexReader.Contracts.Attributes;
+
     public static class Extensions
     {
         public static TIn PopulateFrom<TIn, TFrom>(this TIn obj, TFrom from, List<ErrorMessage> errorObjects) where TIn : class
@@ -64,7 +64,6 @@ namespace IbFlexReader.Utils
                         {
                             possible.SetValue(obj, CastValue(from, p.GetValue(from), possible));
                         }
-
                     }
                 } 
                 catch (Exception e)

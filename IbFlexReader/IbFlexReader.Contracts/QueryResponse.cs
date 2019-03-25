@@ -1,15 +1,12 @@
-﻿
-using IbFlexReader.Contracts.Attributes;
-using System;
-using System.Collections.Generic;
-using IbFlexReader.Contracts.Enums;
-
-namespace IbFlexReader.Contracts
+﻿namespace IbFlexReader.Contracts
 {
+    using System;
+    using System.Collections.Generic;
+    using IbFlexReader.Contracts.Attributes;
+    using IbFlexReader.Contracts.Enums;
 
     public class AccountInformation
     {
-
         public string AccountId { get; set; }
 
         public string AcctAlias { get; set; }
@@ -72,10 +69,8 @@ namespace IbFlexReader.Contracts
         public string PrimaryEmail { get; set; }
     }
 
-
     public class EquitySummaryByReportDateInBase
     {
-
         public string AccountId { get; set; }
 
         public string AcctAlias { get; set; }
@@ -194,17 +189,13 @@ namespace IbFlexReader.Contracts
         public double? TotalShort { get; set; }
     }
 
-
     public class EquitySummaryInBase
     {
-
         public List<EquitySummaryByReportDateInBase> EquitySummaryByReportDateInBase { get; set; }
     }
 
-
     public class OpenPosition
     {
-
         public string AccountId { get; set; }
 
         public string AcctAlias { get; set; }
@@ -292,17 +283,13 @@ namespace IbFlexReader.Contracts
         public string AccruedInt { get; set; }
     }
 
-
     public class OpenPositions
     {
-
         public List<OpenPosition> OpenPosition { get; set; }
     }
 
-
     public class Trade
     {
-
         public string AccountId { get; set; }
 
         public string AcctAlias { get; set; }
@@ -604,7 +591,6 @@ namespace IbFlexReader.Contracts
 
     public class OptionEAE
     {
-
         public string AccountId { get; set; }
 
         public string AcctAlias { get; set; }
@@ -678,10 +664,8 @@ namespace IbFlexReader.Contracts
         public string TradeID { get; set; }
     }
 
-
     public class PriorPeriodPosition
     {
-
         public string AccountId { get; set; }
 
         public string AcctAlias { get; set; }
@@ -737,17 +721,13 @@ namespace IbFlexReader.Contracts
         public string PriorMtmPnl { get; set; }
     }
 
-
     public class PriorPeriodPositions
     {
-
         public List<PriorPeriodPosition> PriorPeriodPosition { get; set; }
     }
 
-
     public class CashTransaction
     {
-
         public string AccountId { get; set; }
 
         public string AcctAlias { get; set; }
@@ -816,17 +796,13 @@ namespace IbFlexReader.Contracts
         public string ClientReference { get; set; }
     }
 
-
     public class CashTransactions
     {
-
         public List<CashTransaction> CashTransaction { get; set; }
     }
 
-
     public class CFDCharge
     {
-
         public string AccountId { get; set; }
 
         public string AcctAlias { get; set; }
@@ -886,17 +862,13 @@ namespace IbFlexReader.Contracts
         public string TransactionID { get; set; }
     }
 
-
     public class CFDCharges
     {
-
         public List<CFDCharge> CFDCharge { get; set; }
     }
 
-
     public class ChangeInDividendAccrual
     {
-
         public string AccountId { get; set; }
 
         public string AcctAlias { get; set; }
@@ -972,17 +944,13 @@ namespace IbFlexReader.Contracts
         public string ToAcct { get; set; }
     }
 
-
     public class ChangeInDividendAccruals
     {
-
         public List<ChangeInDividendAccrual> ChangeInDividendAccrual { get; set; }
     }
 
-
     public class OpenDividendAccrual
     {
-
         public string AccountId { get; set; }
 
         public string AcctAlias { get; set; }
@@ -1054,17 +1022,13 @@ namespace IbFlexReader.Contracts
         public string ToAcct { get; set; }
     }
 
-
     public class OpenDividendAccruals
     {
-
         public OpenDividendAccrual OpenDividendAccrual { get; set; }
     }
 
-
     public class SecurityInfo
     {
-
         public string AssetCategory { get; set; }
 
         public string Symbol { get; set; }
@@ -1114,17 +1078,13 @@ namespace IbFlexReader.Contracts
         public string Code { get; set; }
     }
 
-
     public class SecuritiesInfo
     {
-
         public List<SecurityInfo> SecurityInfo { get; set; }
     }
 
-
     public class ConversionRate
     {
-
         public string ReportDate { get; set; }
 
         public string FromCurrency { get; set; }
@@ -1134,13 +1094,10 @@ namespace IbFlexReader.Contracts
         public string Rate { get; set; }
     }
 
-
     public class ConversionRates
     {
-
         public List<ConversionRate> ConversionRate { get; set; }
     }
-
 
     public class FlexStatement
     {
@@ -1192,19 +1149,15 @@ namespace IbFlexReader.Contracts
         public DateTime? WhenGenerated { get; set; }
     }
 
-
     public class FlexStatements
     {
-
         public FlexStatement FlexStatement { get; set; }
 
         public int? Count { get; set; }
     }
 
-
     public class FlexQueryResponse
     {
-
         public FlexStatements FlexStatements { get; set; }
 
         public string QueryName { get; set; }
@@ -1213,5 +1166,4 @@ namespace IbFlexReader.Contracts
 
         public List<ErrorMessage> Errors { get; set; }
     }
-
 }

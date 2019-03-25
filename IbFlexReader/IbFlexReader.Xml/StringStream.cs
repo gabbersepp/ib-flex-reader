@@ -1,7 +1,7 @@
-﻿using System.IO;
-
-namespace IbFlexReader.Xml
+﻿namespace IbFlexReader.Xml
 {
+    using System.IO;
+
     public class StringStream : IStreamBuilder<string>
     {
         public Stream GenerateStream(string Content)
@@ -18,5 +18,4 @@ namespace IbFlexReader.Xml
             return stream;
         }
     }
-
 }

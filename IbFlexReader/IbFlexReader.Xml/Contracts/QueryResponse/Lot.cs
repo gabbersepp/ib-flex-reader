@@ -1,7 +1,7 @@
-﻿using System.Xml.Serialization;
-
-namespace IbFlexReader.Xml.Contracts
+﻿namespace IbFlexReader.Xml.Contracts
 {
+    using System.Xml.Serialization;
+
     [XmlRoot(ElementName = "Lot")]
     public class Lot
     {
@@ -35,7 +35,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "conid")]
         public string Conid { get; set; }
 
-        [XmlAttribute(AttributeName = "cost")] public string Cost { get; set; }
+        [XmlAttribute(AttributeName = "cost")]
+        public string Cost { get; set; }
 
         [XmlAttribute(AttributeName = "currency")]
         public string Currency { get; set; }
@@ -85,7 +86,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "isAPIOrder")]
         public string IsAPIOrder { get; set; }
 
-        [XmlAttribute(AttributeName = "isin")] public string Isin { get; set; }
+        [XmlAttribute(AttributeName = "isin")]
+        public string Isin { get; set; }
 
         [XmlAttribute(AttributeName = "issuer")]
         public string Issuer { get; set; }
