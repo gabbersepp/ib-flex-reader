@@ -49,7 +49,7 @@ namespace IbFlexReader
         {
             using (var client = new HttpClient())
             {
-                FlexResult requestResult = await SendRequest(client, token, queryId, dumpFile);
+                FlexResult requestResult = await SendRequest(client, token, queryId, dumpFile).ConfigureAwait(false);
 
                 if (!requestResult.IsSuccess)
                 {
@@ -66,7 +66,7 @@ namespace IbFlexReader
                 bool tryAgain = true;
                 while (tryAgain)
                 {
-                    result = await GetStatement(client, token, referenceCode, dumpFile);
+                    result = await GetStatement(client, token, referenceCode, dumpFile).ConfigureAwait(false);
 
                     if (!result.IsSuccess && result.ErrorCode.HasValue && result.ErrorCode.Value == 1019)
                     {
@@ -80,7 +80,7 @@ namespace IbFlexReader
                             // yes
                             retryCounter--;
                             // wait a little bit
-                            await Task.Delay(2000);
+                            await Task.Delay(2000).ConfigureAwait(false);
                         }
                         else
                         {
@@ -104,8 +104,8 @@ namespace IbFlexReader
         {
             var uri = new Uri($"https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.GetStatement?q={referenceCode}&t={token}&v=3");
 
-            using (var getStatementResult = await client.PostAsync(uri, null))
-            using (var stream = await getStatementResult.Content.ReadAsStreamAsync())
+            using (var getStatementResult = await client.PostAsync(uri, null).ConfigureAwait(false))
+            using (var stream = await getStatementResult.Content.ReadAsStreamAsync().ConfigureAwait(false))
             {
                 if (dumpFile != null) { Utils.DumpFileWriter.DumpGetStatement(stream, dumpFile); }
 
@@ -151,8 +151,8 @@ namespace IbFlexReader
         {
             var uri = new Uri($"https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.SendRequest?t={token}&q={queryId}&v=3");
 
-            using (var sendRequestResult = await client.PostAsync(uri, null))
-            using (var stream = await sendRequestResult.Content.ReadAsStreamAsync())
+            using (var sendRequestResult = await client.PostAsync(uri, null).ConfigureAwait(false))
+            using (var stream = await sendRequestResult.Content.ReadAsStreamAsync().ConfigureAwait(false))
             {
                 if (dumpFile != null) { Utils.DumpFileWriter.DumpSendRequest(stream, dumpFile); }
 
