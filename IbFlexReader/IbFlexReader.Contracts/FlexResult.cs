@@ -7,5 +7,6 @@
         public string Status { get; set; }
         public bool IsSuccess => Status == "Success";
         public FlexQueryResponse FlexQueryResponse { get; set; }
+        public string ReferenceCode { get; set; }
     }
 }
