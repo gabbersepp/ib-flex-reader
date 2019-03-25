@@ -1,7 +1,7 @@
-﻿using System.Xml.Serialization;
-
-namespace IbFlexReader.Xml.Contracts
+﻿namespace IbFlexReader.Xml.Contracts.QueryResponse
 {
+    using System.Xml.Serialization;
+
     [XmlRoot(ElementName = "Trade")]
     public class Trade
     {
@@ -41,7 +41,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "cusip")]
         public string Cusip { get; set; }
 
-        [XmlAttribute(AttributeName = "isin")] public string Isin { get; set; }
+        [XmlAttribute(AttributeName = "isin")]
+        public string Isin { get; set; }
 
         [XmlAttribute(AttributeName = "listingExchange")]
         public string ListingExchange { get; set; }
@@ -130,7 +131,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "notes")]
         public string Notes { get; set; }
 
-        [XmlAttribute(AttributeName = "cost")] public string Cost { get; set; }
+        [XmlAttribute(AttributeName = "cost")]
+        public string Cost { get; set; }
 
         [XmlAttribute(AttributeName = "fifoPnlRealized")]
         public string FifoPnlRealized { get; set; }

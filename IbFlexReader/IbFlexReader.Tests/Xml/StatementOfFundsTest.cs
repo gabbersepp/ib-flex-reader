@@ -1,15 +1,15 @@
-﻿using FluentAssertions;
-using IbFlexReader.Contracts.Enums;
-using IbFlexReader.Tests.TestXml;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IbFlexReader.Tests.Xml
+﻿namespace IbFlexReader.Tests.Xml
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using FluentAssertions;
+    using IbFlexReader.Contracts.Enums;
+    using IbFlexReader.Tests.XmlFileTest;
+    using NUnit.Framework;
+
     public class StatementOfFundsTest
     {
         [Test]

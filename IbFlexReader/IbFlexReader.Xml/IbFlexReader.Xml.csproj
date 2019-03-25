@@ -2,8 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+		<RunCodeAnalysis>False</RunCodeAnalysis>
+	<CodeAnalysisRuleSet>./../stylecop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
+     <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'"> 
+   <TreatWarningsAsErrors>true</TreatWarningsAsErrors> 
+	</PropertyGroup>
+
+     <ItemGroup>
+       <PackageReference Include="StyleCop.Analyzers" Version="1.1.1-rc.114">
+         <PrivateAssets>all</PrivateAssets>
+         <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+       </PackageReference>
+     </ItemGroup> 
+	
   <ItemGroup>
     <ProjectReference Include="..\IbFlexReader.Contracts\IbFlexReader.Contracts.csproj" />
     <ProjectReference Include="..\IbFlexReader.Utils\IbFlexReader.Utils.csproj" />

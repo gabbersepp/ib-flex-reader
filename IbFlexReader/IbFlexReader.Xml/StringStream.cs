@@ -1,15 +1,15 @@
-﻿using System.IO;
-
-namespace IbFlexReader.Xml
+﻿namespace IbFlexReader.Xml
 {
+    using System.IO;
+
     public class StringStream : IStreamBuilder<string>
     {
-        public Stream GenerateStream(string Content)
+        public Stream GenerateStream(string content)
         {
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
 
-            writer.Write(Content);
+            writer.Write(content);
 
             writer.Flush();
 
@@ -18,5 +18,4 @@ namespace IbFlexReader.Xml
             return stream;
         }
     }
-
 }

@@ -1,7 +1,7 @@
-﻿using System.Xml.Serialization;
-
-namespace IbFlexReader.Xml.Contracts
+﻿namespace IbFlexReader.Xml.Contracts.QueryResponse
 {
+    using System.Xml.Serialization;
+
     [XmlRoot(ElementName = "EquitySummaryByReportDateInBase")]
     public class EquitySummaryByReportDateInBase
     {
@@ -17,7 +17,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "reportDate")]
         public string ReportDate { get; set; }
 
-        [XmlAttribute(AttributeName = "cash")] public string Cash { get; set; }
+        [XmlAttribute(AttributeName = "cash")]
+        public string Cash { get; set; }
 
         [XmlAttribute(AttributeName = "cashLong")]
         public string CashLong { get; set; }

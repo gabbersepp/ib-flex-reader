@@ -1,19 +1,22 @@
-﻿using IbFlexReader.Contracts;
-using IbFlexReader.Contracts.Attributes;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization.Json;
-using System.Text;
-
-namespace IbFlexReader.Utils
+﻿namespace IbFlexReader.Utils
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime.Serialization.Json;
+    using System.Text;
+    using IbFlexReader.Contracts;
+    using IbFlexReader.Contracts.Attributes;
+    using IbFlexReader.Contracts.Ib;
+
     public static class Extensions
     {
+        private static Type referenceType = typeof(TradeConfirm);
+
         public static TIn PopulateFrom<TIn, TFrom>(this TIn obj, TFrom from, List<ErrorMessage> errorObjects) where TIn : class
         {
             if (from == null)
@@ -25,7 +28,7 @@ namespace IbFlexReader.Utils
             var typeTo = obj.GetType();
             var typeToProperties = typeTo.GetProperties();
             var errorFound = false;
-
+            
             foreach (var p in typeFrom.GetProperties())
             {
                 try
@@ -46,7 +49,7 @@ namespace IbFlexReader.Utils
 
                             foreach (var o in (IEnumerable)p.GetValue(from))
                             {
-                                var entryType = typeof(FlexQueryResponse).Assembly.GetType("IbFlexReader.Contracts." + o.GetType().Name);
+                                var entryType = referenceType.Assembly.GetType(referenceType.Namespace + "." + o.GetType().Name);
                                 var newInstance = Activator.CreateInstance(entryType).PopulateFrom(o, errorObjects);
                                 if (newInstance != null)
                                 {
@@ -64,7 +67,6 @@ namespace IbFlexReader.Utils
                         {
                             possible.SetValue(obj, CastValue(from, p.GetValue(from), possible));
                         }
-
                     }
                 } 
                 catch (Exception e)
