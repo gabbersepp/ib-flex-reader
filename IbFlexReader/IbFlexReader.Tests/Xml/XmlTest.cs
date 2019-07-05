@@ -115,6 +115,19 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
         }
 
         [Test]
+        public void TestTrades2()
+        {
+            var str = StringFactory.XmlStart + @"<Trades>
+<Trade accountId = ""4711"" acctAlias="""" model="""" currency=""USD"" fxRateToBase=""0.89233"" assetCategory=""STK"" symbol=""ALSN"" description=""ALLISON TRANSMISSION HOLDING"" conid=""104054141"" securityID="""" securityIDType="""" cusip="""" isin="""" listingExchange=""NYSE"" underlyingConid="""" underlyingSymbol="""" underlyingSecurityID="""" underlyingListingExchange="""" issuer="""" multiplier=""1"" strike="""" expiry="""" tradeID=""2448999983"" putCall="""" reportDate=""20190524"" principalAdjustFactor="""" dateTime=""20190524;110508"" tradeDate=""20190524"" settleDateTarget=""20190529"" transactionType=""ExchTrade"" exchange=""DARK"" quantity=""-100"" tradePrice=""42.4725"" tradeMoney=""-4247.25"" proceeds=""4247.25"" taxes=""0"" ibCommission=""-5"" ibCommissionCurrency=""USD"" netCash=""4242.25"" closePrice=""42.64"" openCloseIndicator=""O"" notes="""" cost=""-4242.25"" fifoPnlRealized=""0"" fxPnl=""0"" mtmPnl=""-16.75"" origTradePrice=""0"" origTradeDate="""" origTradeID="""" origOrderID=""0"" clearingFirmID="""" transactionID=""10735803236"" buySell=""SELL"" ibOrderID=""1202053016"" ibExecID=""0001506d.5ce7e573.01.01"" brokerageOrderID=""001045e8.0001ab90.5ce7703b.0001"" orderReference="""" volatilityOrderLink="""" exchOrderId=""N/A"" extExecID=""23810252"" orderTime=""20190524;110502"" openDateTime="""" holdingPeriodDateTime="""" whenRealized="""" whenReopened="""" levelOfDetail=""EXECUTION"" changeInPrice=""0"" changeInQuantity=""0"" orderType=""LMT"" traderID=""C1"" isAPIOrder=""N"" />
+</Trades>" + StringFactory.XmlEnd;
+
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(sb.GenerateStream(str), out var msg);
+            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            trades.Count.Should().Be(1);
+            //trades[0].Notes.Value.Should().Be(Notes.Assigned);
+        }
+
+        [Test]
         public void TestCashTransactions()
         {
             var str = StringFactory.XmlStart + @"<CashTransactions>
@@ -141,7 +154,7 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
 </Trades>" + StringFactory.XmlEnd;
             var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(sb.GenerateStream(str), out var msg);
             var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
-            trades[0].TradeDate.Should().Be(new DateTime(2018, 09, 27, 14, 51, 31));
+            trades[0].TradeDate.Should().Be(new DateTime(2018, 09, 27));
         }
 
         [Test]

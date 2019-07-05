@@ -4,12 +4,22 @@
     using IbFlexReader.Contracts;
     using IbFlexReader.Contracts.Enums;
     using IbFlexReader.Contracts.Ib;
+    using IbFlexReader.Xml;
     using NUnit.Framework;
+    using FlexQueryResponse = IbFlexReader.Xml.Contracts.QueryResponse.FlexQueryResponse;
 
     public class TradeTest
     {
+        private IStreamBuilder<string> streamBuilder;
+
+        [SetUp]
+        public void InitTests()
+        {
+            streamBuilder = new StringStream();
+        }
+
         [Test]
-        public void CombinedOpenCloseResolve()
+        public void CombinedOpenCloseResolveX()
         {
             var str = StringFactory.XmlStart + @"<Trades>
 <Trade accountId=""xxxxx"" acctAlias="""" model="""" currency=""USD"" fxRateToBase=""0.87522"" assetCategory=""FUT"" symbol=""CLZ8"" description=""CL DEC18"" conid=""70407716"" securityID="""" securityIDType="""" cusip="""" isin="""" listingExchange="""" underlyingConid=""17340715"" underlyingSymbol=""CL"" underlyingSecurityID="""" underlyingListingExchange="""" issuer="""" multiplier=""1000"" strike="""" expiry=""20181119"" tradeID=""205781538"" putCall="""" reportDate=""20181107"" principalAdjustFactor="""" tradeDate=""20181107"" tradeTime=""013942"" settleDateTarget=""20181108"" transactionType=""ExchTrade"" exchange=""NYMEX"" quantity=""1"" tradePrice=""61.73"" tradeMoney=""61730"" proceeds=""-61730"" taxes=""0"" ibCommission=""-2.37"" ibCommissionCurrency=""USD"" netCash=""-62.37"" closePrice=""61.67"" openCloseIndicator=""O"" notes="""" cost=""61732.37"" fifoPnlRealized=""0"" fxPnl=""0"" mtmPnl=""-60"" origTradePrice=""0"" origTradeDate="""" origTradeID="""" origOrderID=""0"" clearingFirmID="""" transactionID=""695256601"" buySell=""BUY"" ibOrderID=""161900611"" ibExecID=""0001f4e5.5be236f3.01.01"" brokerageOrderID=""002039a1.000107e7.5be283eb.0001"" orderReference="""" volatilityOrderLink="""" exchOrderId=""002039a1.0001f4e0.5be242b4[2]"" extExecID=""150643675B"" orderTime=""20181107;013942"" openDateTime="""" holdingPeriodDateTime="""" whenRealized="""" whenReopened="""" levelOfDetail=""EXECUTION"" changeInPrice=""0"" changeInQuantity=""0"" orderType=""LMT"" traderID="""" isAPIOrder=""N"" />
@@ -37,6 +47,78 @@
             trade2.TradeMoney.Should().Be(-61700);
             trade2.Proceeds.Should().Be(61700);
             trade2.IbCommission.Should().Be(-2.37);
+        }
+
+        [Test]
+        public void TestTrades_AccountId()
+        {
+            var str = StringFactory.XmlStart + @"<Trades>
+            <Trade accountId='abcdefg' />
+            </Trades>" + StringFactory.XmlEnd;
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            trades.Count.Should().Be(1);
+            trades[0].AccountId.Should().Be("abcdefg");
+        }
+
+        [Test]
+        public void TestTrades_TradeDate()
+        {
+            var str = StringFactory.XmlStart + @"<Trades>
+            <Trade tradeDate='20190524' />
+            </Trades>" + StringFactory.XmlEnd;
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            trades.Count.Should().Be(1);
+            trades[0].TradeDate.Should().Be(new System.DateTime(2019, 05, 24));
+        }
+
+        [Test]
+        public void TestTrades_TradeDateAndTradeTime()
+        {
+            var str = StringFactory.XmlStart + @"<Trades>
+            <Trade tradeDate='20190524' tradeTime='145131' />
+            </Trades>" + StringFactory.XmlEnd;
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            trades.Count.Should().Be(1);
+            trades[0].TradeDate.Should().Be(new System.DateTime(2019, 05, 24));
+        }
+
+        [Test]
+        public void TestTrades_TradeDateWith_yyyyMMddhhmmss()
+        {
+            // this will not work any more
+            var str = StringFactory.XmlStart + @"<Trades>
+            <Trade tradeDate='20181231;162001' />
+            </Trades>" + StringFactory.XmlEnd;
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            trades.Count.Should().Be(0);
+        }
+
+        [Test]
+        public void TestTrades_TradeTime()
+        {
+            var str = StringFactory.XmlStart + @"<Trades>
+            <Trade tradeDate='20181231' tradeTime='162001' />
+            </Trades>" + StringFactory.XmlEnd;
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            trades.Count.Should().Be(1);
+            trades[0].TradeTime.Should().Be(new System.DateTime(2018, 12, 31, 16, 20, 01));
+        }
+
+        [Test]
+        public void TestTrades_TradeTimeWithoutTradeDate()
+        {
+            // this will not be parsed because tradeDate is missing
+            var str = StringFactory.XmlStart + @"<Trades>
+            <Trade tradeTime='162001' />
+            </Trades>" + StringFactory.XmlEnd;
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            trades.Count.Should().Be(0);
         }
     }
 }

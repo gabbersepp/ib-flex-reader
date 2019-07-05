@@ -60,8 +60,8 @@
 
         public string PrincipalAdjustFactor { get; set; }
 
-        [Format(Constants.DateTimeFormat)]
-        [TimeField(nameof(TradeTime))]
+        [Format(Constants.DateFormat)]
+        //[TimeField(nameof(TradeTime))]
         public DateTime? TradeDate { get; set; }
 
         [Format(Constants.DateTimeFormat)]
