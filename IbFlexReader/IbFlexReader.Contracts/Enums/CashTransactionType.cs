@@ -1,7 +1,7 @@
-﻿using EnumParser;
-
-namespace IbFlexReader.Contracts.Enums
+﻿namespace IbFlexReader.Contracts.Enums
 {
+    using EnumParser;
+
     [EnumName]
     public enum CashTransactionType
     {

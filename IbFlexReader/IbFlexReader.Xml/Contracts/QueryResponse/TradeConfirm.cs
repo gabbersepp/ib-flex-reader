@@ -1,7 +1,7 @@
-﻿using System.Xml.Serialization;
-
-namespace IbFlexReader.Xml.Contracts
+﻿namespace IbFlexReader.Xml.Contracts.QueryResponse
 {
+    using System.Xml.Serialization;
+
     [XmlRoot(ElementName = "TradeConfirm")]
     public class TradeConfirm
     {
@@ -38,7 +38,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "cusip")]
         public string Cusip { get; set; }
 
-        [XmlAttribute(AttributeName = "isin")] public string Isin { get; set; }
+        [XmlAttribute(AttributeName = "isin")]
+        public string Isin { get; set; }
 
         [XmlAttribute(AttributeName = "listingExchange")]
         public string ListingExchange { get; set; }
@@ -100,7 +101,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "proceeds")]
         public string Proceeds { get; set; }
 
-        [XmlAttribute(AttributeName = "tax")] public string Tax { get; set; }
+        [XmlAttribute(AttributeName = "tax")]
+        public string Tax { get; set; }
 
         [XmlAttribute(AttributeName = "commission")]
         public string Commission { get; set; }
@@ -159,7 +161,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "isAPIOrder")]
         public string IsAPIOrder { get; set; }
 
-        [XmlAttribute(AttributeName = "code")] public string Code { get; set; }
+        [XmlAttribute(AttributeName = "code")]
+        public string Code { get; set; }
 
         [XmlAttribute(AttributeName = "brokerExecutionCommission")]
         public string BrokerExecutionCommission { get; set; }

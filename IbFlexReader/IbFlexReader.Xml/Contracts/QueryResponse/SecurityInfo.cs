@@ -1,7 +1,7 @@
-﻿using System.Xml.Serialization;
-
-namespace IbFlexReader.Xml.Contracts
+﻿namespace IbFlexReader.Xml.Contracts.QueryResponse
 {
+    using System.Xml.Serialization;
+
     [XmlRoot(ElementName = "SecurityInfo")]
     public class SecurityInfo
     {
@@ -26,7 +26,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "cusip")]
         public string Cusip { get; set; }
 
-        [XmlAttribute(AttributeName = "isin")] public string Isin { get; set; }
+        [XmlAttribute(AttributeName = "isin")]
+        public string Isin { get; set; }
 
         [XmlAttribute(AttributeName = "listingExchange")]
         public string ListingExchange { get; set; }
@@ -73,6 +74,7 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "subCategory")]
         public string SubCategory { get; set; }
 
-        [XmlAttribute(AttributeName = "code")] public string Code { get; set; }
+        [XmlAttribute(AttributeName = "code")]
+        public string Code { get; set; }
     }
 }

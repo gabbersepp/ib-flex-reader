@@ -1,7 +1,7 @@
-﻿using System.Xml.Serialization;
-
-namespace IbFlexReader.Xml.Contracts
+﻿namespace IbFlexReader.Xml.Contracts.QueryResponse
 {
+    using System.Xml.Serialization;
+
     [XmlRoot(ElementName = "OptionEAE")]
     public class OptionEAE
     {
@@ -41,7 +41,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "cusip")]
         public string Cusip { get; set; }
 
-        [XmlAttribute(AttributeName = "isin")] public string Isin { get; set; }
+        [XmlAttribute(AttributeName = "isin")]
+        public string Isin { get; set; }
 
         [XmlAttribute(AttributeName = "listingExchange")]
         public string ListingExchange { get; set; }
@@ -76,7 +77,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "principalAdjustFactor")]
         public string PrincipalAdjustFactor { get; set; }
 
-        [XmlAttribute(AttributeName = "date")] public string Date { get; set; }
+        [XmlAttribute(AttributeName = "date")]
+        public string Date { get; set; }
 
         [XmlAttribute(AttributeName = "transactionType")]
         public string TransactionType { get; set; }
