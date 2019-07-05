@@ -44,9 +44,12 @@ namespace IbFlexReader
         /// <param name="queryId">ID of the FlexQuery (not the name)</param>
         /// <param name="dumpFile">if set, the data returned from IB will be dumped to file</param>
         /// <param name="retry">if GetStatement returns warning 1019 (... Please try again shortly), retry defines how many times it will be tried again</param>
+        /// <param name="retryDelay">delay between two tries in milliseconds</param>
         /// <returns></returns>
-        public async Task<FlexResult> GetByApi(string token, string queryId, string dumpFile = null, int? retry = null)
+        public async Task<FlexResult> GetByApi(string token, string queryId, string dumpFile = null, int? retry = null, int retryDelay = 3000)
         {
+            if (retryDelay <= 0) throw new ArgumentOutOfRangeException("retryDelay");
+
             using (var client = new HttpClient())
             {
                 FlexResult requestResult = await SendRequest(client, token, queryId, dumpFile).ConfigureAwait(false);
@@ -80,7 +83,7 @@ namespace IbFlexReader
                             // yes
                             retryCounter--;
                             // wait a little bit
-                            await Task.Delay(2000).ConfigureAwait(false);
+                            await Task.Delay(retryDelay).ConfigureAwait(false);
                         }
                         else
                         {
