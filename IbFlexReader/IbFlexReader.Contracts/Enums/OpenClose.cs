@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace IbFlexReader.Contracts.Enums
+﻿namespace IbFlexReader.Contracts.Enums
 {
+    using System;
+
     [Flags]
     public enum OpenClose
     {

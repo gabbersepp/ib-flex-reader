@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IbFlexReader.Contracts.Attributes
+﻿namespace IbFlexReader.Contracts.Attributes
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class DateFieldAttribute : Attribute
     {
         public string Field;

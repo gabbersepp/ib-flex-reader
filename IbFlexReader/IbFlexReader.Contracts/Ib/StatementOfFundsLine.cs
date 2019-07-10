@@ -1,9 +1,9 @@
-﻿using IbFlexReader.Contracts.Attributes;
-using IbFlexReader.Contracts.Enums;
-using System;
-
-namespace IbFlexReader.Contracts
+﻿namespace IbFlexReader.Contracts.Ib
 {
+    using System;
+    using IbFlexReader.Contracts.Attributes;
+    using IbFlexReader.Contracts.Enums;
+
     public class StatementOfFundsLine
     {
         public string AccountId { get; set; }

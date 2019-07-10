@@ -1,8 +1,8 @@
-﻿using System;
-using EnumParser;
-
-namespace IbFlexReader.Contracts.Enums
+﻿namespace IbFlexReader.Contracts.Enums
 {
+    using System;
+    using EnumParser;
+
     [EnumName]
     [Flags]
     public enum Notes : long

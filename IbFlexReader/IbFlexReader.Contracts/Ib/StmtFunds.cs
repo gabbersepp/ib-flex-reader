@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IbFlexReader.Contracts
+﻿namespace IbFlexReader.Contracts.Ib
 {
+    using System.Collections.Generic;
+
     public class StmtFunds
     {
         public List<StatementOfFundsLine> StatementOfFundsLine { get; set; }

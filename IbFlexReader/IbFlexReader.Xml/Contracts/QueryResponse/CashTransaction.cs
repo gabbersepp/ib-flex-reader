@@ -1,7 +1,7 @@
-﻿using System.Xml.Serialization;
-
-namespace IbFlexReader.Xml.Contracts
+﻿namespace IbFlexReader.Xml.Contracts.QueryResponse
 {
+    using System.Xml.Serialization;
+
     [XmlRoot(ElementName = "CashTransaction")]
     public class CashTransaction
     {
@@ -41,7 +41,8 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "cusip")]
         public string Cusip { get; set; }
 
-        [XmlAttribute(AttributeName = "isin")] public string Isin { get; set; }
+        [XmlAttribute(AttributeName = "isin")]
+        public string Isin { get; set; }
 
         [XmlAttribute(AttributeName = "listingExchange")]
         public string ListingExchange { get; set; }
@@ -82,12 +83,14 @@ namespace IbFlexReader.Xml.Contracts
         [XmlAttribute(AttributeName = "amount")]
         public string Amount { get; set; }
 
-        [XmlAttribute(AttributeName = "type")] public string Type { get; set; }
+        [XmlAttribute(AttributeName = "type")]
+        public string Type { get; set; }
 
         [XmlAttribute(AttributeName = "tradeID")]
         public string TradeID { get; set; }
 
-        [XmlAttribute(AttributeName = "code")] public string Code { get; set; }
+        [XmlAttribute(AttributeName = "code")]
+        public string Code { get; set; }
 
         [XmlAttribute(AttributeName = "transactionID")]
         public string TransactionID { get; set; }

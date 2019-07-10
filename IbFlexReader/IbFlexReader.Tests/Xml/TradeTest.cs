@@ -1,10 +1,11 @@
-﻿using FluentAssertions;
-using IbFlexReader.Contracts;
-using IbFlexReader.Contracts.Enums;
-using NUnit.Framework;
-
-namespace IbFlexReader.Tests
+﻿namespace IbFlexReader.Tests.Xml
 {
+    using FluentAssertions;
+    using IbFlexReader.Contracts;
+    using IbFlexReader.Contracts.Enums;
+    using IbFlexReader.Contracts.Ib;
+    using NUnit.Framework;
+
     public class TradeTest
     {
         [Test]

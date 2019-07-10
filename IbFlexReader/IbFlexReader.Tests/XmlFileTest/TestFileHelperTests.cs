@@ -1,21 +1,16 @@
-﻿
-using System;
-using System.Linq;
-using NUnit.Framework;
-
-namespace IbFlexReader.Tests.TestXml
+﻿namespace IbFlexReader.Tests.XmlFileTest
 {
+    using NUnit.Framework;
+
     public class TestFileHelperTests
     {
-
-        private TestFileHelper _tfh;
+        private TestFileHelper tfh;
 
         [SetUp]
         public void InitTests()
         {
-            _tfh = new TestFileHelper();
+            tfh = new TestFileHelper();
         }
-
 
         [Test]
         public void GetSlnPathTest()
@@ -25,16 +20,15 @@ namespace IbFlexReader.Tests.TestXml
             string exp = @"ib-flex-reader\IbFlexReader";
 
             // Act
-            var path = _tfh.GetSlnPath().Replace("/", "\\");
+            var path = tfh.GetSlnPath().Replace("/", "\\");
             if (path.Contains(exp))
             {
-                check = true;}
+                check = true;
+            }
 
             // Assert
             Assert.IsTrue(check, $"exp: {exp}, current: {path}");
-
         }
-
 
         [Test]
         public void GetTestFilePathTest()
@@ -44,18 +38,15 @@ namespace IbFlexReader.Tests.TestXml
             bool check = false;
 
             // Act
-            var path = _tfh.GetTestFilePath().Replace("/", "\\");
-
+            var path = tfh.GetTestFilePath().Replace("/", "\\");
 
             // Assert
             if (path.Contains(exp))
             {
                 check = true;
             }
-            
-            
-            Assert.True(check, $"exp: {exp}, current: {path}");
 
+            Assert.True(check, $"exp: {exp}, current: {path}");
         }
 
         [Test]
@@ -65,11 +56,10 @@ namespace IbFlexReader.Tests.TestXml
             int xmlsInPath = 2;
 
             //Act
-            var xfiles = _tfh.GetXmlFiles().Count;
+            var xfiles = tfh.GetXmlFiles().Count;
 
             //Assert
-           Assert.AreEqual(xmlsInPath, xfiles);
-
+            Assert.AreEqual(xmlsInPath, xfiles);
         }
 
         [Test]
@@ -80,10 +70,10 @@ namespace IbFlexReader.Tests.TestXml
             bool cont = false;
 
             //Act
-            var stringCol = _tfh.ConvertXmlToString(_tfh.GetXmlFiles());
+            var stringCol = tfh.ConvertXmlToString(tfh.GetXmlFiles());
 
             //Assert
-            for (int i = 0; i < stringCol.Count ;i++)
+            for (int i = 0; i < stringCol.Count; i++)
             {
                 if (stringCol[i].Contains(xmlStart))
                 {
@@ -91,9 +81,6 @@ namespace IbFlexReader.Tests.TestXml
                     Assert.IsTrue(cont);
                 }
             }
-           
-
-           
         }
     }
 }
