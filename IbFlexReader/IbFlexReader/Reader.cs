@@ -48,7 +48,10 @@
         /// <returns></returns>
         public async Task<FlexResult> GetByApi(string token, string queryId, string dumpFile = null, int? retry = null, int retryDelay = 3000)
         {
-            if (retryDelay <= 0) throw new ArgumentOutOfRangeException("retryDelay");
+            if (retryDelay <= 0)
+            {
+                throw new ArgumentOutOfRangeException("retryDelay");
+            }
 
             using (var client = new HttpClient())
             {
