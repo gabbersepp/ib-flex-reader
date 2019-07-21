@@ -126,22 +126,10 @@
             {
                 // expet format
                 var formatAttribute = property.GetCustomAttribute<FormatAttribute>();
-                var timeFieldAttribute = property.GetCustomAttribute<TimeFieldAttribute>();
-                var dateFieldAttribute = property.GetCustomAttribute<DateFieldAttribute>();
 
                 if (formatAttribute == null)
                 {
                     throw new Exception("format not specified");
-                }
-                
-                if (dateFieldAttribute != null)
-                {
-                    strVal = GetValueOfProperty(valueHolder, dateFieldAttribute.Field).ToString() + ";" + strVal;
-                }
-
-                if (timeFieldAttribute != null)
-                {
-                    strVal = strVal + ";" + GetValueOfProperty(valueHolder, timeFieldAttribute.Field).ToString();
                 }
 
                 return DateTime.ParseExact(strVal, formatAttribute.Value, CultureInfo.InvariantCulture);

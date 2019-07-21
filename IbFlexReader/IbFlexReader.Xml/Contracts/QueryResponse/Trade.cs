@@ -83,11 +83,8 @@
         [XmlAttribute(AttributeName = "principalAdjustFactor")]
         public string PrincipalAdjustFactor { get; set; }
 
-        [XmlAttribute(AttributeName = "tradeDate")]
-        public string TradeDate { get; set; }
-
-        [XmlAttribute(AttributeName = "tradeTime")]
-        public string TradeTime { get; set; }
+        [XmlAttribute(AttributeName = "dateTime")]
+        public string TradeDateTime { get; set; }
 
         [XmlAttribute(AttributeName = "settleDateTarget")]
         public string SettleDateTarget { get; set; }

@@ -61,12 +61,7 @@
         public string PrincipalAdjustFactor { get; set; }
 
         [Format(Constants.DateTimeFormat)]
-        [TimeField(nameof(TradeTime))]
-        public DateTime? TradeDate { get; set; }
-
-        [Format(Constants.DateTimeFormat)]
-        [DateField(nameof(TradeDate))]
-        public DateTime? TradeTime { get; set; }
+        public DateTime? TradeDateTime { get; set; }
 
         [Format(Constants.DateFormat)]
         public DateTime? SettleDateTarget { get; set; }
