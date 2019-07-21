@@ -136,7 +136,7 @@
                 {
                     return DateTime.ParseExact(strVal, formatAttributes.FirstOrDefault(x => x.Order == 0).Value, CultureInfo.InvariantCulture);
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
                     return DateTime.ParseExact(strVal, formatAttributes.FirstOrDefault(x => x.Order != 0).Value, CultureInfo.InvariantCulture);
                 }                
