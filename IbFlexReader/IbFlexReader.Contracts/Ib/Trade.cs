@@ -60,7 +60,9 @@
 
         public string PrincipalAdjustFactor { get; set; }
 
-        [Format(Constants.DateTimeFormat)]
+        [Format(Constants.DateTimeFormat, 0)]
+        // alternative format
+        [Format(Constants.DateFormat, 1)]
         public DateTime? TradeDateTime { get; set; }
 
         [Format(Constants.DateFormat)]
