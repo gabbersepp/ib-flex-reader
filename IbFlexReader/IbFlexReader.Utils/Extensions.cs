@@ -124,27 +124,22 @@
 
             if (type == typeof(DateTime?))
             {
-                // expet format
-                var formatAttribute = property.GetCustomAttribute<FormatAttribute>();
-                var timeFieldAttribute = property.GetCustomAttribute<TimeFieldAttribute>();
-                var dateFieldAttribute = property.GetCustomAttribute<DateFieldAttribute>();
+                // expect format
+                var formatAttributes = property.GetCustomAttributes<FormatAttribute>();
 
-                if (formatAttribute == null)
+                if (!formatAttributes.Any())
                 {
                     throw new Exception("format not specified");
                 }
-                
-                if (dateFieldAttribute != null)
-                {
-                    strVal = GetValueOfProperty(valueHolder, dateFieldAttribute.Field).ToString() + ";" + strVal;
-                }
 
-                if (timeFieldAttribute != null)
+                try
                 {
-                    strVal = strVal + ";" + GetValueOfProperty(valueHolder, timeFieldAttribute.Field).ToString();
+                    return DateTime.ParseExact(strVal, formatAttributes.FirstOrDefault(x => x.Order == 0).Value, CultureInfo.InvariantCulture);
                 }
-
-                return DateTime.ParseExact(strVal, formatAttribute.Value, CultureInfo.InvariantCulture);
+                catch (FormatException)
+                {
+                    return DateTime.ParseExact(strVal, formatAttributes.FirstOrDefault(x => x.Order != 0).Value, CultureInfo.InvariantCulture);
+                }                
             }
 
             if (type == typeof(int?))

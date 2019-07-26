@@ -26,7 +26,7 @@
 
             foreach (var ocTrade in ocTrades)
             {
-                var lot = lots.First(x => x.TradeDate == ocTrade.TradeDate && x.TradeTime == ocTrade.TradeTime && x.BuySell == ocTrade.BuySell && x.Description == ocTrade.Description);
+                var lot = lots.First(x => x.TradeDateTime == ocTrade.TradeDateTime && x.BuySell == ocTrade.BuySell && x.Description == ocTrade.Description);
                 var copy = ocTrade.Clone();
 
                 // ocTrade must be the "close" and the copy the "open"

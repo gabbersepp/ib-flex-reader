@@ -173,9 +173,6 @@
         [XmlAttribute(AttributeName = "taxes")]
         public string Taxes { get; set; }
 
-        [XmlAttribute(AttributeName = "tradeDate")]
-        public string TradeDate { get; set; }
-
         [XmlAttribute(AttributeName = "tradeID")]
         public string TradeID { get; set; }
 
@@ -188,8 +185,8 @@
         [XmlAttribute(AttributeName = "traderID")]
         public string TraderID { get; set; }
 
-        [XmlAttribute(AttributeName = "tradeTime")]
-        public string TradeTime { get; set; }
+        [XmlAttribute(AttributeName = "dateTime")]
+        public string TradeDateTime { get; set; }
 
         [XmlAttribute(AttributeName = "transactionID")]
         public string TransactionID { get; set; }
