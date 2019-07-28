@@ -13,6 +13,8 @@
         SEK,
         HKD,
         MXN,
-        RUB
+        RUB,
+        NOK,
+        ZAR
     }
 }
