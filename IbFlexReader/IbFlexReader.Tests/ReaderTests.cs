@@ -33,11 +33,10 @@
 
             foreach (var file in stringCol)
             {
-                 fQR = result.GetByString(file);
+                fQR = result.GetByString(file);
+                //Assert
+                Assert.NotNull(fQR);
             }
-
-            //Assert
-            Assert.NotNull(fQR);
         }
     }
 }

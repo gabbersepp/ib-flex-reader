@@ -18,6 +18,8 @@
         [EnumName("Price Adjustments")]
         PriceAdjustments,
         [EnumName("Deposits/Withdrawals")]
-        DepositsWithdrawals
+        DepositsWithdrawals,
+        [EnumName("Broker Interest Received")]
+        BrokerInterestReceived
     }
 }
