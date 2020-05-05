@@ -115,6 +115,19 @@ https://gdcdyn.interactivebrokers.com/Universal/servlet/FlexStatementService.Get
         }
 
         [Test]
+        public void TestTrades_QuantityIsDouble()
+        {
+            var str = StringFactory.XmlStart + @"<Trades>
+<Trade accountId=""U3042194"" acctAlias="""" model="""" currency=""USD"" fxRateToBase=""0.92391"" assetCategory=""STK"" symbol=""OSTKO"" description=""OVERSTOCK.COM INC - PFD A-1"" conid=""419209157"" securityID=""US6903705076"" securityIDType=""ISIN"" cusip=""690370507"" isin=""US6903705076"" listingExchange=""VALUE"" underlyingConid="""" underlyingSymbol="""" underlyingSecurityID="""" underlyingListingExchange="""" issuer="""" multiplier=""1"" strike="""" expiry="""" tradeID="""" putCall="""" reportDate=""20200424"" principalAdjustFactor="""" dateTime=""20200423;202500"" tradeDate=""20200423"" settleDateTarget="""" transactionType=""FracShare"" exchange=""--"" quantity=""-0.5"" tradePrice=""0.0118"" tradeMoney=""-0.0059"" proceeds=""0.0059"" taxes=""0"" ibCommission=""0"" ibCommissionCurrency=""USD"" netCash=""0.0059"" closePrice=""0.0001"" openCloseIndicator=""C"" notes="""" cost=""-0.000082"" fifoPnlRealized=""0.005818"" fxPnl=""0"" mtmPnl=""0.0059"" origTradePrice=""0"" origTradeDate="""" origTradeID="""" origOrderID=""0"" clearingFirmID="""" transactionID=""12578777639"" buySell=""SELL"" ibOrderID=""12578777639"" ibExecID="""" brokerageOrderID="""" orderReference="""" volatilityOrderLink="""" exchOrderId=""N/A"" extExecID=""N/A"" orderTime="""" openDateTime="""" holdingPeriodDateTime="""" whenRealized="""" whenReopened="""" levelOfDetail=""EXECUTION"" changeInPrice=""0"" changeInQuantity=""0"" orderType="""" traderID="""" isAPIOrder=""N"" />
+</Trades>" + StringFactory.XmlEnd;
+
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(sb.GenerateStream(str), out var msg);
+            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            trades.Count.Should().Be(1);
+            trades[0].Quantity.Value.Should().Be(-0.5);
+        }
+
+        [Test]
         public void TestCashTransactions()
         {
             var str = StringFactory.XmlStart + @"<CashTransactions>
