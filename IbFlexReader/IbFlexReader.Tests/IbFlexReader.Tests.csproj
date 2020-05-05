@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\UtilsTest.cs" />
     <Compile Include="Xml\ChashTransactionTest.cs" />
     <Compile Include="Xml\StatementOfFundsTest.cs" />
     <Compile Include="Xml\StringFactory.cs" />

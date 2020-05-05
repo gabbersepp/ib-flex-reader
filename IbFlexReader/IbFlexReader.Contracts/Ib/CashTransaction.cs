@@ -55,7 +55,7 @@
 
         public string PrincipalAdjustFactor { get; set; }
 
-        [Format(Constants.DateFormat)]
+        [Format(Constants.DateFormat), Format(Constants.DateTimeFormat, order: 1)]
         public DateTime? DateTime { get; set; }
 
         public double? Amount { get; set; }
