@@ -10,106 +10,106 @@
         [EnumName("A")]
         Assigned = 1,
         [EnumName("AEx")]
-        AutomaticalExercise = 2 ^ 1,
+        AutomaticalExercise = 1L << 1,
         [EnumName("Adj")]
-        Adjustment = 2 ^ 2,
+        Adjustment = 1L << 2,
         [EnumName("Al")]
-        Allocation = 2 ^ 3,
+        Allocation = 1L << 3,
         [EnumName("Aw")]
-        AwayTrade = 2 ^ 4,
+        AwayTrade = 1L << 4,
         [EnumName("B")]
-        AutoBuyIn = 2 ^ 5,
+        AutoBuyIn = 1L << 5,
         [EnumName("Bo")]
-        DirectLending = 2 ^ 6,
+        DirectLending = 1L << 6,
         [EnumName("C")]
-        ClosingTrade = 2 ^ 7,
+        ClosingTrade = 1L << 7,
         [EnumName("CD")]
-        CashDelivery = 2 ^ 8,
+        CashDelivery = 1L << 8,
         [EnumName("CP")]
-        ComplexePosition = 2 ^ 9,
+        ComplexePosition = 1L << 9,
         [EnumName("Ca")]
-        Deleted = 2 ^ 10,
+        Deleted = 1L << 10,
         [EnumName("Co")]
-        CorrectedTrade = 2 ^ 11,
+        CorrectedTrade = 1L << 11,
         [EnumName("Cx")]
-        CrossTrade = 2 ^ 12,
+        CrossTrade = 1L << 12,
         [EnumName("ETF")]
-        EtfCreation = 2 ^ 13,
+        EtfCreation = 1L << 13,
         [EnumName("Ep")]
-        Expired = 2 ^ 14,
+        Expired = 1L << 14,
         [EnumName("Ex")]
-        Exercised = 2 ^ 15,
+        Exercised = 1L << 15,
         [EnumName("G")]
-        GuaranteedAccountSegment = 2 ^ 16,
+        GuaranteedAccountSegment = 1L << 16,
         [EnumName("HC")]
-        MaxTaxBase = 2 ^ 17,
+        MaxTaxBase = 1L << 17,
         [EnumName("HFI")]
-        InvestmentTransferToHedgeFund = 2 ^ 18,
+        InvestmentTransferToHedgeFund = 1L << 18,
         [EnumName("HFR")]
-        RedemptionForHedgeFund = 2 ^ 19,
+        RedemptionForHedgeFund = 1L << 19,
         [EnumName("I")]
-        InternalTransfer = 2 ^ 20,
+        InternalTransfer = 1L << 20,
         [EnumName("IA")]
-        ExecutedAgainstCompany = 2 ^ 21,
+        ExecutedAgainstCompany = 1L << 21,
         [EnumName("INV")]
-        InvestmentTransferFromInvestor = 2 ^ 22,
+        InvestmentTransferFromInvestor = 1L << 22,
         [EnumName("IPO")]
-        IPO = 2 ^ 23,
+        IPO = 1L << 23,
         [EnumName("L")]
-        MarginViolation = 2 ^ 24,
+        MarginViolation = 1L << 24,
         [EnumName("LD")]
-        AdjustedLossWashSale = 2 ^ 25,
+        AdjustedLossWashSale = 1L << 25,
         [EnumName("LI")]
-        LiFo = 2 ^ 26,
+        LiFo = 1L << 26,
         [EnumName("LT")]
-        LongTermPL = 2 ^ 27,
+        LongTermPL = 1L << 27,
         [EnumName("Lo")]
-        DirectLoan = 2 ^ 28,
+        DirectLoan = 1L << 28,
         [EnumName("M")]
-        ManualThroughIB = 2 ^ 29,
+        ManualThroughIB = 1L << 29,
         [EnumName("MEx")]
-        ManualExercise = 2 ^ 30,
+        ManualExercise = 1L << 30,
         [EnumName("ML")]
-        MaximizeLoss = 2 ^ 31,
+        MaximizeLoss = 1L << 31,
         [EnumName("MLG")]
-        MLG = 2 ^ 32,
+        MLG = 1L << 32,
         [EnumName("MLL")]
-        MLL = 2 ^ 33,
+        MLL = 1L << 33,
         [EnumName("MSG")]
-        MSG = 2 ^ 34,
+        MSG = 1L << 34,
         [EnumName("MSL")]
-        MSL = 2 ^ 35,
+        MSL = 1L << 35,
         [EnumName("O")]
-        OpeningTrade = 2 ^ 36,
+        OpeningTrade = 1L << 36,
         [EnumName("P")]
-        PartialExecution = 2 ^ 37,
+        PartialExecution = 1L << 37,
         [EnumName("PI")]
-        PI = 2 ^ 38,
+        PI = 1L << 38,
         [EnumName("Po")]
-        InterestDividendAccrualPosting = 2 ^ 39,
+        InterestDividendAccrualPosting = 1L << 39,
         [EnumName("Pr")]
-        PrincipalTrade = 2 ^ 40,
+        PrincipalTrade = 1L << 40,
         [EnumName("R")]
-        DividendReinvestment = 2 ^ 41,
+        DividendReinvestment = 1L << 41,
         [EnumName("RED")]
-        RedemptionToInvestor = 2 ^ 42,
+        RedemptionToInvestor = 1L << 42,
         [EnumName("Re")]
-        TransformationInterestDividend = 2 ^ 43,
+        TransformationInterestDividend = 1L << 43,
         [EnumName("Ri")]
-        Refund = 2 ^ 44,
+        Refund = 1L << 44,
         [EnumName("SI")]
-        ArrangedByIB = 2 ^ 45,
+        ArrangedByIB = 1L << 45,
         [EnumName("SL")]
-        SL = 2 ^ 46,
+        SL = 1L << 46,
         [EnumName("SO")]
-        ArrangedByIntroducingBroker = 2 ^ 47,
+        ArrangedByIntroducingBroker = 1L << 47,
         [EnumName("SS")]
-        ShortendedExecution = 2 ^ 48,
+        ShortendedExecution = 1L << 48,
         [EnumName("ST")]
-        ShortTermPL = 2 ^ 49,
+        ShortTermPL = 1L << 49,
         [EnumName("SY")]
-        StockYieldEligible = 2 ^ 50,
+        StockYieldEligible = 1L << 50,
         [EnumName("T")]
-        Transfer = 2 ^ 51
+        Transfer = 1L << 51
     }
 }
