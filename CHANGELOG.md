@@ -1,3 +1,6 @@
+# OBSOLETE
+use https://github.com/gabbersepp/ib-flex-reader/releases instead
+
 # Changelog
 
 Here you can see a full list of changes between each release.
