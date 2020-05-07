@@ -7,6 +7,7 @@
     using IbFlexReader.Xml;
     using IbFlexReader.Xml.Contracts;
     using NUnit.Framework;
+    using Contracts = IbFlexReader.Contracts;
     using FlexQueryResponse = IbFlexReader.Xml.Contracts.QueryResponse.FlexQueryResponse;
 
     public class XmlTest

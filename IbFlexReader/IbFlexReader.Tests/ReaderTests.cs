@@ -27,7 +27,7 @@
             var tfh = new TestFileHelper();
             var stringCol = tfh.ConvertXmlToString(tfh.GetXmlFiles());
             var result = new Reader();
-            var fQR = new Contracts.FlexQueryResponse();
+            var fQR = new IbFlexReader.Contracts.FlexQueryResponse();
 
             //Act
 

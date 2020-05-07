@@ -3,9 +3,10 @@
     using FluentAssertions;
     using IbFlexReader.Xml;
     using NUnit.Framework;
+    using Contracts = IbFlexReader.Contracts;
     using FlexQueryResponse = IbFlexReader.Xml.Contracts.QueryResponse.FlexQueryResponse;
 
-    public class ChashTransactionTest
+    public class CashTransactionTest
     {
         private IStreamBuilder<string> streamBuilder;
 

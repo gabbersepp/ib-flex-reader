@@ -5,6 +5,7 @@
     using IbFlexReader.Contracts;
     using IbFlexReader.Utils;
     using NUnit.Framework;
+    using Contracts = IbFlexReader.Contracts;
 
     public class UtilsTest
     {
