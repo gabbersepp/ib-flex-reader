@@ -9,6 +9,8 @@
         OtherFees,
         [EnumName("Withholding Tax")]
         WithholdingTax,
+        [EnumName("871(m) Withholding")]
+        Withholding871,
         [EnumName("Dividends")]
         Dividends,
         [EnumName("Payment In Lieu Of Dividends")]
