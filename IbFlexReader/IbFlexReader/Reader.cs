@@ -31,7 +31,10 @@
                 var result = Deserializer.Deserialize<Xml.Contracts.QueryResponse.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
                 result = result ?? new Contracts.FlexQueryResponse();
                 result.Errors = errorObjects;
-                Logic.ProcessStatement(result.FlexStatements?.FlexStatement, options);
+                foreach (FlexStatement statement in result.FlexStatements.FlexStatement)
+                {
+                    Logic.ProcessStatement(statement, options);
+                }
 
                 return result;
             }
