@@ -28,7 +28,7 @@
             var typeTo = obj.GetType();
             var typeToProperties = typeTo.GetProperties();
             var errorFound = false;
-            
+
             foreach (var p in typeFrom.GetProperties())
             {
                 try
@@ -68,15 +68,18 @@
                             possible.SetValue(obj, CastValue(from, p.GetValue(from), possible));
                         }
                     }
-                } 
+                }
                 catch (Exception e)
                 {
-                    var msg = $"error during casting field '{p.Name}' of '{typeFrom.Name}' with message: {e.Message.ToString()} and stacktrace: {e.StackTrace.ToString()}";
-                    errorObjects.Add(new ErrorMessage
+                    if (errorObjects != null)
                     {
-                        Message = msg,
-                        Object = GetJson(from, typeFrom)
-                    });
+                        var msg = $"error during casting field '{p.Name}' of '{typeFrom.Name}' with message: {e.Message.ToString()} and stacktrace: {e.StackTrace.ToString()}";
+                        errorObjects.Add(new ErrorMessage
+                        {
+                            Message = msg,
+                            Object = GetJson(from, typeFrom)
+                        });
+                    }
                     errorFound = true;
                     break;
                 }
@@ -139,7 +142,7 @@
                 catch (FormatException)
                 {
                     return DateTime.ParseExact(strVal, formatAttributes.FirstOrDefault(x => x.Order != 0).Value, CultureInfo.InvariantCulture);
-                }                
+                }
             }
 
             if (type == typeof(int?))
@@ -156,7 +159,7 @@
             {
                 return double.Parse(strVal, CultureInfo.InvariantCulture);
             }
-            
+
             return value.ToString();
         }
     }
