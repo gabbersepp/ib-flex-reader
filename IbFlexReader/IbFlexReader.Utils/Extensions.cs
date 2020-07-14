@@ -80,6 +80,7 @@
                             Object = GetJson(from, typeFrom)
                         });
                     }
+
                     errorFound = true;
                     break;
                 }
@@ -114,6 +115,12 @@
             var strVal = value.ToString();
 
             if (strVal == string.Empty && property.PropertyType != typeof(string))
+            {
+                return null;
+            }
+
+            //handle the case where IB uses a single hyphen as value
+            if (strVal == "-")
             {
                 return null;
             }
