@@ -34,7 +34,7 @@
 
         public string ListingExchange { get; set; }
 
-        public string UnderlyingConid { get; set; }
+        public long? UnderlyingConid { get; set; }
 
         public string UnderlyingSymbol { get; set; }
 
@@ -68,9 +68,12 @@
 
         public long? TransactionID { get; set; }
 
-        [Format(Constants.DateFormat)]
-        public DateTime? ReportDate { get; set; }
+        //Note: The reportDate XML attribute may contain either a date or a string, i.e. reportDate="MULTI"
+        public string ReportDate { get; set; }
 
         public string ClientReference { get; set; }
+
+        [Format(Constants.DateFormat)]
+        public string SettleDate { get; set; }
     }
 }

@@ -12,11 +12,14 @@
 	</PropertyGroup> 
 	
   <ItemGroup>
-    <PackageReference Include="Biehler.EnumParser" Version="1.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+  </ItemGroup> 
+	
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\enum-parser\EnumParser\EnumParser\EnumParser.csproj" />
   </ItemGroup>
 
 </Project>

@@ -53,14 +53,14 @@
 
         public PutCall? PutCall { get; set; }
 
-        [Format(Constants.DateFormat)]
-        public DateTime? ReportDate { get; set; }
+        //Note: The reportDate XML attribute may contain either a date or a string, i.e. reportDate="MULTI"
+        public string ReportDate { get; set; }
 
         [Format(Constants.DateFormat)]
         public DateTime? SettleDate { get; set; }
 
-        [Format(Constants.DateFormat)]
-        public DateTime? TradeDate { get; set; }
+        //Note: The tradeDate XML attribute may contain either a date or a string, i.e. tradeDate="MULTI"
+        public string TradeDate { get; set; }
 
         public string PrincipalAdjustFactor { get; set; }
 

@@ -55,8 +55,8 @@
 
         public PutCall? PutCall { get; set; }
 
-        [Format(Constants.DateFormat)]
-        public DateTime? ReportDate { get; set; }
+        //Note: The reportDate XML attribute may contain either a date or a string, i.e. reportDate="MULTI"
+        public string ReportDate { get; set; }
 
         public string PrincipalAdjustFactor { get; set; }
 
@@ -65,8 +65,11 @@
         [Format(Constants.DateFormat, 1)]
         public DateTime? TradeDateTime { get; set; }
 
-        [Format(Constants.DateFormat)]
-        public DateTime? SettleDateTarget { get; set; }
+        //Note: The tradeDate XML attribute may contain either a date or a string, i.e. tradeDate="MULTI"
+        public string TradeDate { get; set; }
+
+        //Note: The settleDateTarget XML attribute may contain either a date or a string, i.e. settleDateTarget="MULTI"
+        public string SettleDateTarget { get; set; }
 
         public string TransactionType { get; set; }
 
@@ -113,7 +116,7 @@
 
         public string ClearingFirmID { get; set; }
 
-        public long? TransactionID { get; set; }
+        //public string TransactionID { get; set; }
 
         public BuySell? BuySell { get; set; }
 
@@ -134,24 +137,30 @@
         [Format(Constants.DateTimeFormat)]
         public DateTime? OrderTime { get; set; }
 
-        public string OpenDateTime { get; set; }
+        [Format(Constants.DateTimeFormat)]
+        public DateTime? OpenDateTime { get; set; }
 
-        public string HoldingPeriodDateTime { get; set; }
+        [Format(Constants.DateTimeFormat)]
+        public DateTime? HoldingPeriodDateTime { get; set; }
 
-        public string WhenRealized { get; set; }
+        [Format(Constants.DateTimeFormat)]
+        public DateTime? WhenRealized { get; set; }
 
-        public string WhenReopened { get; set; }
+        [Format(Constants.DateTimeFormat)]
+        public DateTime? WhenReopened { get; set; }
 
         public string LevelOfDetail { get; set; }
 
-        public string ChangeInPrice { get; set; }
+        public double? ChangeInPrice { get; set; }
 
-        public string ChangeInQuantity { get; set; }
+        public double? ChangeInQuantity { get; set; }
 
         public string OrderType { get; set; }
 
-        public string TraderID { get; set; }
-
         public string IsAPIOrder { get; set; }
+
+        public double? AccruedInterest { get; set; }
+
+        public string TraderID { get; set; }
     }
 }

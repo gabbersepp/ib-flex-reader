@@ -22,6 +22,8 @@
         [EnumName("Deposits/Withdrawals")]
         DepositsWithdrawals,
         [EnumName("Broker Interest Received")]
-        BrokerInterestReceived
+        BrokerInterestReceived,
+        [EnumName("Bond Interest Received")]
+        BondInterestReceived
     }
 }

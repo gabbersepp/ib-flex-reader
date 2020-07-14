@@ -1,5 +1,9 @@
 ﻿namespace IbFlexReader.Contracts.Ib
 {
+    using System;
+    using IbFlexReader.Contracts.Attributes;
+    using IbFlexReader.Contracts.Enums;
+
     public class CFDCharge
     {
         public string AccountId { get; set; }
@@ -8,17 +12,17 @@
 
         public string Model { get; set; }
 
-        public string Currency { get; set; }
+        public Currencies? Currency { get; set; }
 
-        public string FxRateToBase { get; set; }
+        public double? FxRateToBase { get; set; }
 
-        public string AssetCategory { get; set; }
+        public AssetCategory? AssetCategory { get; set; }
 
         public string Symbol { get; set; }
 
         public string Description { get; set; }
 
-        public string Conid { get; set; }
+        public long? Conid { get; set; }
 
         public string SecurityID { get; set; }
 
@@ -30,7 +34,7 @@
 
         public string ListingExchange { get; set; }
 
-        public string UnderlyingConid { get; set; }
+        public long? UnderlyingConid { get; set; }
 
         public string UnderlyingSymbol { get; set; }
 
@@ -40,23 +44,25 @@
 
         public string Issuer { get; set; }
 
-        public string Multiplier { get; set; }
+        public int? Multiplier { get; set; }
 
-        public string Strike { get; set; }
+        public double? Strike { get; set; }
 
-        public string Expiry { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime? Expiry { get; set; }
 
-        public string PutCall { get; set; }
+        public PutCall? PutCall { get; set; }
 
         public string PrincipalAdjustFactor { get; set; }
 
-        public string Date { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime? Date { get; set; }
 
-        public string Received { get; set; }
+        public double? Received { get; set; }
 
-        public string Paid { get; set; }
+        public double? Paid { get; set; }
 
-        public string Total { get; set; }
+        public double? Total { get; set; }
 
         public string TransactionID { get; set; }
     }

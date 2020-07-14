@@ -29,10 +29,10 @@
 </Trades>" + StringFactory.XmlEnd;
             var obj = new Reader().GetByString(str, new Options { SplitUpOpenCloseTrades = true });
             obj.Errors.Count.Should().Be(0);
-            obj.FlexStatements.FlexStatement.Trades.Trade.Count.Should().Be(3);
+            obj.FlexStatements.FlexStatement[0].Trades.Trade.Count.Should().Be(3);
 
-            var trade1 = obj.FlexStatements.FlexStatement.Trades.Trade[1];
-            var trade2 = obj.FlexStatements.FlexStatement.Trades.Trade[2];
+            var trade1 = obj.FlexStatements.FlexStatement[0].Trades.Trade[1];
+            var trade2 = obj.FlexStatements.FlexStatement[0].Trades.Trade[2];
 
             trade1.OpenCloseIndicator.Value.Should().HaveFlag(OpenClose.C);
             trade2.OpenCloseIndicator.Value.Should().HaveFlag(OpenClose.O);
@@ -57,7 +57,7 @@
             <Trade accountId='abcdefg' />
             </Trades>" + StringFactory.XmlEnd;
             var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
-            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            var trades = obj.FlexStatements.FlexStatement[0].Trades.Trade;
             trades.Count.Should().Be(1);
             trades[0].AccountId.Should().Be("abcdefg");
         }
@@ -69,7 +69,7 @@
             <Trade dateTime='20190524' />
             </Trades>" + StringFactory.XmlEnd;
             var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
-            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            var trades = obj.FlexStatements.FlexStatement[0].Trades.Trade;
             trades.Count.Should().Be(1);
             trades[0].TradeDateTime.Should().Be(new System.DateTime(2019, 05, 24));
         }
@@ -81,7 +81,7 @@
             <Trade dateTime='20181231;162001' />
             </Trades>" + StringFactory.XmlEnd;
             var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
-            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            var trades = obj.FlexStatements.FlexStatement[0].Trades.Trade;
             trades.Count.Should().Be(1);
         }
 
@@ -92,7 +92,7 @@
             <Trade dateTime='20181231;162001' />
             </Trades>" + StringFactory.XmlEnd;
             var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
-            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            var trades = obj.FlexStatements.FlexStatement[0].Trades.Trade;
             trades.Count.Should().Be(1);
             trades[0].TradeDateTime.Should().Be(new System.DateTime(2018, 12, 31, 16, 20, 01));
         }
@@ -105,7 +105,7 @@
             <Trade dateTime='162001' />
             </Trades>" + StringFactory.XmlEnd;
             var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
-            var trades = obj.FlexStatements.FlexStatement.Trades.Trade;
+            var trades = obj.FlexStatements.FlexStatement[0].Trades.Trade;
             trades.Count.Should().Be(0);
         }
     }

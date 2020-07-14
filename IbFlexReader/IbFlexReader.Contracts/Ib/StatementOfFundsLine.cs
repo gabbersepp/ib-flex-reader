@@ -34,7 +34,7 @@
         public string OrderID { get; set; }
         public string PrincipalAdjustFactor { get; set; }
         public PutCall? PutCall { get; set; }
-        [Format(Constants.DateFormat)]
+        //Note: The reportDate XML attribute may contain either a date or a string, i.e. reportDate="MULTI"
         public DateTime? ReportDate { get; set; }
         public string SecurityID { get; set; }
         public string SecurityIDType { get; set; }
@@ -49,7 +49,7 @@
         public double? TradePrice { get; set; }
         public int? TradeQuantity { get; set; }
         public double? TradeTax { get; set; }
-        public string UnderlyingConid { get; set; }
+        public long? UnderlyingConid { get; set; }
         public string UnderlyingListingExchange { get; set; }
         public string UnderlyingSecurityID { get; set; }
         public string UnderlyingSymbol { get; set; }

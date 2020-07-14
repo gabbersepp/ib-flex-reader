@@ -155,8 +155,8 @@
         [XmlAttribute(AttributeName = "clearingFirmID")]
         public string ClearingFirmID { get; set; }
 
-        [XmlAttribute(AttributeName = "transactionID")]
-        public string TransactionID { get; set; }
+        //[XmlAttribute(AttributeName = "transactionID")]
+        //public string TransactionID { get; set; }
 
         [XmlAttribute(AttributeName = "buySell")]
         public string BuySell { get; set; }
@@ -214,5 +214,8 @@
 
         [XmlAttribute(AttributeName = "isAPIOrder")]
         public string IsAPIOrder { get; set; }
+
+        [XmlAttribute(AttributeName = "accruedInt")]
+        public string AccruedInterest { get; set; }
     }
 }
