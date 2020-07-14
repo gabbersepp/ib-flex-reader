@@ -630,17 +630,17 @@
             tradeConfirms[0].DateTime.Should().Be(new DateTime(2018, 12, 30, 17, 20, 01));
         }
 
-        [Test]
-        public void TestTradeConfirms_ReportDate()
-        {
-            var str = StringFactory.XmlStart + @"<TradeConfirms>
-            <TradeConfirm reportDate='20181230' />
-            </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
-            var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
-            tradeConfirms.Count.Should().Be(1);
-            tradeConfirms[0].ReportDate.Should().Be(new DateTime(2018, 12, 30));
-        }
+        //[Test]
+        //public void TestTradeConfirms_ReportDate()
+        //{
+        //    var str = StringFactory.XmlStart + @"<TradeConfirms>
+        //    <TradeConfirm reportDate='20181230' />
+        //    </TradeConfirms>" + StringFactory.XmlEnd;
+        //    var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+        //    var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
+        //    tradeConfirms.Count.Should().Be(1);
+        //    tradeConfirms[0].ReportDate.Should().Be(new DateTime(2018, 12, 30));
+        //}
 
         [Test]
         public void TestTradeConfirms_SettleDate()
@@ -654,17 +654,17 @@
             tradeConfirms[0].SettleDate.Should().Be(new DateTime(2018, 11, 20));
         }
 
-        [Test]
-        public void TestTradeConfirms_TradeDate()
-        {
-            var str = StringFactory.XmlStart + @"<TradeConfirms>
-            <TradeConfirm tradeDate='20181223' />
-            </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
-            var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
-            tradeConfirms.Count.Should().Be(1);
-            tradeConfirms[0].TradeDate.Should().Be(new DateTime(2018, 12, 23));
-        }
+        //[Test]
+        //public void TestTradeConfirms_TradeDate()
+        //{
+        //    var str = StringFactory.XmlStart + @"<TradeConfirms>
+        //    <TradeConfirm tradeDate='20181223' />
+        //    </TradeConfirms>" + StringFactory.XmlEnd;
+        //    var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+        //    var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
+        //    tradeConfirms.Count.Should().Be(1);
+        //    tradeConfirms[0].TradeDate.Should().Be(new DateTime(2018, 12, 23));
+        //}
 
         [Test]
         public void TestTradeConfirms_Exchange()
