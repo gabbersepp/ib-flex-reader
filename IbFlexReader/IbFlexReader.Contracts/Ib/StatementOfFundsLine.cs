@@ -34,7 +34,7 @@
         public string OrderID { get; set; }
         public string PrincipalAdjustFactor { get; set; }
         public PutCall? PutCall { get; set; }
-        //Note: The reportDate XML attribute may contain either a date or a string, i.e. reportDate="MULTI"
+        [Format(Constants.DateFormat)]
         public DateTime? ReportDate { get; set; }
         public string SecurityID { get; set; }
         public string SecurityIDType { get; set; }
