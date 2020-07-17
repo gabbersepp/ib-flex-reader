@@ -102,7 +102,7 @@
         public string ActivityDescription { get; set; }
 
         [XmlAttribute(AttributeName = "quantity")]
-        public string quantity { get; set; }
+        public string Quantity { get; set; }
 
         [XmlAttribute(AttributeName = "slbTransactionId")]
         public string SlbTransactionId { get; set; }
