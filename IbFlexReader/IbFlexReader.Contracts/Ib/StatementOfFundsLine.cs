@@ -47,7 +47,7 @@
         public double? TradeGross { get; set; }
         public string TradeID { get; set; }
         public double? TradePrice { get; set; }
-        public int? TradeQuantity { get; set; }
+        public double? TradeQuantity { get; set; }
         public double? TradeTax { get; set; }
         public long? UnderlyingConid { get; set; }
         public string UnderlyingListingExchange { get; set; }

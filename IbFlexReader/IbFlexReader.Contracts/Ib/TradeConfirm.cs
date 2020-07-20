@@ -71,7 +71,7 @@
 
         public string Exchange { get; set; }
 
-        public int? Quantity { get; set; }
+        public double? Quantity { get; set; }
 
         public double? Proceeds { get; set; }
 
