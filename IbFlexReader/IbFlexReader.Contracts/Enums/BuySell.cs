@@ -1,7 +1,15 @@
 ﻿namespace IbFlexReader.Contracts.Enums
 {
+    using EnumParser;
+
+    [EnumName]
     public enum BuySell
     {
-        BUY, SELL
+        [EnumName("BUY")]
+        BUY,
+        [EnumName("SELL")]
+        SELL,
+        [EnumName("SELL (Ca.)")]
+        SELLCa 
     }
 }

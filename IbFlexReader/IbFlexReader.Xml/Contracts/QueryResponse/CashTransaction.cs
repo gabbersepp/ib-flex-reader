@@ -100,5 +100,8 @@
 
         [XmlAttribute(AttributeName = "clientReference")]
         public string ClientReference { get; set; }
+
+        [XmlAttribute(AttributeName = "settleDate")]
+        public string SettleDate { get; set; }
     }
 }

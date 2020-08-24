@@ -28,7 +28,7 @@
             var typeTo = obj.GetType();
             var typeToProperties = typeTo.GetProperties();
             var errorFound = false;
-            
+
             foreach (var p in typeFrom.GetProperties())
             {
                 try
@@ -68,15 +68,19 @@
                             possible.SetValue(obj, CastValue(from, p.GetValue(from), possible));
                         }
                     }
-                } 
+                }
                 catch (Exception e)
                 {
-                    var msg = $"error during casting field '{p.Name}' of '{typeFrom.Name}' with message: {e.Message.ToString()} and stacktrace: {e.StackTrace.ToString()}";
-                    errorObjects.Add(new ErrorMessage
+                    if (errorObjects != null)
                     {
-                        Message = msg,
-                        Object = GetJson(from, typeFrom)
-                    });
+                        var msg = $"error during casting field '{p.Name}' of '{typeFrom.Name}' with message: {e.Message} and stacktrace: {e.StackTrace}";
+                        errorObjects.Add(new ErrorMessage
+                        {
+                            Message = msg,
+                            Object = GetJson(from, typeFrom)
+                        });
+                    }
+
                     errorFound = true;
                     break;
                 }
@@ -115,6 +119,12 @@
                 return null;
             }
 
+            //handle the case where IB uses a single hyphen as value
+            if (strVal.Trim() == "-")
+            {
+                return null;
+            }
+
             var type = property.PropertyType;
 
             if (Nullable.GetUnderlyingType(type)?.IsEnum ?? false)
@@ -124,22 +134,31 @@
 
             if (type == typeof(DateTime?))
             {
-                // expect format
+                // expect format attribute
                 var formatAttributes = property.GetCustomAttributes<FormatAttribute>();
+                DateTime dateTimeValue;
 
-                if (!formatAttributes.Any())
+                if (formatAttributes.Any())
                 {
-                    throw new Exception("format not specified");
+                    // try parsing using the array of specified formats
+                    string[] specifiedFormats = formatAttributes.Select(fa => fa.Value).ToArray();
+                    if (DateTime.TryParseExact(value.ToString(), specifiedFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTimeValue))
+                    {
+                        return dateTimeValue;
+                    }
                 }
-
-                try
+                else
                 {
-                    return DateTime.ParseExact(strVal, formatAttributes.FirstOrDefault(x => x.Order == 0).Value, CultureInfo.InvariantCulture);
+                    // no FormatAttribute was provided, so attempt parsing to IB's default date format
+                    if (DateTime.TryParseExact(value.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTimeValue))
+                    {
+                        return dateTimeValue;
+                    }
+                    else
+                    {
+                        throw new Exception($"Unable to cast {value} to DateTime and no FormatAttribute was specified.");
+                    }
                 }
-                catch (FormatException)
-                {
-                    return DateTime.ParseExact(strVal, formatAttributes.FirstOrDefault(x => x.Order != 0).Value, CultureInfo.InvariantCulture);
-                }                
             }
 
             if (type == typeof(int?))
@@ -156,7 +175,7 @@
             {
                 return double.Parse(strVal, CultureInfo.InvariantCulture);
             }
-            
+
             return value.ToString();
         }
     }

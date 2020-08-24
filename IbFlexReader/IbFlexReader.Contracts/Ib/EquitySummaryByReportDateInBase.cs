@@ -11,8 +11,8 @@
 
         public string Model { get; set; }
 
-        [Format(Constants.DateFormat)]
-        public DateTime? ReportDate { get; set; }
+        //Note: The reportDate XML attribute may contain either a date or a string, i.e. reportDate="MULTI"
+        public string ReportDate { get; set; }
 
         public double? Cash { get; set; }
 

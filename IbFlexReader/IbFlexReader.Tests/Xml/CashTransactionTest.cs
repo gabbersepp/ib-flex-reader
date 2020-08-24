@@ -23,7 +23,7 @@
             <CashTransaction type='Broker Interest Received' />
             </CashTransactions>" + StringFactory.XmlEnd;
             var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
-            var cashTransactions = obj.FlexStatements.FlexStatement.CashTransactions.CashTransaction;
+            var cashTransactions = obj.FlexStatements.FlexStatement[0].CashTransactions.CashTransaction;
             cashTransactions.Count.Should().Be(1);
             cashTransactions[0].Type.Should().Be(Contracts.Enums.CashTransactionType.BrokerInterestReceived);
         }

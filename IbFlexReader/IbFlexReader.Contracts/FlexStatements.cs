@@ -1,10 +1,11 @@
 ﻿namespace IbFlexReader.Contracts
 {
+    using System.Collections.Generic;
     using IbFlexReader.Contracts.Ib;
 
     public class FlexStatements
     {
-        public FlexStatement FlexStatement { get; set; }
+        public List<FlexStatement> FlexStatement { get; set; }
 
         public int? Count { get; set; }
     }

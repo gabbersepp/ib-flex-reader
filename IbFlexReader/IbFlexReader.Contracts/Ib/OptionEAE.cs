@@ -1,5 +1,9 @@
 ﻿namespace IbFlexReader.Contracts.Ib
 {
+    using System;
+    using IbFlexReader.Contracts.Attributes;
+    using IbFlexReader.Contracts.Enums;
+
     public class OptionEAE
     {
         public string AccountId { get; set; }
@@ -8,17 +12,17 @@
 
         public string Model { get; set; }
 
-        public string Currency { get; set; }
+        public Currencies? Currency { get; set; }
 
-        public string FxRateToBase { get; set; }
+        public double? FxRateToBase { get; set; }
 
-        public string AssetCategory { get; set; }
+        public AssetCategory? AssetCategory { get; set; }
 
         public string Symbol { get; set; }
 
         public string Description { get; set; }
 
-        public string Conid { get; set; }
+        public long? Conid { get; set; }
 
         public string SecurityID { get; set; }
 
@@ -30,7 +34,7 @@
 
         public string ListingExchange { get; set; }
 
-        public string UnderlyingConid { get; set; }
+        public long? UnderlyingConid { get; set; }
 
         public string UnderlyingSymbol { get; set; }
 
@@ -40,37 +44,39 @@
 
         public string Issuer { get; set; }
 
-        public string Multiplier { get; set; }
+        public int? Multiplier { get; set; }
 
-        public string Strike { get; set; }
+        public double? Strike { get; set; }
 
-        public string Expiry { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime? Expiry { get; set; }
 
-        public string PutCall { get; set; }
+        public PutCall? PutCall { get; set; }
 
         public string PrincipalAdjustFactor { get; set; }
 
-        public string Date { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime? Date { get; set; }
 
         public string TransactionType { get; set; }
 
-        public string Quantity { get; set; }
+        public double? Quantity { get; set; }
 
-        public string TradePrice { get; set; }
+        public double? TradePrice { get; set; }
 
-        public string MarkPrice { get; set; }
+        public double? MarkPrice { get; set; }
 
-        public string Proceeds { get; set; }
+        public double? Proceeds { get; set; }
 
-        public string CommisionsAndTax { get; set; }
+        public double? CommisionsAndTax { get; set; }
 
-        public string CostBasis { get; set; }
+        public double? CostBasis { get; set; }
 
-        public string RealizedPnl { get; set; }
+        public double? RealizedPnl { get; set; }
 
-        public string FxPnl { get; set; }
+        public double? FxPnl { get; set; }
 
-        public string MtmPnl { get; set; }
+        public double? MtmPnl { get; set; }
 
         public string TradeID { get; set; }
     }

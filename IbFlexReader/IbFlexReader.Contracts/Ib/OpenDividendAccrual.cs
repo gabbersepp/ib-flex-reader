@@ -1,5 +1,9 @@
 ﻿namespace IbFlexReader.Contracts.Ib
 {
+    using System;
+    using IbFlexReader.Contracts.Attributes;
+    using IbFlexReader.Contracts.Enums;
+
     public class OpenDividendAccrual
     {
         public string AccountId { get; set; }
@@ -8,17 +12,17 @@
 
         public string Model { get; set; }
 
-        public string Currency { get; set; }
+        public Currencies? Currency { get; set; }
 
-        public string FxRateToBase { get; set; }
+        public double? FxRateToBase { get; set; }
 
-        public string AssetCategory { get; set; }
+        public AssetCategory? AssetCategory { get; set; }
 
         public string Symbol { get; set; }
 
         public string Description { get; set; }
 
-        public string Conid { get; set; }
+        public long? Conid { get; set; }
 
         public string SecurityID { get; set; }
 
@@ -30,7 +34,7 @@
 
         public string ListingExchange { get; set; }
 
-        public string UnderlyingConid { get; set; }
+        public long? UnderlyingConid { get; set; }
 
         public string UnderlyingSymbol { get; set; }
 
@@ -40,13 +44,14 @@
 
         public string Issuer { get; set; }
 
-        public string Multiplier { get; set; }
+        public int? Multiplier { get; set; }
 
-        public string Strike { get; set; }
+        public double? Strike { get; set; }
 
-        public string Expiry { get; set; }
+        [Format(Constants.DateFormat)]
+        public DateTime? Expiry { get; set; }
 
-        public string PutCall { get; set; }
+        public PutCall? PutCall { get; set; }
 
         public string PrincipalAdjustFactor { get; set; }
 
@@ -54,17 +59,17 @@
 
         public string PayDate { get; set; }
 
-        public string Quantity { get; set; }
+        public double? Quantity { get; set; }
 
-        public string Tax { get; set; }
+        public double? Tax { get; set; }
 
-        public string Fee { get; set; }
+        public double? Fee { get; set; }
 
-        public string GrossRate { get; set; }
+        public double? GrossRate { get; set; }
 
-        public string GrossAmount { get; set; }
+        public double? GrossAmount { get; set; }
 
-        public string NetAmount { get; set; }
+        public double? NetAmount { get; set; }
 
         public string Code { get; set; }
 

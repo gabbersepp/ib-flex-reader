@@ -4,6 +4,7 @@
     using System.IO;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using System.Xml;
     using IbFlexReader.Contracts;
     using IbFlexReader.Contracts.Ib;
     using IbFlexReader.Xml;
@@ -26,12 +27,39 @@
         /// <returns>An object with account activities</returns>
         public Contracts.FlexQueryResponse GetByString(string xmlFile, Options options = null)
         {
+            if (options != null)
+            {
+                if (options.UseXmlReader)
+                {
+                    XmlReaderSettings settings = new XmlReaderSettings
+                    {
+                        Async = true
+                    };
+
+                    using (XmlReader reader = XmlReader.Create(xmlFile, settings))
+                    {
+                        var result = Deserializer.Deserialize<Xml.Contracts.QueryResponse.FlexQueryResponse, Contracts.FlexQueryResponse>(reader, out var errorObjects);
+                        result = result ?? new Contracts.FlexQueryResponse();
+                        result.Errors = errorObjects;
+                        foreach (FlexStatement statement in result.FlexStatements.FlexStatement)
+                        {
+                            Logic.ProcessStatement(statement, options);
+                        }
+
+                        return result;
+                    }
+                }
+            }
+
             using (var stream = sb.GenerateStream(xmlFile))
             {
                 var result = Deserializer.Deserialize<Xml.Contracts.QueryResponse.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
                 result = result ?? new Contracts.FlexQueryResponse();
                 result.Errors = errorObjects;
-                Logic.ProcessStatement(result.FlexStatements?.FlexStatement, options);
+                foreach (FlexStatement statement in result.FlexStatements.FlexStatement)
+                {
+                    Logic.ProcessStatement(statement, options);
+                }
 
                 return result;
             }

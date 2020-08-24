@@ -110,6 +110,19 @@
         [EnumName("SY")]
         StockYieldEligible = 1L << 50,
         [EnumName("T")]
-        Transfer = 1L << 51
+        Transfer = 1L << 51,
+
+        [EnumName("ADR")]
+        ADRFeeAccrual = 1L << 52,
+        [EnumName("FP")]
+        IBPrincipalForFractional = 1L << 53,
+        [EnumName("FPA")]
+        IBPrincipalForFractionalAgentWhole = 1L << 54,
+        [EnumName("RP")]
+        IBRisklessPrincipalForFractional = 1L << 55,
+        [EnumName("RPA")]
+        IBRisklessPrincipalForFractionalAgentWhole = 1L << 56,
+        [EnumName("U")]
+        UnvestedSharesFromStockGrant = 1L << 57
     }
 }

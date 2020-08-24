@@ -55,8 +55,8 @@
 
         public string PrincipalAdjustFactor { get; set; }
 
-        [Format(Constants.DateFormat)]
-        public DateTime? ReportDate { get; set; }
+        //Note: The reportDate XML attribute may contain either a date or a string, i.e. reportDate="MULTI"
+        public string ReportDate { get; set; }
 
         public int? Position { get; set; }
 
@@ -70,7 +70,7 @@
 
         public double? CostBasisMoney { get; set; }
 
-        public string PercentOfNAV { get; set; }
+        public double? PercentOfNAV { get; set; }
 
         public double? FifoPnlUnrealized { get; set; }
 
@@ -90,6 +90,6 @@
 
         public long? OriginatingTransactionID { get; set; }
 
-        public string AccruedInt { get; set; }
+        public double? AccruedInt { get; set; }
     }
 }
