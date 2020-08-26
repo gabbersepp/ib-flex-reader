@@ -1,8 +1,5 @@
 ﻿namespace IbFlexReader.Contracts.Ib
 {
-    using System;
-    using IbFlexReader.Contracts.Attributes;
-
     public class EquitySummaryByReportDateInBase
     {
         public string AccountId { get; set; }
