@@ -65,6 +65,7 @@
         public string PrincipalAdjustFactor { get; set; }
 
         [Format(Constants.DateTimeFormat)]
+        [Format(Constants.DateFormat)]
         public DateTime? DateTime { get; set; }
 
         public string TransactionType { get; set; }
@@ -106,7 +107,7 @@
 
         public string VolatilityOrderLink { get; set; }
 
-        public string ExchOrderId { get; set; }
+        //public string ExchOrderId { get; set; }
 
         [Format(Constants.DateTimeFormat)]
         public DateTime? OrderTime { get; set; }
