@@ -14,9 +14,12 @@
             where TXml : XmlBase where TOut : class, new()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(TXml));
-            var obj = (TXml)serializer.Deserialize(content);
-            errorObjects = new List<ErrorMessage>();
-            return new TOut().PopulateFrom(obj, errorObjects);
+            using (XmlReader reader = XmlReader.Create(content))
+            {
+                var obj = (TXml)serializer.Deserialize(reader);
+                errorObjects = new List<ErrorMessage>();
+                return new TOut().PopulateFrom(obj, errorObjects);
+            }
         }
 
         public static TOut Deserialize<TXml, TOut>(XmlReader content, out List<ErrorMessage> errorObjects)
