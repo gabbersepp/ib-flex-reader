@@ -123,6 +123,8 @@
         [EnumName("RPA")]
         IBRisklessPrincipalForFractionalAgentWhole = 1L << 56,
         [EnumName("U")]
-        UnvestedSharesFromStockGrant = 1L << 57
+        UnvestedSharesFromStockGrant = 1L << 57,
+        [EnumName("D")]
+        Delisted = 1L << 58
     }
 }
