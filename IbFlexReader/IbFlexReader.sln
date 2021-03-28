@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader", "IbFlexReader\IbFlexReader.csproj", "{9E8052D9-DF98-49AC-B5D2-B1F254330C8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader", "IbFlexReader\Biehler.IbFlexReader.csproj", "{9E8052D9-DF98-49AC-B5D2-B1F254330C8F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IbFlexReader.Xml", "IbFlexReader.Xml\IbFlexReader.Xml.csproj", "{9A8831DA-29E8-4F17-B2B5-3C4BD0ED54A5}"
 EndProject

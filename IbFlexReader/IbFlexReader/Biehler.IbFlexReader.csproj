@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <RunCodeAnalysis>False</RunCodeAnalysis>
+	  <CodeAnalysisRuleSet>./../stylecop.ruleset</CodeAnalysisRuleSet>
+
+    <Title>Interactive Brokers Flex Query Reader</Title>
+    <Authors>Josef Biehler (gabbersepp)</Authors>
+    <Description>Easily read any flex query. Provides the whole data model.</Description>
+    <Copyright>Josef Biehler (gabbersepp)</Copyright>
+    <PackageProjectUrl>https://github.com/gabbersepp/ib-flex-reader</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/gabbersepp/ib-flex-reader</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Version>2.5.0</Version>
+  </PropertyGroup>
+
+   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'"> 
+   <TreatWarningsAsErrors>true</TreatWarningsAsErrors> 
+	</PropertyGroup> 
+ 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IbFlexReader.Contracts\IbFlexReader.Contracts.csproj" />
+    <ProjectReference Include="..\IbFlexReader.Utils\IbFlexReader.Utils.csproj" />
+    <ProjectReference Include="..\IbFlexReader.Xml\IbFlexReader.Xml.csproj" />
+  </ItemGroup>
+
+</Project>

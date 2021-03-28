@@ -95,9 +95,9 @@
       <Project>{9a8831da-29e8-4f17-b2b5-3c4bd0ed54a5}</Project>
       <Name>IbFlexReader.Xml</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IbFlexReader\IbFlexReader.csproj">
+    <ProjectReference Include="..\IbFlexReader\Biehler.IbFlexReader.csproj">
       <Project>{9e8052d9-df98-49ac-b5d2-b1f254330c8f}</Project>
-      <Name>IbFlexReader</Name>
+      <Name>Biehler.IbFlexReader</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
