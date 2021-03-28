@@ -1,5 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))"/>
+    </ItemGroup>
+  </Target>
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
 	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -15,7 +21,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <Version>2.5.0</Version>
+    <Version>2.5.1</Version>
+
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
    <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'"> 
@@ -34,9 +42,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IbFlexReader.Contracts\IbFlexReader.Contracts.csproj" />
-    <ProjectReference Include="..\IbFlexReader.Utils\IbFlexReader.Utils.csproj" />
-    <ProjectReference Include="..\IbFlexReader.Xml\IbFlexReader.Xml.csproj" />
+    <ProjectReference Include="..\IbFlexReader.Contracts\IbFlexReader.Contracts.csproj">
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <IncludeAssets>IbFlexReader.Contracts.dll</IncludeAssets>
+    </ProjectReference>
+      <ProjectReference Include="..\IbFlexReader.Utils\IbFlexReader.Utils.csproj">
+        <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+        <IncludeAssets>IbFlexReader.Utils.dll</IncludeAssets>
+      </ProjectReference>
+      <ProjectReference Include="..\IbFlexReader.Xml\IbFlexReader.Xml.csproj">
+        <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+        <IncludeAssets>IbFlexReader.Xml.dll</IncludeAssets>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>
