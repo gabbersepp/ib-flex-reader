@@ -67,7 +67,7 @@
         public Trades Trades { get; set; }
 
         [XmlElement(ElementName = "TransactionTaxes")]
-        public string TransactionTaxes { get; set; }
+        public TransactionTaxes TransactionTaxes { get; set; }
 
         [XmlElement(ElementName = "Transfers")]
         public Transfers Transfers { get; set; }

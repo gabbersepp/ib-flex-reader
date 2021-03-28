@@ -45,7 +45,7 @@
 
         public Trades Trades { get; set; }
 
-        public string TransactionTaxes { get; set; }
+        public TransactionTaxes TransactionTaxes { get; set; }
 
         public Transfers Transfers { get; set; }
 

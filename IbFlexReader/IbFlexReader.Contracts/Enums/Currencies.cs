@@ -15,6 +15,7 @@
         MXN,
         RUB,
         NOK,
-        ZAR
+        ZAR,
+        SGD
     }
 }
