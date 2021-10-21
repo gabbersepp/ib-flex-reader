@@ -66,5 +66,9 @@
         public string IbEntity { get; set; }
 
         public string PrimaryEmail { get; set; }
+
+        public string AccountRepName  { get; set; }
+
+        public string AccountRepPhone { get; set; }
     }
 }

@@ -11,5 +11,6 @@
         public string Type { get; set; }
 
         public List<ErrorMessage> Errors { get; set; }
+        public string MappingErrors { get; set; }
     }
 }

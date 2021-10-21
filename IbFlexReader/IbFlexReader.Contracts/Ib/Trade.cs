@@ -1,4 +1,6 @@
-﻿namespace IbFlexReader.Contracts.Ib
+﻿using System.Globalization;
+
+namespace IbFlexReader.Contracts.Ib
 {
     using System;
     using IbFlexReader.Contracts.Attributes;
@@ -68,6 +70,26 @@
         //Note: The tradeDate XML attribute may contain either a date or a string, i.e. tradeDate="MULTI"
         public string TradeDate { get; set; }
 
+        public string TradeTime { get; set; }
+
+        public DateTime? TradeDateTime2
+        {
+            get
+            {
+                try
+                {
+                    DateTime dt        = DateTime.ParseExact($"{TradeDate}:{TradeTime}", "yyyyMMdd:HHmmss", CultureInfo.InvariantCulture);
+                    return dt;
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+
+                return null;
+            }
+        }
+
         //Note: The settleDateTarget XML attribute may contain either a date or a string, i.e. settleDateTarget="MULTI"
         public string SettleDateTarget { get; set; }
 
@@ -116,7 +138,7 @@
 
         public string ClearingFirmID { get; set; }
 
-        //public string TransactionID { get; set; }
+        public string TransactionID { get; set; }
 
         public BuySell? BuySell { get; set; }
 
@@ -162,5 +184,11 @@
         public double? AccruedInterest { get; set; }
 
         public string TraderID { get; set; }
+
+        public string SerialNumber  { get; set; }
+        public string DeliveryType  { get; set; }
+        public string CommodityType { get; set; }
+        public string Fineness      { get; set; }
+        public string Weight        { get; set; }
     }
 }

@@ -118,5 +118,13 @@
         public double? TotalLong { get; set; }
 
         public double? TotalShort { get; set; }
+
+        public string BrokerCashComponent             { get; set; }
+        public string IpoSubscription                 { get; set; }
+        public string IpoSubscriptionLong             { get; set; }
+        public string IpoSubscriptionShort            { get; set; }
+        public string BrokerInterestAccrualsComponent { get; set; }
+        public string BondInterestAccrualsComponent   { get; set; }
+        public string BrokerFeesAccrualsComponent     { get; set; }
     }
 }

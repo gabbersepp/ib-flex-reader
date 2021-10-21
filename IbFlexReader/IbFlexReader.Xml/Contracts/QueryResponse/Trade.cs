@@ -86,6 +86,12 @@
         [XmlAttribute(AttributeName = "dateTime")]
         public string TradeDateTime { get; set; }
 
+        [XmlAttribute(AttributeName = "tradeDate")]
+        public string TradeDate { get; set; }
+
+        [XmlAttribute(AttributeName = "tradeTime")]
+        public string TradeTime { get; set; }
+
         [XmlAttribute(AttributeName = "settleDateTarget")]
         public string SettleDateTarget { get; set; }
 
@@ -155,8 +161,8 @@
         [XmlAttribute(AttributeName = "clearingFirmID")]
         public string ClearingFirmID { get; set; }
 
-        //[XmlAttribute(AttributeName = "transactionID")]
-        //public string TransactionID { get; set; }
+        [XmlAttribute(AttributeName = "transactionID")]
+        public string TransactionID { get; set; }
 
         [XmlAttribute(AttributeName = "buySell")]
         public string BuySell { get; set; }
@@ -217,5 +223,20 @@
 
         [XmlAttribute(AttributeName = "accruedInt")]
         public string AccruedInterest { get; set; }
+
+        [XmlAttribute(AttributeName = "serialNumber")]
+        public string SerialNumber { get; set; }
+
+        [XmlAttribute(AttributeName = "deliveryType")]
+        public string DeliveryType { get; set; }
+
+        [XmlAttribute(AttributeName = "commodityType")]
+        public string CommodityType { get; set; }
+
+        [XmlAttribute(AttributeName = "fineness")]
+        public string Fineness { get; set; }
+
+        [XmlAttribute(AttributeName = "weight")]
+        public string Weight { get; set; }
     }
 }

@@ -34,7 +34,7 @@
 
             string str = sb.ToString();
 
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(4);
         }
@@ -45,7 +45,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm accountId='abcdefg' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].AccountId.Should().Be("abcdefg");
@@ -57,7 +57,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm acctAlias='alias' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].AcctAlias.Should().Be("alias");
@@ -69,7 +69,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm model='aModel' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Model.Should().Be("aModel");
@@ -81,7 +81,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm currency='USD' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Currency.HasValue.Should().Be(true);
@@ -94,7 +94,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm currency='EUR' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Currency.HasValue.Should().Be(true);
@@ -108,7 +108,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm currency='XYZ' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -120,7 +120,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm assetCategory='STK' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].AssetCategory.Should().Be(AssetCategory.STK);
@@ -132,7 +132,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm assetCategory='OPT' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].AssetCategory.Should().Be(AssetCategory.OPT);
@@ -144,7 +144,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm assetCategory='unknown' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -156,7 +156,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm symbol='KO' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Symbol.Should().Be("KO");
@@ -168,7 +168,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm description='COCA-COLA CO/THE' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Description.Should().Be("COCA-COLA CO/THE");
@@ -180,7 +180,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm conid='8894' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Conid.Should().Be(8894);
@@ -192,7 +192,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm securityID='secID' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].SecurityID.Should().Be("secID");
@@ -204,7 +204,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm securityIDType='secIDType' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].SecurityIDType.Should().Be("secIDType");
@@ -216,7 +216,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm cusip='cusipStr' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Cusip.Should().Be("cusipStr");
@@ -228,7 +228,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm isin='ii' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Isin.Should().Be("ii");
@@ -240,7 +240,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm listingExchange='ex' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ListingExchange.Should().Be("ex");
@@ -252,7 +252,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm underlyingConid='1234' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].UnderlyingConid.Should().Be(1234);
@@ -264,7 +264,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm underlyingSymbol='uSym' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].UnderlyingSymbol.Should().Be("uSym");
@@ -276,7 +276,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm underlyingSecurityID='usecID' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].UnderlyingSecurityID.Should().Be("usecID");
@@ -288,7 +288,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm underlyingListingExchange='ulEx' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].UnderlyingListingExchange.Should().Be("ulEx");
@@ -300,7 +300,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm issuer='issuerTxt' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Issuer.Should().Be("issuerTxt");
@@ -312,7 +312,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm multiplier='101' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Multiplier.Should().Be(101);
@@ -324,7 +324,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm multiplier='' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Multiplier.Should().BeNull();
@@ -336,7 +336,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm multiplier='abc' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -348,7 +348,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm strike='10.1' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Strike.Should().Be(10.1);
@@ -360,7 +360,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm strike='' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Strike.Should().BeNull();
@@ -372,7 +372,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm strike='abc' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -384,7 +384,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm expiry='20181116' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Expiry.Should().Be(new DateTime(2018, 11, 16));
@@ -396,7 +396,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm expiry='' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Expiry.Should().BeNull();
@@ -408,7 +408,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm expiry='dasda' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -420,7 +420,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm putCall='P' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].PutCall.Should().Be(PutCall.P);
@@ -432,7 +432,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm putCall='C' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].PutCall.Should().Be(PutCall.C);
@@ -444,7 +444,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm putCall='' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].PutCall.Should().BeNull();
@@ -456,7 +456,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm putCall='sfdf' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -468,7 +468,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm principalAdjustFactor='paf' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].PrincipalAdjustFactor.Should().Be("paf");
@@ -480,7 +480,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm transactionType='BookTrade' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].TransactionType.Should().Be("BookTrade");
@@ -492,7 +492,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm tradeID='2276360777' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].TradeID.Should().Be(2276360777);
@@ -504,7 +504,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm orderID='9857779816' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrderID.Should().Be(9857779816);
@@ -516,7 +516,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm execID='exec' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ExecID.Should().Be("exec");
@@ -528,7 +528,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm brokerageOrderID='boID' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].BrokerageOrderID.Should().Be("boID");
@@ -540,7 +540,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm orderReference='oRef' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrderReference.Should().Be("oRef");
@@ -552,7 +552,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm volatilityOrderLink='voLink' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].VolatilityOrderLink.Should().Be("voLink");
@@ -564,7 +564,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm clearingFirmID='cfID' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ClearingFirmID.Should().Be("cfID");
@@ -576,7 +576,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm origTradePrice='1.23' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrigTradePrice.Should().Be(1.23);
@@ -588,7 +588,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm origTradeDate='20181231' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrigTradeDate.Should().Be(new DateTime(2018, 12, 31));
@@ -600,7 +600,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm origTradeID='12345678' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrigTradeID.Should().Be(12345678);
@@ -612,7 +612,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm orderTime='20181231;162001' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrderTime.Should().Be(new DateTime(2018, 12, 31, 16, 20, 01));
@@ -624,7 +624,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm dateTime='20181230;172001' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].DateTime.Should().Be(new DateTime(2018, 12, 30, 17, 20, 01));
@@ -636,7 +636,7 @@
         //    var str = StringFactory.XmlStart + @"<TradeConfirms>
         //    <TradeConfirm reportDate='20181230' />
         //    </TradeConfirms>" + StringFactory.XmlEnd;
-        //    var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+        //    var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
         //    var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
         //    tradeConfirms.Count.Should().Be(1);
         //    tradeConfirms[0].ReportDate.Should().Be(new DateTime(2018, 12, 30));
@@ -648,7 +648,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm settleDate='20181120' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].SettleDate.Should().Be(new DateTime(2018, 11, 20));
@@ -660,7 +660,7 @@
         //    var str = StringFactory.XmlStart + @"<TradeConfirms>
         //    <TradeConfirm tradeDate='20181223' />
         //    </TradeConfirms>" + StringFactory.XmlEnd;
-        //    var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+        //    var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
         //    var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
         //    tradeConfirms.Count.Should().Be(1);
         //    tradeConfirms[0].TradeDate.Should().Be(new DateTime(2018, 12, 23));
@@ -672,7 +672,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm exchange='--' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Exchange.Should().Be("--");
@@ -684,7 +684,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm buySell='SELL' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].BuySell.Should().Be(BuySell.SELL);
@@ -696,7 +696,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm quantity='-100' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Quantity.Should().Be(-100);
@@ -708,7 +708,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm price='46.123' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Price.Should().Be(46.123);
@@ -720,7 +720,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm amount='-123.456' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Amount.Should().Be(-123.456);
@@ -732,7 +732,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm proceeds='-123.654' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Proceeds.Should().Be(-123.654);
@@ -744,7 +744,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm commission='-0.0717' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Commission.Should().Be(-0.0717);
@@ -756,7 +756,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm brokerExecutionCommission='0.0717' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].BrokerExecutionCommission.Should().Be(0.0717);
@@ -768,7 +768,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm brokerClearingCommission='1.0717' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].BrokerClearingCommission.Should().Be(1.0717);
@@ -780,7 +780,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm thirdPartyExecutionCommission='-1.0717' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ThirdPartyExecutionCommission.Should().Be(-1.0717);
@@ -792,7 +792,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm thirdPartyClearingCommission='-33.456' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ThirdPartyClearingCommission.Should().Be(-33.456);
@@ -804,7 +804,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm thirdPartyRegulatoryCommission='33.456' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].ThirdPartyRegulatoryCommission.Should().Be(33.456);
@@ -816,7 +816,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm otherCommission='12.456' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OtherCommission.Should().Be(12.456);
@@ -828,7 +828,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm commissionCurrency='EUR' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].CommissionCurrency.Should().Be(Currencies.EUR);
@@ -840,7 +840,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm tax='432.765' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Tax.Should().Be(432.765);
@@ -852,7 +852,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm code='A' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Code.Should().Be(Notes.Assigned);
@@ -865,7 +865,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm code='O' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Code.Should().Be(Notes.OpeningTrade);
@@ -878,7 +878,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm code='unknown' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(0);
             msg.Should().NotBeNull();
@@ -890,7 +890,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm code='C;AEx;T' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].Code.Should().HaveFlag(Notes.ClosingTrade);
@@ -904,7 +904,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm orderType='oTyp' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].OrderType.Should().Be("oTyp");
@@ -916,7 +916,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm levelOfDetail='EXECUTION' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].LevelOfDetail.Should().Be("EXECUTION");
@@ -928,7 +928,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm traderID='trID' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].TraderID.Should().Be("trID");
@@ -940,7 +940,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm isAPIOrder='N' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].IsAPIOrder.Should().Be("N");
@@ -952,7 +952,7 @@
             var str = StringFactory.XmlStart + @"<TradeConfirms>
             <TradeConfirm allocatedTo='allocTo' />
             </TradeConfirms>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var tradeConfirms = obj.FlexStatements.FlexStatement[0].TradeConfirms.TradeConfirm;
             tradeConfirms.Count.Should().Be(1);
             tradeConfirms[0].AllocatedTo.Should().Be("allocTo");

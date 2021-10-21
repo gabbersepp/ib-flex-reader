@@ -82,5 +82,12 @@
         public string FromAcct { get; set; }
 
         public string ToAcct { get; set; }
+
+        public string SerialNumber  { get; set; }
+        public string DeliveryType  { get; set; }
+        public string CommodityType { get; set; }
+        public string Fineness      { get; set; }
+        public string Weight        { get; set; }
+        public string LevelOfDetail { get; set; }
     }
 }

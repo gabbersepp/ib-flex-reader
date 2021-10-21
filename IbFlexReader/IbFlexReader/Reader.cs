@@ -1,4 +1,8 @@
-﻿namespace IbFlexReader
+﻿/* 
+ Tool to convert xml to c# classes: https://xmltocsharp.azurewebsites.net/
+ */
+
+namespace IbFlexReader
 {
     using System;
     using System.IO;
@@ -38,9 +42,10 @@
 
                     using (XmlReader reader = XmlReader.Create(xmlFile, settings))
                     {
-                        var result = Deserializer.Deserialize<Xml.Contracts.QueryResponse.FlexQueryResponse, Contracts.FlexQueryResponse>(reader, out var errorObjects);
+                        var result = Deserializer.Deserialize<Xml.Contracts.QueryResponse.FlexQueryResponse, Contracts.FlexQueryResponse>(reader, out var errorObjects, out string mappingError);
                         result = result ?? new Contracts.FlexQueryResponse();
                         result.Errors = errorObjects;
+                        result.MappingErrors = mappingError;
                         foreach (FlexStatement statement in result.FlexStatements.FlexStatement)
                         {
                             Logic.ProcessStatement(statement, options);
@@ -53,9 +58,10 @@
 
             using (var stream = sb.GenerateStream(xmlFile))
             {
-                var result = Deserializer.Deserialize<Xml.Contracts.QueryResponse.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
+                var result = Deserializer.Deserialize<Xml.Contracts.QueryResponse.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects, out string mappingError);
                 result = result ?? new Contracts.FlexQueryResponse();
                 result.Errors = errorObjects;
+                result.MappingErrors = mappingError;
                 foreach (FlexStatement statement in result.FlexStatements.FlexStatement)
                 {
                     Logic.ProcessStatement(statement, options);
@@ -159,7 +165,7 @@
                     };
                 }
 
-                var queryResponse = Deserializer.Deserialize<Xml.Contracts.QueryResponse.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects);
+                var queryResponse = Deserializer.Deserialize<Xml.Contracts.QueryResponse.FlexQueryResponse, Contracts.FlexQueryResponse>(stream, out var errorObjects, out string mappingErrors);
 
                 // in case of an error during deserialization, queryResponse maybe NULL (see PopulateFrom method)
                 if (queryResponse == null)
@@ -177,6 +183,7 @@
                 }
 
                 queryResponse.Errors = errorObjects;
+                queryResponse.MappingErrors = mappingErrors;
 
                 return new FlexResult
                 {
@@ -198,7 +205,7 @@
                     Utils.DumpFileWriter.DumpSendRequest(stream, dumpFile);
                 }
 
-                var response = Deserializer.Deserialize<XmlFlexStatementResponse, FlexStatementResponse>(stream, out var errorObjects);
+                var response = Deserializer.Deserialize<XmlFlexStatementResponse, FlexStatementResponse>(stream, out var errorObjects, out string mappingErrors);
 
                 if (response == null)
                 {
@@ -240,7 +247,7 @@
 
             try
             {
-                response = Deserializer.Deserialize<XmlFlexStatementResponse, FlexStatementResponse>(stream, out var errorObjects);
+                response = Deserializer.Deserialize<XmlFlexStatementResponse, FlexStatementResponse>(stream, out var errorObjects, out string mappingError);
                 return response != null;
             }
             catch (Exception)

@@ -7,7 +7,7 @@
     public class FlexStatements
     {
         [XmlElement(ElementName = "FlexStatement")]
-        public List<FlexStatement> FlexStatement { get; set; }
+        public List<FlexStatement>            FlexStatement { get; set; }
 
         [XmlAttribute(AttributeName = "count")]
         public string Count { get; set; }

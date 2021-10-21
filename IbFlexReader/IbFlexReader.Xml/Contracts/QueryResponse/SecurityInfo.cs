@@ -76,5 +76,26 @@
 
         [XmlAttribute(AttributeName = "code")]
         public string Code { get; set; }
+
+        [XmlAttribute(AttributeName = "currency")]
+        public string Currency { get; set; }
+
+        [XmlAttribute(AttributeName = "serialNumber")]
+        public string SerialNumber { get; set; }
+
+        [XmlAttribute(AttributeName = "deliveryType")]
+        public string DeliveryType { get; set; }
+
+        [XmlAttribute(AttributeName = "commodityType")]
+        public string CommodityType { get; set; }
+
+        [XmlAttribute(AttributeName = "fineness")]
+        public string Fineness { get; set; }
+
+        [XmlAttribute(AttributeName = "weight")]
+        public string Weight { get; set; }
+
+        [XmlAttribute(AttributeName = "settlementPolicyMethod")]
+        public string SettlementPolicyMethod { get; set; }
     }
 }
