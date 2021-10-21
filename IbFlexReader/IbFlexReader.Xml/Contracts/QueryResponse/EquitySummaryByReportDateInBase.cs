@@ -178,5 +178,26 @@
 
         [XmlAttribute(AttributeName = "totalShort")]
         public string TotalShort { get; set; }
+
+        [XmlAttribute(AttributeName = "brokerCashComponent")]
+        public string BrokerCashComponent { get; set; }
+
+        [XmlAttribute(AttributeName = "ipoSubscription")]
+        public string IpoSubscription { get; set; }
+
+        [XmlAttribute(AttributeName = "ipoSubscriptionLong")]
+        public string IpoSubscriptionLong { get; set; }
+
+        [XmlAttribute(AttributeName = "ipoSubscriptionShort")]
+        public string IpoSubscriptionShort { get; set; }
+
+        [XmlAttribute(AttributeName = "brokerInterestAccrualsComponent")]
+        public string BrokerInterestAccrualsComponent { get; set; }
+
+        [XmlAttribute(AttributeName = "bondInterestAccrualsComponent")]
+        public string BondInterestAccrualsComponent { get; set; }
+
+        [XmlAttribute(AttributeName = "brokerFeesAccrualsComponent")]
+        public string BrokerFeesAccrualsComponent { get; set; }
     }
 }

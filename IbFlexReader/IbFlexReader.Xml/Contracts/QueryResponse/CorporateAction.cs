@@ -2,8 +2,8 @@
 {
     using System.Xml.Serialization;
 
-    [XmlRoot(ElementName = "CashTransaction")]
-    public class CashTransaction
+    [XmlRoot(ElementName = "CorporateAction")]
+    public class CorporateAction
     {
         [XmlAttribute(AttributeName = "accountId")]
         public string AccountId { get; set; }
@@ -77,33 +77,6 @@
         [XmlAttribute(AttributeName = "principalAdjustFactor")]
         public string PrincipalAdjustFactor { get; set; }
 
-        [XmlAttribute(AttributeName = "dateTime")]
-        public string DateTime { get; set; }
-
-        [XmlAttribute(AttributeName = "amount")]
-        public string Amount { get; set; }
-
-        [XmlAttribute(AttributeName = "type")]
-        public string Type { get; set; }
-
-        [XmlAttribute(AttributeName = "tradeID")]
-        public string TradeID { get; set; }
-
-        [XmlAttribute(AttributeName = "code")]
-        public string Code { get; set; }
-
-        [XmlAttribute(AttributeName = "transactionID")]
-        public string TransactionID { get; set; }
-
-        [XmlAttribute(AttributeName = "reportDate")]
-        public string ReportDate { get; set; }
-
-        [XmlAttribute(AttributeName = "clientReference")]
-        public string ClientReference { get; set; }
-
-        [XmlAttribute(AttributeName = "settleDate")]
-        public string SettleDate { get; set; }
-
         [XmlAttribute(AttributeName = "serialNumber")]
         public string SerialNumber { get; set; }
 
@@ -118,6 +91,39 @@
 
         [XmlAttribute(AttributeName = "weight")]
         public string Weight { get; set; }
+
+        [XmlAttribute(AttributeName = "reportDate")]
+        public string ReportDate { get; set; }
+
+        [XmlAttribute(AttributeName = "dateTime")]
+        public string DateTime { get; set; }
+
+        [XmlAttribute(AttributeName = "actionDescription")]
+        public string ActionDescription { get; set; }
+
+        [XmlAttribute(AttributeName = "amount")]
+        public string Amount { get; set; }
+
+        [XmlAttribute(AttributeName = "proceeds")]
+        public string Proceeds { get; set; }
+
+        [XmlAttribute(AttributeName = "value")]
+        public string Value { get; set; }
+
+        [XmlAttribute(AttributeName = "quantity")]
+        public string Quantity { get; set; }
+
+        [XmlAttribute(AttributeName = "fifoPnlRealized")]
+        public string FifoPnlRealized { get; set; }
+
+        [XmlAttribute(AttributeName = "mtmPnl")]
+        public string MtmPnl { get; set; }
+
+        [XmlAttribute(AttributeName = "type")]
+        public string Type { get; set; }
+
+        [XmlAttribute(AttributeName = "transactionID")]
+        public string TransactionID { get; set; }
 
         [XmlAttribute(AttributeName = "levelOfDetail")]
         public string LevelOfDetail { get; set; }

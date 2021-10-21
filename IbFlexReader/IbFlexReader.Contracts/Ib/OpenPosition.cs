@@ -91,5 +91,12 @@
         public long? OriginatingTransactionID { get; set; }
 
         public double? AccruedInt { get; set; }
+
+        public string SerialNumber  { get; set; }
+        public string DeliveryType  { get; set; }
+        public string CommodityType { get; set; }
+        public string Fineness      { get; set; }
+        public string Weight        { get; set; }
+        public string VestingDate   { get; set; }
     }
 }

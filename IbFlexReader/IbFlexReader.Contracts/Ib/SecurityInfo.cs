@@ -54,5 +54,13 @@
         public string SubCategory { get; set; }
 
         public string Code { get; set; }
+
+        public string Currency               { get; set; }
+        public string SerialNumber           { get; set; }
+        public string DeliveryType           { get; set; }
+        public string CommodityType          { get; set; }
+        public string Fineness               { get; set; }
+        public string Weight                 { get; set; }
+        public string SettlementPolicyMethod { get; set; }
     }
 }

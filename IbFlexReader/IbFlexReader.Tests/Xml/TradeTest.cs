@@ -56,7 +56,7 @@
             var str = StringFactory.XmlStart + @"<Trades>
             <Trade accountId='abcdefg' />
             </Trades>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var trades = obj.FlexStatements.FlexStatement[0].Trades.Trade;
             trades.Count.Should().Be(1);
             trades[0].AccountId.Should().Be("abcdefg");
@@ -68,7 +68,7 @@
             var str = StringFactory.XmlStart + @"<Trades>
             <Trade dateTime='20190524' />
             </Trades>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var trades = obj.FlexStatements.FlexStatement[0].Trades.Trade;
             trades.Count.Should().Be(1);
             trades[0].TradeDateTime.Should().Be(new System.DateTime(2019, 05, 24));
@@ -80,7 +80,7 @@
             var str = StringFactory.XmlStart + @"<Trades>
             <Trade dateTime='20181231;162001' />
             </Trades>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var trades = obj.FlexStatements.FlexStatement[0].Trades.Trade;
             trades.Count.Should().Be(1);
         }
@@ -91,7 +91,7 @@
             var str = StringFactory.XmlStart + @"<Trades>
             <Trade dateTime='20181231;162001' />
             </Trades>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var trades = obj.FlexStatements.FlexStatement[0].Trades.Trade;
             trades.Count.Should().Be(1);
             trades[0].TradeDateTime.Should().Be(new System.DateTime(2018, 12, 31, 16, 20, 01));
@@ -104,7 +104,7 @@
             var str = StringFactory.XmlStart + @"<Trades>
             <Trade dateTime='162001' />
             </Trades>" + StringFactory.XmlEnd;
-            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg);
+            var obj = Deserializer.Deserialize<FlexQueryResponse, Contracts.FlexQueryResponse>(streamBuilder.GenerateStream(str), out var msg, out string mappingError);
             var trades = obj.FlexStatements.FlexStatement[0].Trades.Trade;
             trades.Count.Should().Be(0);
         }

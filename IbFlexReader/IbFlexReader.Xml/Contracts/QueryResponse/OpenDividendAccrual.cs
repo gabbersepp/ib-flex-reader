@@ -109,5 +109,20 @@
 
         [XmlAttribute(AttributeName = "toAcct")]
         public string ToAcct { get; set; }
+
+        [XmlAttribute(AttributeName = "serialNumber")]
+        public string SerialNumber { get; set; }
+
+        [XmlAttribute(AttributeName = "deliveryType")]
+        public string DeliveryType { get; set; }
+
+        [XmlAttribute(AttributeName = "commodityType")]
+        public string CommodityType { get; set; }
+
+        [XmlAttribute(AttributeName = "fineness")]
+        public string Fineness { get; set; }
+
+        [XmlAttribute(AttributeName = "weight")]
+        public string Weight { get; set; }
     }
 }

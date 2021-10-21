@@ -1,4 +1,4 @@
-﻿/* 
+﻿/*
  Licensed under the Apache License, Version 2.0
 
  http://www.apache.org/licenses/LICENSE-2.0
@@ -99,5 +99,11 @@ namespace IbFlexReader.Xml.Contracts.QueryResponse
 
         [XmlAttribute(AttributeName = "primaryEmail")]
         public string PrimaryEmail { get; set; }
+
+        [XmlAttribute(AttributeName = "accountRepName")]
+        public string AccountRepName { get; set; }
+
+        [XmlAttribute(AttributeName = "accountRepPhone")]
+        public string AccountRepPhone { get; set; }
     }
 }
